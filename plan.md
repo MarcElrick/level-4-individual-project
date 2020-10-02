@@ -1,40 +1,40 @@
 # Plan
 
-* PROJECT TITLE
-* YOUR NAME
-* STUDENT ID
-* SUPERVISOR NAME
-
-Week-by-week plan for the whole project. Update this as you go along.
+- Lipid Isotope Inference Software
+- Marc Elrick
+- 2316291E
+- Dr Simon Rogers
 
 ## Winter semester
 
-* **Week 1**
-* **Week 2**
-* **Week 3**
-* **Week 4**
-* **Week 5**
-* **Week 6**
-* **Week 7**
-* **Week 8**
-* **Week 9**
-* **Week 10**
-* **Week 11 [PROJECT WEEK]**
-* **Week 12 [PROJECT WEEK]** Status report submitted.
+- **Week 1**
+- **Week 2**
+  - Gain a deeper understanding of the problem.
+  - Set up initial github repo.
+  - Decide on technology stack, looking at prototype repo.
+- **Week 3**
+- **Week 4**
+- **Week 5**
+- **Week 6**
+- **Week 7**
+- **Week 8**
+- **Week 9**
+- **Week 10**
+- **Week 11 [PROJECT WEEK]**
+- **Week 12 [PROJECT WEEK]** Status report submitted.
 
 ## Winter break
 
 ## Spring Semester
 
-* **Week 13**
-* **Week 14**
-* **Week 15**
-* **Week 16**
-* **Week 17**
-* **Week 19**
-* **Week 20**
-* **Week 21**
-* **Week 22**
-* **Week 23 [TERM ENDS]**
-* **Week 24** Dissertation submission deadline and presentations.
-
+- **Week 13**
+- **Week 14**
+- **Week 15**
+- **Week 16**
+- **Week 17**
+- **Week 19**
+- **Week 20**
+- **Week 21**
+- **Week 22**
+- **Week 23 [TERM ENDS]**
+- **Week 24** Dissertation submission deadline and presentations.

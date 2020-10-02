@@ -1,26 +1,19 @@
 # Timelog
 
-* PROJECT NAME
-* YOUR NAME
-* STUDENT_ID
-* SUPERVISOR NAME
-
-## Guidance
-
-* This file contains the time log for your project. It will be submitted along with your final dissertation.
-* **YOU MUST KEEP THIS UP TO DATE AND UNDER VERSION CONTROL.**
-* This timelog should be filled out honestly, regularly (daily) and accurately. It is for *your* benefit.
-* Follow the structure provided, grouping time by weeks.  Quantise time to the half hour.
+- Lipid Isotope Inference Software
+- Marc Elrick
+- 2316291E
+- Dr Simon Rogers
 
 ## Week 1
 
-### 19 Oct 2019
+### 30 September 2020
 
-* *4 hours* Read the project guidance notes
-* *0.5 hour* Created GitLab repository and cloned the cookiecutter for the projects
-* *1 hour* Modified dissertation template, compiled  
+- _0.5 hours_ Introductory meeting with project supervisor.
+- _1 hour_ Review meeting recording and generate meeting minutes.
 
-## 20 Oct 2019
+## 2 Oct 2020
 
-* *1 hour* meeting with supervisor
-* *2 hours* writing initial version of test harness
+- _1 hour_ Read academic paper sent by supervisor.
+- _1.5 hours_ Cloned prototype repo and began trying to run the jupyter notebook, fixing import issues.
+- _0.5 hours_ Copied project template from project moodle page and initialised it. with correct timelog, readme etc.
