@@ -17,3 +17,14 @@
 - _1 hour_ Read academic paper sent by supervisor.
 - _1.5 hours_ Cloned prototype repo and began trying to run the jupyter notebook, fixing import issues.
 - _0.5 hours_ Copied project template from project moodle page and initialised it. with correct timelog, readme etc.
+
+## 3 Oct 2020
+
+- _1 hour_ - Planned out which libraries are required, by analysing Jupiter notebook.
+- _1 hour_ - Researched available libraries in other languages. Pretty much decided on Python.
+- _0.5 hours_ - Listened to meeting recording again and took notes of steps for software to follow.
+
+## 4 Oct 2020
+
+- _1.5 hours_ - Gone through prototype code and commented, based on my understanding of the procedure.
+- _0.5 hours_ - Outlined agenda for next supervisor meeting(6 Oct 2020)
