@@ -15,16 +15,17 @@
 - **Week 3**
   - Set up inital project repository with appropriate structure.
   - Set up CI to run tests on commits/merges.
+  - Create user stories, that can then be used to plan sprints, and refine these into smaller steps.
   - Design rudementary wireframes of how I think the program should look.
   - Create commit/merge templates to help maintain developer discipline since working alone.
-  - Begin writing code, first step should be to accept and validate user input.(Could be complex)
 - **Week 4**
-  - Begin work on project workflow, specifically with parsing mzml file and extracting data based on input.
+  - Begin writing code, first step should be to accept and validate user input.(Could be complex)
 - **Week 5**
+- Begin work on project workflow, specifically with parsing mzml file and extracting data based on input.
+- **Week 6**
   - Begin work on excel data output.
   - Carry out 'self code review', checking for test coverage etc.
   - Gather feedback on UI with client.
-- **Week 6**
 - **Week 7**
 - **Week 8**
 - **Week 9**

@@ -28,3 +28,7 @@
 
 - _1.5 hours_ - Gone through prototype code and commented, based on my understanding of the procedure.
 - _0.5 hours_ - Outlined agenda for next supervisor meeting(6 Oct 2020)
+
+## 6 Oct 2020
+
+- _0.5 hours_ - Supervisor meeting.
