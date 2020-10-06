@@ -1,0 +1,17 @@
+name: Build Dissertation
+on:
+  push:
+    branches:
+      - master
+    paths:
+    - "**/dissertation/l4proj.tex"
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out git repo
+        uses: actions/checkout@v1
+      - name: Build dissertation with pdfLatex
+        uses: dante-ev/latex-action@master
+        with:
+          root_file: main.tex
