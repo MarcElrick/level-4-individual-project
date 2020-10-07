@@ -1,16 +1,17 @@
-name: Build Dissertation
+name: Build LaTeX document
 on:
   push:
-    branches:
+    branches: 
       - master
     paths:
-    - "**/dissertation/l4proj.tex"
+      - /dissertation/**
 jobs:
   build_latex:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out git repo
+      - name: Set up Git repository
         uses: actions/checkout@v1
-      - name: Build dissertation with pdfLatex
-        run: |
-          pdflatex dissertation/l4proj.tex
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@master
+        with:
+          root_file: dissertation/l4proj.tex
