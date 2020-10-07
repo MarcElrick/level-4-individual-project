@@ -32,3 +32,9 @@
 ## 6 Oct 2020
 
 - _0.5 hours_ - Supervisor meeting.
+- _1.5 hours_ - Installed PyCharm and attempted to setup CI/CD for dissertation. currently getting errors.
+- _0.5 hours_ - Reviewed earlier meeting and generated meeting minutes.
+- _0.5 hours_ - Created initial python project structure.
+
+## 7 Oct 2020
+- _1 hour_ - Created python CI pipeline on github actions which runs tests on commits/merges if there are any changes in the src folder.
