@@ -7,7 +7,7 @@ This repository contains my Glasgow University Level 4 Individual Project, as we
 TBC
 
 ## Documentation
- - [Timelog :timer :clock:](https://github.com/MarcElrick/level-4-individual-project/blob/master/timelog.md)
+ - [Timelog :timer_clock:](https://github.com/MarcElrick/level-4-individual-project/blob/master/timelog.md)
  - [Project Plan :world_map:](https://github.com/MarcElrick/level-4-individual-project/blob/master/plan.md)
  - [Meeting Minutes :spiral_notepad:](https://github.com/MarcElrick/level-4-individual-project/blob/master/meetingminutes.md)
  - Design documentation available in the [wiki :open_book:](https://github.com/MarcElrick/level-4-individual-project/wiki)
