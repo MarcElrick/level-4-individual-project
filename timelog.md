@@ -43,3 +43,4 @@
 ## 9 Oct 2020
 - _0.5 hour_ - Created user stories for both "MVP" as well as for potential further development.
 - _0.5 hour_ - Created PR template.
+- _0.5 hour_ - Created commit message template(viewable in wiki)
