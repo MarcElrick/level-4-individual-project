@@ -21,3 +21,4 @@ jobs:
         uses: xu-cheng/latex-action@master
         with:
           root_file: dissertation/l4proj.tex
+          working_directory: dissertation
