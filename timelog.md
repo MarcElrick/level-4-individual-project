@@ -42,5 +42,9 @@
 
 ## 9 Oct 2020
 - _0.5 hour_ - Created user stories for both "MVP" as well as for potential further development.
+
+## 10 Oct 2020
 - _0.5 hour_ - Created PR template.
 - _0.5 hour_ - Created commit message template(viewable in wiki)
+- _1 hour_ - Messing around with Qt Designer.
+- _2 hours_ - Created wireframes in Figma to show Dr Rogers/Nicole for review before getting started on GUI. :pensive:
