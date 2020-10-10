@@ -39,3 +39,6 @@
 ## 7 Oct 2020
 - _1 hour_ - Created python CI pipeline on github actions which runs tests on commits/merges if there are any changes in the src folder.
 - _0.5 hours_ - Attempted to fix CI pipeline for latex with no success :(. I did however find out how to manually run CI so no longer need to make commits just to trigger runs.
+
+## 9 Oct 2020
+- _0.5 hour_ - Created user stories for both "MVP" as well as for potential further development.
