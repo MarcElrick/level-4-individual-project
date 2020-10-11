@@ -27,4 +27,4 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: my-artifact
-          path: path/to/artifact/world.txt
+          path: dissertation/l4proj.pdf
