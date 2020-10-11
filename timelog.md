@@ -51,3 +51,4 @@
 - _0.5 hours_ - Documented readme and Wiki.
 ## 11 Oct 2020
 - _0.5 hours_ - Finally got CI working for Dissertation. It is now possible to download a PDF build artefact from CI.
+- _0.5 hours_ - Created issues on github with a roadmap of how 

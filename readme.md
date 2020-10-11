@@ -7,7 +7,7 @@ This repository contains my Glasgow University Level 4 Individual Project, as we
 TBC
 
 ## Dissertation
-The PDF version of the dissertation is not in version control, however the most recent build of the PDF can be downloaded from the artefacts section of the most recent build, located [here](https://github.com/MarcElrick/level-4-individual-project/actions?query=workflow%3A%22Build+LaTeX+document%22)
+The PDF version of the dissertation is not in version control, however the most recent build of the PDF can be downloaded from the artefacts section of the most recent build, located [here](https://github.com/MarcElrick/level-4-individual-project/actions?query=workflow%3A%22Build+LaTeX+document%22).
 ## Documentation
  - [Timelog :timer_clock:](https://github.com/MarcElrick/level-4-individual-project/blob/master/timelog.md)
  - [Project Plan :world_map:](https://github.com/MarcElrick/level-4-individual-project/blob/master/plan.md)
