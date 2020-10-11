@@ -26,5 +26,5 @@ jobs:
           push: no # optional, default is no
       - uses: actions/upload-artifact@v2
         with:
-          name: my-artifact
+          name: dissertation
           path: dissertation/l4proj.pdf
