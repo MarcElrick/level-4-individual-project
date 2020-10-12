@@ -37,18 +37,28 @@
 - _0.5 hours_ - Created initial python project structure.
 
 ## 7 Oct 2020
+
 - _1 hour_ - Created python CI pipeline on github actions which runs tests on commits/merges if there are any changes in the src folder.
 - _0.5 hours_ - Attempted to fix CI pipeline for latex with no success :(. I did however find out how to manually run CI so no longer need to make commits just to trigger runs.
 
 ## 9 Oct 2020
+
 - _0.5 hour_ - Created user stories for both "MVP" as well as for potential further development.
 
 ## 10 Oct 2020
+
 - _0.5 hour_ - Created PR template.
 - _0.5 hour_ - Created commit message template(viewable in wiki)
 - _1 hour_ - Messing around with Qt Designer.
 - _2 hours_ - Created wireframes in Figma to show Dr Rogers/Nicole for review before getting started on GUI.
 - _0.5 hours_ - Documented readme and Wiki.
+
 ## 11 Oct 2020
+
 - _0.5 hours_ - Finally got CI working for Dissertation. It is now possible to download a PDF build artefact from CI.
-- _0.5 hours_ - Created issues on github with a roadmap of how 
+- _0.5 hours_ - Created issues on github
+
+## 12 Oct 2020
+
+- _1 hour_- Got prototype pipeline working on my machine and created a PR into the original repository.
+- _2 hours_ Started messing around with PyQt and set up directory structure for GUI components. I think this will likely need to be redone later, all in one file.
