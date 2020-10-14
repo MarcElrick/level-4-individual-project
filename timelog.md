@@ -61,4 +61,13 @@
 ## 12 Oct 2020
 
 - _1 hour_- Got prototype pipeline working on my machine and created a PR into the original repository.
-- _2 hours_ Started messing around with PyQt and set up directory structure for GUI components. I think this will likely need to be redone later, all in one file.
+- _2 hours_ - Started messing around with PyQt and set up directory structure for GUI components. I think this will likely need to be redone later, all in one file.
+
+## 13 Oct 2020
+- _1 hour_ - Continued work developing GUI - now have a nice framework set uo for switching between screens.
+- _1 hour_ - Further GUI work - now have a solid grasp on PyQt and have an idea of state management procedure.
+
+## 14 Oct 2020
+- _1 hour_ - Further work on gui, now dynamically loading all screens on next/back and have capability for disabling buttons if no on_next/on_back arg is provided.
+- _1 hour_ - Trying to decypher testing PyQt applications for which there is ZERO documentation :pensive:
+- _2 hours_ - EUREKA! have successfully written my first gui test, hopefully the rest should come easily now.
