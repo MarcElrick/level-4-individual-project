@@ -47,5 +47,5 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: main-executable
-        path: dist/main.exe
+        path: src/dist/main.exe
 
