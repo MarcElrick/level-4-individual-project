@@ -19,7 +19,11 @@
   - Design rudementary wireframes of how I think the program should look.
   - Create commit/merge templates to help maintain developer discipline since working alone.
 - **Week 4**
-  - Begin writing code, first step should be to accept and validate user input.(Could be complex)
+  - Begin writing code, first step should be to accept and validate user input.(Could be complex). This includes:
+    - Step 1 page - Collect lipid information details.
+    - Step 2 page - Pick files and enter retention times.
+    - Step 3 page - Show summary of details entered.
+    - Step 4 page - Show progress bar of analysis.
 - **Week 5**
 - Begin work on project workflow, specifically with parsing mzml file and extracting data based on input.
 - **Week 6**

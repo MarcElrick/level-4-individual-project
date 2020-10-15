@@ -10,7 +10,7 @@ from gui.progress_screen import ProgressScreen
 import sys
 
 
-# Smoke test to verify test suite works
+# Smoke test to verify test suite runs
 class SmokeTest(unittest.TestCase):
 
     def test_smoke(self):
