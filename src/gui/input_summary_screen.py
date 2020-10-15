@@ -7,8 +7,8 @@ class InputSummaryScreen(QWidget):
     def __init__(self, on_next=None, on_back=None):
         super(InputSummaryScreen, self).__init__()
 
-        nav_buttons = NavigationButtons(on_next=on_next, on_back=on_back)
+        self.nav_buttons = NavigationButtons(on_next=on_next, on_back=on_back)
 
-        layout = QGridLayout()
-        layout.addWidget(nav_buttons)
-        self.setLayout(layout)
+        self.layout = QGridLayout()
+        self.layout.addWidget(self.nav_buttons)
+        self.setLayout(self.layout)
