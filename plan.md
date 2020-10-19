@@ -22,15 +22,19 @@
   - Begin writing code, first step should be to accept and validate user input.(Could be complex). This includes:
     - Step 1 page - Collect lipid information details.
     - Step 2 page - Pick files and enter retention times.
-    - Step 3 page - Show summary of details entered.
-    - Step 4 page - Show progress bar of analysis.
+    - Basic state management
 - **Week 5**
-- Begin work on project workflow, specifically with parsing mzml file and extracting data based on input.
+  - Setup pyinstaller in CI, excluding test folder etc
+  - Step 3 page - Show summary of details entered.
+  - Step 4 page - Show progress bar of analysis.
 - **Week 6**
+
+  - Begin work on project workflow, specifically with parsing mzml file and extracting data based on input.
+
+- **Week 7**
   - Begin work on excel data output.
   - Carry out 'self code review', checking for test coverage etc.
   - Gather feedback on UI with client.
-- **Week 7**
 - **Week 8**
 - **Week 9**
 - **Week 10**

@@ -64,16 +64,28 @@
 - _2 hours_ - Started messing around with PyQt and set up directory structure for GUI components. I think this will likely need to be redone later, all in one file.
 
 ## 13 Oct 2020
+
 - _1 hour_ - Continued work developing GUI - now have a nice framework set uo for switching between screens.
 - _1 hour_ - Further GUI work - now have a solid grasp on PyQt and have an idea of state management procedure.
 
 ## 14 Oct 2020
+
 - _1 hour_ - Further work on gui, now dynamically loading all screens on next/back and have capability for disabling buttons if no on_next/on_back arg is provided.
 - _1 hour_ - Trying to decipher testing PyQt applications for which there is ZERO documentation :pensive:
 - _2 hours_ - EUREKA! have successfully written my first gui test, hopefully the rest should come easily now.
 
 ## 15 Oct 2020
+
 - _1 hour_ - Working on GUI tests. Now have tests that verify all next/back buttons take the user to the correct page.
 - _0.5 hour_ - Investigating how I can run updated CI without pushing to master and breaking current CI - Github actions has no way to do this, and so the only solution is to change the default branch, run tests and change back.
 - _0.5 hour_ - Investigating if GUI tests can be run on CI without being able to load the application - This may well be impossible.
+
   - Having spent too much time on this, I finally decided to avoid running gui tests in CI, and only run unit tests for now. GUI tests are still good to have, and I will run locally.
+
+- _1 hour_ - Working on GUI tests. Now have tests that verify all next/back buttons take the user to the correct page.
+
+- _3 hours_ - GUI development, almost have step1 page layout done. Also, retried pyInstaller and it seems to successfully create an executable for my application. Making custom components with custom styles.
+
+- _1 hour_ - Have been debugging an issue whereby pyinstaller could not find CSS static file. I instead decided to hardcode the css within the python file. Since it will not be a large file, this is not _too_ bad a smell at the moment, although I may need to reevaluate later.
+
+- _1.5 hours_ Set up CI with PyInstaller.
