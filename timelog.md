@@ -69,8 +69,11 @@
 
 ## 14 Oct 2020
 - _1 hour_ - Further work on gui, now dynamically loading all screens on next/back and have capability for disabling buttons if no on_next/on_back arg is provided.
-- _1 hour_ - Trying to decypher testing PyQt applications for which there is ZERO documentation :pensive:
+- _1 hour_ - Trying to decipher testing PyQt applications for which there is ZERO documentation :pensive:
 - _2 hours_ - EUREKA! have successfully written my first gui test, hopefully the rest should come easily now.
 
 ## 15 Oct 2020
--_1 hour_ - Working on GUI tests. Now have tests that verify all next/back buttons take the user to the correct page.
+- _1 hour_ - Working on GUI tests. Now have tests that verify all next/back buttons take the user to the correct page.
+- _0.5 hour_ - Investigating how I can run updated CI without pushing to master and breaking current CI - Github actions has no way to do this, and so the only solution is to change the default branch, run tests and change back.
+- _0.5 hour_ - Investigating if GUI tests can be run on CI without being able to load the application - This may well be impossible.
+  - Having spent too much time on this, I finally decided to avoid running gui tests in CI, and only run unit tests for now. GUI tests are still good to have, and I will run locally.
