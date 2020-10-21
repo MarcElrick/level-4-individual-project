@@ -88,4 +88,13 @@
 
 - _1 hour_ - Have been debugging an issue whereby pyinstaller could not find CSS static file. I instead decided to hardcode the css within the python file. Since it will not be a large file, this is not _too_ bad a smell at the moment, although I may need to reevaluate later.
 
-- _1.5 hours_ Set up CI with PyInstaller.
+- _1.5 hours_ - Set up CI for Windows with PyInstaller.
+
+## 20 Oct 2020
+
+- _0.5 hour_ - Set up CI for MacOS with PyInstaller.
+
+## 21 Oct 2020
+
+- _1.5 hours_ - Implemented state management for lipid screen.
+- _0.5_ - Completed lipid screen for now.

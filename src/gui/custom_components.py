@@ -8,7 +8,10 @@ stylesheet = """
     }
 
     #field {
-        font-size: 20px;
+        font-size: 15px;
+        qproperty-alignment: AlignRight;
+        padding: 5px;
+
     }
 """
 

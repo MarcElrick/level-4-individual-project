@@ -9,8 +9,9 @@ from gui.progress_screen import ProgressScreen
 
 class MainApp(QMainWindow):
 
-    def __init__(self):
+    def __init__(self, state):
         super().__init__()
+        self.state = state
         self.init_ui()
 
     def init_ui(self):
@@ -20,13 +21,17 @@ class MainApp(QMainWindow):
         self.init_lipid_details_screen()
 
     def init_lipid_details_screen(self):
-        self.setCentralWidget(LipidDetailsScreen(on_next=self.init_file_picker_screen))
+        self.setCentralWidget(LipidDetailsScreen(page_state=self.state.screen1,
+                                                 on_next=self.init_file_picker_screen))
 
     def init_file_picker_screen(self):
-        self.setCentralWidget(FilePickerScreen(on_back=self.init_lipid_details_screen, on_next=self.init_input_summary_screen))
+        self.setCentralWidget(FilePickerScreen(
+            on_back=self.init_lipid_details_screen, on_next=self.init_input_summary_screen))
 
     def init_input_summary_screen(self):
-        self.setCentralWidget(InputSummaryScreen(on_back=self.init_file_picker_screen, on_next=self.init_progress_screen))
+        self.setCentralWidget(InputSummaryScreen(
+            on_back=self.init_file_picker_screen, on_next=self.init_progress_screen))
 
     def init_progress_screen(self):
-        self.setCentralWidget(ProgressScreen(on_back=self.init_input_summary_screen))
+        self.setCentralWidget(ProgressScreen(
+            on_back=self.init_input_summary_screen))
