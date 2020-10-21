@@ -1,7 +1,7 @@
 import unittest
 
 
-# Smoke test to verify test suite works
+# Smoke test to verify test suite runs
 class SmokeTest(unittest.TestCase):
 
     def test_smoke(self):

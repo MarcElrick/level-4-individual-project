@@ -1,3 +1,2 @@
 PyQt5==5.15.1
-pyqt5-tool==5.15.1.1.7.4
 mass-spec-utils==0.0.10
