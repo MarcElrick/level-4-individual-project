@@ -98,3 +98,12 @@
 
 - _1.5 hours_ - Implemented state management for lipid screen.
 - _0.5_ - Completed lipid screen for now.
+
+## 22 Oct 2020
+
+- _2 hours_ - Began implementing step 2 form(pick files). Having issues figuring out state management, as I need a way to add an unknown number of files. Enough for today.
+
+## 24 Oct 2020
+
+- _1 hour_ - Further implementation of file picker screen. Can now add rows correctly, as well as changing screen and rebuilding the UI. There is however an issues with deleting widgets(Qt layouts are not designed for this, so I think I need to switch to a QListWidget to properly handle deleting elements.)
+- _1 hour_ - QListWidget was not suitable, as it is designed for one line, textual items. I finally managed to get it working by redrawing the entire panel on delete. I now have everything working statefully. Likely some refactoring needed, as some of the code is a bit cursed.

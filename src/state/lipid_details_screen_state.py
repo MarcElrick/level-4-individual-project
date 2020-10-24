@@ -1,4 +1,4 @@
-class ScreenOneState:
+class LipidDetailsScreenState:
     def __init__(self):
         self.isotope_formula = ""
 
