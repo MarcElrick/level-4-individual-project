@@ -2,15 +2,15 @@ name: Build LaTeX document
 on:
   workflow_dispatch:
   push:
-    branches: 
+    branches:
       - master
     paths:
-      - /dissertation/**
+      - dissertation/**
   pull_request:
-    branches: 
+    branches:
       - master
     paths:
-      - /dissertation/**
+      - dissertation/**
 jobs:
   build_latex:
     runs-on: ubuntu-latest
