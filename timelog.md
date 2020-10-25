@@ -112,3 +112,4 @@
 
 - _0.5 hours_ - Refactored so that index value is no longer explicitly stated. Removing this variable greatly reduces likelihood of error (before, pairings were in the form [filename, time, index], now index is not required)
 - _0.5 hours_ - Completed unit tests for FileInputScreenState. I have opted not to write unit tests for LipidDetailsScreen, given that all methods are setters. There are no methods with any complex interactions.
+- _1 hour_ - Fixed a newly introduced bug in FilePickerScreen. The cause of this was that lambda functions evaluate their arguments when they are called, not when they are declared, and so the last item was always being deleted as that was the current value of the iterator variable i.

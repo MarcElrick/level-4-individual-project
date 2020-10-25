@@ -22,9 +22,9 @@ class FilePickerScreen(QWidget):
         self.innerLayout = QVBoxLayout()
 
         # Create all pairing items from existing pairs.
-        for i in range(len(self.state.file_time_pairs)):
+        for i in range(0, len(self.state.file_time_pairs)):
             self.innerLayout.addLayout(
-                PairListItem(self.state.file_time_pairs[i], lambda: self.remove_pairing(i), lambda: self.state.update_record(self.state.file_time_pairs[i], i)))
+                PairListItem(self.state.file_time_pairs[i], lambda i=i: self.remove_pairing(i), lambda i=i: self.state.update_record(self.state.file_time_pairs[i], i)))
 
         self.nav_buttons = NavigationButtons(
             on_next=self.on_next, on_back=self.on_back)
@@ -42,11 +42,12 @@ class FilePickerScreen(QWidget):
     def add_new_pairing(self):
         self.state.add_record(
             ["", 0])
-
+        length = len(self.state.file_time_pairs)
         self.innerLayout.addLayout(
-            PairListItem(self.state.file_time_pairs[-1], lambda: self.remove_pairing(len(self.state.file_time_pairs)-1), lambda: self.state.update_record(self.state.file_time_pairs[len(self.state.file_time_pairs)-1], len(self.state.file_time_pairs)-1)))
+            PairListItem(self.state.file_time_pairs[-1], lambda i=length: self.remove_pairing(i-1), lambda i=length: self.state.update_record(self.state.file_time_pairs[i-1], i-1)))
 
     def remove_pairing(self, index):
+        print(index)
         self.state.remove_record(index)
         self.redraw()
 
@@ -69,7 +70,7 @@ class PairListItem(QHBoxLayout):
         self.time_entry.valueChanged.connect(self.onTimeChange)
 
         self.btn_delete = DeleteButton("Delete")
-        self.btn_delete.clicked.connect(on_delete)
+        self.btn_delete.clicked.connect(lambda: on_delete())
 
         self.addWidget(self.path_label)
         self.addWidget(self.btn_choose_file)

@@ -26,10 +26,11 @@ class FilePickerScreenStateTests(unittest.TestCase):
         self.state.add_record(['test.mzml'])
         self.assertEqual(self.files[0], ['test.mzml'])
 
-    def test_remove_pair_exists(self):
-        self.state.add_record(['test.mzml', 8, 0])
+    def test_remove_pair_removes_correct_pair(self):
+        self.state.add_record(['test8.mzml', 8, 0])
+        self.state.add_record(['test16.mzml', 16, 0])
         self.state.remove_record(0)
-        self.assertEqual(self.files, [])
+        self.assertEqual(self.files, [['test16.mzml', 16, 0]])
 
 
 if __name__ == '__main__':
