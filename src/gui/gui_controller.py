@@ -25,8 +25,8 @@ class MainApp(QMainWindow):
                                                  on_next=self.init_file_picker_screen))
 
     def init_file_picker_screen(self):
-        self.setCentralWidget(FilePickerScreen(
-            on_back=self.init_lipid_details_screen, on_next=self.init_input_summary_screen))
+        self.setCentralWidget(FilePickerScreen(page_state=self.state.screen2,
+                                               on_back=self.init_lipid_details_screen, on_next=self.init_input_summary_screen, redraw=self.init_file_picker_screen))
 
     def init_input_summary_screen(self):
         self.setCentralWidget(InputSummaryScreen(

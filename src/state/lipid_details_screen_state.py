@@ -1,4 +1,4 @@
-class ScreenOneState:
+class LipidDetailsScreenState:
     def __init__(self):
         self.isotope_formula = ""
 
@@ -17,7 +17,6 @@ class ScreenOneState:
         self.mass_tolerance_units_list = ['ppm', 'Da']
 
     def setIsotopeFormula(self, text):
-        print(text)
         self.isotope_formula = text
 
     def setAdductIndex(self, text):
