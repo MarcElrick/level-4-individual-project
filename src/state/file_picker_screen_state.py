@@ -4,9 +4,9 @@ class FilePickerScreenState:
         self.file_time_pairs = []
         print("STATE INITIALISED")
 
+    # Pass in an changed record to adjust that record. This will change record based on the index value at index 2
     def update_record(self, record):
         self.file_time_pairs[record[2]] = record
-        print(self.file_time_pairs)
 
     def remove_record(self, index):
         del self.file_time_pairs[index]
