@@ -107,3 +107,8 @@
 
 - _1 hour_ - Further implementation of file picker screen. Can now add rows correctly, as well as changing screen and rebuilding the UI. There is however an issues with deleting widgets(Qt layouts are not designed for this, so I think I need to switch to a QListWidget to properly handle deleting elements.)
 - _1 hour_ - QListWidget was not suitable, as it is designed for one line, textual items. I finally managed to get it working by redrawing the entire panel on delete. I now have everything working statefully. Likely some refactoring needed, as some of the code is a bit cursed.
+
+- _2 hours_ - More work on file picker screen. Form is fully working now and almost ready to close issue. While writing unit tests, I have realised that the way in which I store the index within pairings is not optimal, and things could easily go wrong with it. Looking at ways to remove it.
+
+- _0.5 hours_ - Refactored so that index value is no longer explicitly stated. Removing this variable greatly reduces likelihood of error (before, pairings were in the form [filename, time, index], now index is not required)
+- _0.5 hours_ - Completed unit tests for FileInputScreenState. I have opted not to write unit tests for LipidDetailsScreen, given that all methods are setters. There are no methods with any complex interactions.

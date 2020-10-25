@@ -17,7 +17,6 @@ class LipidDetailsScreenState:
         self.mass_tolerance_units_list = ['ppm', 'Da']
 
     def setIsotopeFormula(self, text):
-        print(text)
         self.isotope_formula = text
 
     def setAdductIndex(self, text):
