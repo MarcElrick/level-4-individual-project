@@ -29,8 +29,8 @@ class MainApp(QMainWindow):
                                                on_back=self.init_lipid_details_screen, on_next=self.init_input_summary_screen, redraw=self.init_file_picker_screen))
 
     def init_input_summary_screen(self):
-        self.setCentralWidget(InputSummaryScreen(
-            on_back=self.init_file_picker_screen, on_next=self.init_progress_screen))
+        self.setCentralWidget(InputSummaryScreen(page_state=self.state.screen3,
+                                                 on_back=self.init_file_picker_screen, on_next=self.init_progress_screen))
 
     def init_progress_screen(self):
         self.setCentralWidget(ProgressScreen(
