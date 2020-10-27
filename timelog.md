@@ -118,6 +118,10 @@
 - _1 hour_ - Fixed a newly introduced bug in FilePickerScreen. The cause of this was that lambda functions evaluate their arguments when they are called, not when they are declared, and so the last item was always being deleted as that was the current value of the iterator variable i.
 - _1 hour_ - Created a component that will display key-value pairs for the summary screen.
 
-## 26 OCt 2020
+## 26 Oct 2020
 
 - _3 hours_ - Almost completely implemented summary screen, correctly retrieving state from steps 1 and 2 by exposing a getter function, without making it possible to change anything in page 1 or 2 state.
+
+## 27 Oct 2020
+
+-_1 hour_ - Wrote unit tests and made visual improments to input summary screen.
