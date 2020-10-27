@@ -1,7 +1,8 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QFileDialog, QPushButton, QMainWindow, QLabel, QSpinBox
 from PyQt5.QtCore import Qt
 from gui.nav_buttons import NavigationButtons
-from gui.custom_components import CustomTitle, CustomFieldLabel, DeleteButton, AddButton
+from gui.custom_components import CustomTitle, CustomFieldLabel, DeleteButton, ActionButton
+from helper import getFilenameFromPath
 import sys
 import os
 
@@ -29,7 +30,7 @@ class FilePickerScreen(QWidget):
         self.nav_buttons = NavigationButtons(
             on_next=self.on_next, on_back=self.on_back)
 
-        self.btn_add = AddButton("Add File")
+        self.btn_add = ActionButton("Add File")
         self.btn_add.clicked.connect(self.add_new_pairing)
 
         self.outerLayout.addWidget(self.title)
@@ -87,9 +88,3 @@ class PairListItem(QHBoxLayout):
     def onTimeChange(self, value):
         self.record[1] = value
         self.on_change()
-
-
-def getFilenameFromPath(filepath):
-    if filepath == "":
-        return ""
-    return os.path.abspath(filepath).split(os.sep)[-1]

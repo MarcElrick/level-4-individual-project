@@ -16,6 +16,17 @@ class LipidDetailsScreenState:
         self.mass_tolerance_units_index = 0
         self.mass_tolerance_units_list = ['ppm', 'Da']
 
+    def get_data_summary(self):
+        return {
+            "Lipid Formula": self.isotope_formula,
+            "Adduct": self.adduct_list[self.adduct_index],
+            "Isotope Depth": self.isotope_depth,
+            "Retention Time": str(self.retention_time) + "s",
+            "Retention Time Tolerance": str(self.retention_time_tolerance) + "s",
+            "Mass": self.mass,
+            "Mass Tolerance": str(self.mass_tolerance) + self.mass_tolerance_units_list[self.mass_tolerance_units_index]
+        }
+
     def setIsotopeFormula(self, text):
         self.isotope_formula = text
 

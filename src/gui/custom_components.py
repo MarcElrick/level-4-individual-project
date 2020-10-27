@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QLabel, QPushButton, QVBoxLayout
+from PyQt5.QtWidgets import QLabel, QPushButton, QVBoxLayout, QWidget, QLayout, QSizePolicy
 import os
 
 # To work with PyInstaller, we need to get the absolute path for css file.
@@ -18,12 +18,43 @@ stylesheet = """
         background-color: #B71C1C;
     }
 
-    #addButton {
+    #actionButton {
         color: #FFF;
         background-color: #01579B;
-        min-width: 150px;
+        qproperty-sizePolicy: Minimum;
+
     }
+
+    #summaryLabel {
+        font-size:16px;
+        color:rgba(0, 0, 0, 0.5);
+    }
+
+    #summaryValue{
+        font-size:22px;
+    }
+
 """
+
+
+class SummaryDisplayCard(QWidget):
+    def __init__(self, label, *values):
+        super(QWidget, self).__init__()
+        self.setObjectName('summaryCard')
+        self.layout = QVBoxLayout()
+        self.label = QLabel(label)
+        self.label.setObjectName('summaryLabel')
+        self.layout.addWidget(self.label)
+
+        for value in values:
+            valueWidget = QLabel(value)
+            valueWidget.setObjectName('summaryValue')
+            self.layout.addWidget(valueWidget)
+        self.layout.setSizeConstraint(QLayout.SetNoConstraint)
+        self.layout.setSpacing(0)
+        self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        self.setStyleSheet(stylesheet)
+        self.setLayout(self.layout)
 
 
 class DeleteButton(QPushButton):
@@ -34,11 +65,11 @@ class DeleteButton(QPushButton):
         self.setStyleSheet(stylesheet)
 
 
-class AddButton(QPushButton):
+class ActionButton(QPushButton):
     def __init__(self, text):
         super(QPushButton, self).__init__()
         self.setText(text)
-        self.setObjectName('addButton')
+        self.setObjectName('actionButton')
         self.setStyleSheet(stylesheet)
 
 
