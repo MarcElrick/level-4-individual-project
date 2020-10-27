@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import QWidget, QFormLayout, QLabel, QVBoxLayout, QHBoxLayout, QSpacerItem, QComboBox, QLabel, QLineEdit, QSpinBox, QDoubleSpinBox
 from gui.nav_buttons import NavigationButtons
 from gui.custom_components import CustomTitle, CustomFieldLabel
+from molmass import Formula, FormulaError
+
 import sys
 
 
@@ -8,9 +10,10 @@ class LipidDetailsScreen(QWidget):
     def __init__(self, page_state=None, on_next=None, on_back=None):
         super(LipidDetailsScreen, self).__init__()
 
-        self.isotope_formula = QLineEdit()
-        self.isotope_formula.setText(page_state.isotope_formula)
-        self.isotope_formula.textChanged.connect(page_state.setIsotopeFormula)
+        self.page_state = page_state
+        self.lipid_formula = QLineEdit()
+        self.lipid_formula.setText(page_state.lipid_formula)
+        self.lipid_formula.textChanged.connect(self.validate_lipid_formula)
 
         self.adduct_type = QComboBox()
         self.adduct_type.addItems(page_state.adduct_list)
@@ -65,7 +68,7 @@ class LipidDetailsScreen(QWidget):
 
         self.content_layout = QFormLayout()
         self.content_layout.addRow(CustomFieldLabel(
-            "Isotope Formula"), self.isotope_formula)
+            "Isotope Formula"), self.lipid_formula)
 
         self.content_layout.addRow(CustomFieldLabel(
             "Adduct Type"), self.adduct_type)
@@ -95,3 +98,16 @@ class LipidDetailsScreen(QWidget):
         self.screen_layout.addWidget(self.nav_buttons)
 
         self.setLayout(self.screen_layout)
+
+    def validate_lipid_formula(self, text):
+        f = Formula(text)
+        valid = True
+
+        try:
+            formula = f.formula
+            self.page_state.setLipidFormula(text)
+            self.lipid_formula.setStyleSheet("border: 1px solid green")
+
+        except FormulaError:
+            valid = False
+            self.lipid_formula.setStyleSheet("border: 1px solid red")

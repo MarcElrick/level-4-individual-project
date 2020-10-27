@@ -44,7 +44,7 @@ class InputSummaryScreenStateTests(unittest.TestCase):
             get_lipid_info=cls.lipid_state.get_data_summary, get_file_info=cls.file_picker_state.get_data_summary)
 
     def test_lipid_info_is_correct(self):
-        self.lipid_state.setIsotopeFormula("C4356H4")
+        self.lipid_state.setLipid("C4356H4")
         self.lipid_state.setAdductIndex(0)
         self.lipid_state.setIsotopeDepth(5)
         self.lipid_state.setMass(100.000)
