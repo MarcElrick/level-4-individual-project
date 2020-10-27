@@ -21,16 +21,17 @@ stylesheet = """
     #actionButton {
         color: #FFF;
         background-color: #01579B;
-        min-width: 150px;
+        qproperty-sizePolicy: Minimum;
+
     }
 
     #summaryLabel {
-        font-size:20px;
+        font-size:16px;
         color:rgba(0, 0, 0, 0.5);
     }
 
     #summaryValue{
-        font-size:25px;
+        font-size:22px;
     }
 
 """

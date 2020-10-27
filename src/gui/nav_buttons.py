@@ -22,5 +22,4 @@ class NavigationButtons(QWidget):
 
         self.layout.addWidget(self.btn_back)
         self.layout.addWidget(self.btn_next)
-        #self.layout.addItem(QSpacerItem(303, 0))
         self.setLayout(self.layout)
