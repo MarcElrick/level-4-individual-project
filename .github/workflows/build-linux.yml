@@ -42,7 +42,7 @@ jobs:
         run: |
           cd src/
           pyinstaller main.py -F
-          ls -a src/dist
+          ls src/dist
       - uses: actions/upload-artifact@v2
         with:
           name: main-executable
