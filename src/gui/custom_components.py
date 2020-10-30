@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QLabel, QPushButton, QVBoxLayout, QWidget, QLayout, QSizePolicy
+from PyQt5.QtCore import Qt
 import os
 
 # To work with PyInstaller, we need to get the absolute path for css file.
@@ -9,7 +10,6 @@ stylesheet = """
 
     #field {
         font-size: 15px;
-        qproperty-alignment: AlignRight;
         padding: 5px;
     }
 
@@ -82,8 +82,14 @@ class CustomTitle(QLabel):
 
 
 class CustomFieldLabel(QLabel):
-    def __init__(self, text):
+    def __init__(self, text, alignment=None):
         super(QLabel, self).__init__()
         self.setText(text)
         self.setObjectName('field')
         self.setStyleSheet(stylesheet)
+        if alignment == 'left':
+            self.setAlignment(Qt.AlignLeft)
+        elif alignment == 'center':
+            self.setAlignment(Qt.AlignLeft)
+        else:
+            self.setAlignment(Qt.AlignRight)

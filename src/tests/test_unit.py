@@ -2,6 +2,7 @@ import unittest
 from state.file_picker_screen_state import FilePickerScreenState
 from state.lipid_details_screen_state import LipidDetailsScreenState
 from state.input_summary_screen_state import InputSummaryScreenState
+from molmass import Formula
 
 # Smoke test to verify test suite runs
 
@@ -44,7 +45,7 @@ class InputSummaryScreenStateTests(unittest.TestCase):
             get_lipid_info=cls.lipid_state.get_data_summary, get_file_info=cls.file_picker_state.get_data_summary)
 
     def test_lipid_info_is_correct(self):
-        self.lipid_state.setLipid("C4356H4")
+        self.lipid_state.setLipidFormula("C4356H4")
         self.lipid_state.setAdductIndex(0)
         self.lipid_state.setIsotopeDepth(5)
         self.lipid_state.setMass(100.000)
@@ -53,8 +54,8 @@ class InputSummaryScreenStateTests(unittest.TestCase):
         self.lipid_state.setRetentionTime(100.000)
         self.lipid_state.setRetentionTimeTolerance(20)
 
-        self.assertDictEqual({"Lipid Formula": "C4356H4", "Isotope Depth": 5,
-                              "Adduct": "Item1", "Mass": 100.0, "Mass Tolerance": "20ppm",
+        self.assertDictEqual({"Lipid Formula": Formula("C4356H4").formula, "Isotope Depth": 5,
+                              "Adduct": "[M+H]+", "Mass": 100.0, "Mass Tolerance": "20ppm",
                               "Retention Time": "100.0s",
                               "Retention Time Tolerance": "20s"}, self.state.get_lipid_info())
 

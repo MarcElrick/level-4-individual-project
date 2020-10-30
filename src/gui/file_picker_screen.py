@@ -29,6 +29,8 @@ class FilePickerScreen(QWidget):
 
         self.nav_buttons = NavigationButtons(
             on_next=self.on_next, on_back=self.on_back)
+        self.nav_buttons.btn_next.setDisabled(
+            len(self.state.file_time_pairs) == 0)
 
         self.btn_add = ActionButton("Add File")
         self.btn_add.clicked.connect(self.add_new_pairing)
@@ -41,6 +43,7 @@ class FilePickerScreen(QWidget):
         self.setLayout(self.outerLayout)
 
     def add_new_pairing(self):
+        self.nav_buttons.btn_next.setDisabled(False)
         self.state.add_record(
             ["", 0])
         length = len(self.state.file_time_pairs)
@@ -48,9 +51,10 @@ class FilePickerScreen(QWidget):
             PairListItem(self.state.file_time_pairs[-1], lambda i=length: self.remove_pairing(i-1), lambda i=length: self.state.update_record(self.state.file_time_pairs[i-1], i-1)))
 
     def remove_pairing(self, index):
-        print(index)
         self.state.remove_record(index)
         self.redraw()
+        if(len(self.state.file_time_pairs) == 0):
+            self.nav_buttons.btn_next.setDisabled(True)
 
 
 class PairListItem(QHBoxLayout):

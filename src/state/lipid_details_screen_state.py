@@ -1,8 +1,11 @@
+from molmass import Formula
+
+
 class LipidDetailsScreenState:
     def __init__(self):
         self.lipid_formula = ""
 
-        self.adduct_list = ['Item1', 'Item2', 'Item3', 'Item4', 'Item5']
+        self.adduct_list = ['[M+H]+', '[M+H]+', '[M+H]+', '[M+H]+', '[M+H]+']
         self.adduct_index = 0
 
         self.isotope_depth = 0
@@ -28,7 +31,7 @@ class LipidDetailsScreenState:
         }
 
     def setLipidFormula(self, text):
-        self.lipid_formula = text
+        self.lipid_formula = Formula(text).formula
 
     def setAdductIndex(self, text):
         self.adduct_index = text
