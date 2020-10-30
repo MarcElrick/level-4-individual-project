@@ -68,6 +68,8 @@ class PairListItem(QHBoxLayout):
         self.btn_choose_file = QPushButton("Choose File...")
         if record[0] != "":
             self.btn_choose_file.setText(getFilenameFromPath(record[0]))
+        else:
+            self.getFilepath()
         self.btn_choose_file.clicked.connect(self.getFilepath)
 
         self.time_entry = QSpinBox()

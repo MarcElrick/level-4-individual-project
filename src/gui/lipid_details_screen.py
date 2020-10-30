@@ -38,7 +38,7 @@ class LipidDetailsScreen(QWidget):
         self.retention_time_tolerance.valueChanged.connect(
             page_state.setRetentionTimeTolerance)
 
-        self.mass = QDoubleSpinBox(decimals=10)
+        self.mass = QDoubleSpinBox(decimals=20)
         self.mass.setRange(0, 10000)
         self.mass.setValue(
             page_state.mass)

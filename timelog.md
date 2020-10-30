@@ -135,3 +135,4 @@
 ## 30 Oct 2020
 
 - _1 hour_ - Added checkbox to manually override mass.
+- _0.5 hours_ - Add file button now directly opens file dialog, removing a click.
