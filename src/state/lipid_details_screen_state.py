@@ -1,8 +1,11 @@
+from molmass import Formula
+
+
 class LipidDetailsScreenState:
     def __init__(self):
-        self.isotope_formula = ""
+        self.lipid_formula = ""
 
-        self.adduct_list = ['Item1', 'Item2', 'Item3', 'Item4', 'Item5']
+        self.adduct_list = ['[M+H]+', '[M+H]+', '[M+H]+', '[M+H]+', '[M+H]+']
         self.adduct_index = 0
 
         self.isotope_depth = 0
@@ -18,7 +21,7 @@ class LipidDetailsScreenState:
 
     def get_data_summary(self):
         return {
-            "Lipid Formula": self.isotope_formula,
+            "Lipid Formula": self.lipid_formula,
             "Adduct": self.adduct_list[self.adduct_index],
             "Isotope Depth": self.isotope_depth,
             "Retention Time": str(self.retention_time) + "s",
@@ -27,8 +30,8 @@ class LipidDetailsScreenState:
             "Mass Tolerance": str(self.mass_tolerance) + self.mass_tolerance_units_list[self.mass_tolerance_units_index]
         }
 
-    def setIsotopeFormula(self, text):
-        self.isotope_formula = text
+    def setLipidFormula(self, text):
+        self.lipid_formula = Formula(text).formula
 
     def setAdductIndex(self, text):
         self.adduct_index = text

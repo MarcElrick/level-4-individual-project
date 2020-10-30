@@ -1,6 +1,9 @@
-from PyQt5.QtWidgets import QWidget, QFormLayout, QLabel, QVBoxLayout, QHBoxLayout, QSpacerItem, QComboBox, QLabel, QLineEdit, QSpinBox, QDoubleSpinBox
+from PyQt5.QtWidgets import QWidget, QFormLayout, QLabel, QVBoxLayout, QHBoxLayout, QSpacerItem, QComboBox, QLabel, QLineEdit, QSpinBox, QDoubleSpinBox, QCheckBox
 from gui.nav_buttons import NavigationButtons
+from PyQt5.QtCore import Qt
 from gui.custom_components import CustomTitle, CustomFieldLabel
+from molmass import Formula, FormulaError
+
 import sys
 
 
@@ -8,9 +11,10 @@ class LipidDetailsScreen(QWidget):
     def __init__(self, page_state=None, on_next=None, on_back=None):
         super(LipidDetailsScreen, self).__init__()
 
-        self.isotope_formula = QLineEdit()
-        self.isotope_formula.setText(page_state.isotope_formula)
-        self.isotope_formula.textChanged.connect(page_state.setIsotopeFormula)
+        self.page_state = page_state
+        self.lipid_formula = QLineEdit()
+        self.lipid_formula.setText(page_state.lipid_formula)
+        self.lipid_formula.textChanged.connect(self.validate_lipid_formula)
 
         self.adduct_type = QComboBox()
         self.adduct_type.addItems(page_state.adduct_list)
@@ -34,8 +38,8 @@ class LipidDetailsScreen(QWidget):
         self.retention_time_tolerance.valueChanged.connect(
             page_state.setRetentionTimeTolerance)
 
-        self.mass = QDoubleSpinBox(decimals=6)
-        self.mass.setRange(0, 100)
+        self.mass = QDoubleSpinBox(decimals=10)
+        self.mass.setRange(0, 10000)
         self.mass.setValue(
             page_state.mass)
         self.mass.valueChanged.connect(
@@ -65,7 +69,13 @@ class LipidDetailsScreen(QWidget):
 
         self.content_layout = QFormLayout()
         self.content_layout.addRow(CustomFieldLabel(
-            "Isotope Formula"), self.isotope_formula)
+            "Lipid Formula"), self.lipid_formula)
+
+        self.lipid_formula_label = CustomFieldLabel("", alignment='left')
+        hill_not_label = CustomFieldLabel("Hill Notation: ")
+        hill_not_label.setAlignment(Qt.AlignLeft)
+        self.content_layout.addRow(CustomFieldLabel(
+            "Hill Notation: "), self.lipid_formula_label)
 
         self.content_layout.addRow(CustomFieldLabel(
             "Adduct Type"), self.adduct_type)
@@ -81,9 +91,14 @@ class LipidDetailsScreen(QWidget):
             "tolerance(s)"))
         rt_container.addWidget(self.retention_time_tolerance)
 
+        self.override = QCheckBox("Override Mass")
+        self.override.setChecked(False)
+        self.override.stateChanged.connect(self.override_toggled)
+        self.mass.setDisabled(True)
         mass_container = QHBoxLayout()
         mass_container.addWidget(CustomFieldLabel("Mass(m/z)"))
         mass_container.addWidget(self.mass)
+        mass_container.addWidget(self.override)
         mass_container.addWidget(CustomFieldLabel("tolerance"))
         mass_container.addWidget(self.mass_tolerance_units)
         mass_container.addWidget(self.mass_tolerance)
@@ -93,5 +108,26 @@ class LipidDetailsScreen(QWidget):
         self.screen_layout.addLayout(self.content_layout)
         self.nav_buttons = NavigationButtons(on_next=on_next)
         self.screen_layout.addWidget(self.nav_buttons)
+        self.validate_lipid_formula(self.lipid_formula.text())
 
         self.setLayout(self.screen_layout)
+
+    def validate_lipid_formula(self, text):
+        f = Formula(text)
+        try:
+            formula = f.formula
+            self.page_state.setLipidFormula(text)
+            self.lipid_formula.setStyleSheet("border: 1px solid green")
+            self.lipid_formula_label.setText(f.formula)
+            self.nav_buttons.btn_next.setDisabled(False)
+            self.mass.setValue(f.isotope.mass)
+        except FormulaError:
+            self.lipid_formula.setStyleSheet("border: 1px solid red")
+            self.lipid_formula_label.setText("")
+            self.nav_buttons.btn_next.setDisabled(True)
+
+    def override_toggled(self):
+        if self.override.isChecked():
+            self.mass.setDisabled(False)
+        else:
+            self.mass.setDisabled(True)

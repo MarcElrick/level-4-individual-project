@@ -124,4 +124,14 @@
 
 ## 27 Oct 2020
 
--_1 hour_ - Wrote unit tests and made visual improments to input summary screen.
+- _1 hour_ - Wrote unit tests and made visual improments to input summary screen.
+- _0.5 hour_ - Implementing validation of lipid formula + mass calculation - Have added a red/green border round lipid field depending on if the formula entered is valid.
+
+## 29 Oct 2020
+
+- _1 hour_ - Next button is now disabled unless a valid formula is entered.
+- _1 hour_ - Implemented monoisotopic mass calculation.
+
+## 30 Oct 2020
+
+- _1 hour_ - Added checkbox to manually override mass.
