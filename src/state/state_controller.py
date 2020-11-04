@@ -11,5 +11,5 @@ class StateController:
         self.screen1 = LipidDetailsScreenState()
         self.screen2 = FilePickerScreenState()
         self.screen3 = InputSummaryScreenState(
-            self.screen1.get_data_summary, self.screen2.get_data_summary)
+            self.screen1.get_data_string_summary, self.screen2.get_data_string_summary)
         #self.screen4 = ScreenFourState()
