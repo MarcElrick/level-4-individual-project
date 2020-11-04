@@ -68,35 +68,3 @@ class InputSummaryScreenStateTests(unittest.TestCase):
 
         self.assertEqual(self.state.get_file_info(), [["zero.mzML", 0], [
                          "one.mzML", 1], ["two.mzML", 2], ["three.mzML", 3]])
-
-
-class LipidKineticsTests(unittest.TestCase):
-    def test_compute_lipid_kinetics(self):
-        compute_lipid_kinetics({
-            "formula": Formula("C4356H4"),
-            "adduct": '[M+H]+',
-            "isotopeDepth": 5,
-            "retentionTime": 100.0,
-            "retentionTimeTolerance": 10.0,
-            "mass": 1000.0,
-            "massTolerance": 20.0,
-            "massToleranceUnits": 'ppm'
-        }, [["zero.mzML", 0], [
-            "one.mzML", 1], ["two.mzML", 2], ["three.mzML", 3]])
-
-    def test_get_isotope_intensity(self):
-        filepath = 'C:\\Users\\marce\\PycharmProjects\\test_files\\'
-        get_isotope_intensity({
-            "formula": Formula("C42H82NO8P"),
-            "adduct": '[M+H]+',
-            "isotopeDepth": 5,
-            "retentionTime": 10.47*60,
-            "retentionTimeTolerance": 60,
-            "mass": 760.5836,
-            "massTolerance": 50.0,
-            "massToleranceUnits": 'ppm'
-        }, [filepath + "0_pp_d20_pos_1.mzML", 0])
-
-
-if __name__ == '__main__':
-    unittest.main()

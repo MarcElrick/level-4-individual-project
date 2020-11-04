@@ -6,16 +6,54 @@ from mass_spec_utils.adduct_calculator.adduct_rules import AdductTransformer
 def compute_lipid_kinetics(lipid_details, files):
     data_matrix = np.zeros((len(files), lipid_details['isotopeDepth'] + 1))
 
-    for (filename, time) in files:
-        pass
-        # DO MORE STUFF HERE
+    discard_pos = -1
+    all_isos = []
+    bespoke_file_time_list = []
+
+    for fpos, (filepath, time) in enumerate(files):
+        isos = get_isotope_intensity(lipid_details, [filepath, time])
+
+        if fpos == 0:
+            # check that intensities are monotonically decreasig. If not, chop.
+            for a, (b, _, intensity, _, _, _) in enumerate(isos[:-1]):
+                if intensity < isos[a+1][2]:
+                    discard_pos = a
+                    print(lipid_name, discard_pos)
+                    break
+        for ipos, (_, _, intensity, _, _, _) in enumerate(isos):
+            if discard_pos > -1 and ipos > discard_pos:
+                print(lipid_name, fpos, ipos)
+                data_matrix[fpos, ipos] = 0
+            else:
+                data_matrix[fpos, ipos] = intensity
+
+        all_isos.append(isos)
+
+    if discard_pos > -1:
+        data_matrix = data_matrix[:, :discard_pos+1]
+
+    times = [t for (f, t) in bespoke_file_time_list]
+
+    data_matrix /= data_matrix.sum(axis=1)[:, None]
+
+    p = fit(times, data_matrix, fix_ends=False, make_plot=False)
+    k, a0, ai = p
+
+    output_dict = {}
+    output_dict['kinetic_parameters'] = (k, a0, ai)
+    output_dict['data_matrix'] = data_matrix
+    output_dict['times'] = times
+    output_dict['all_isos'] = all_isos
+
+    return output_dict
 
 
-def get_isotope_intensity(lipid_details, file, scan_delta=2):
-    file[0] = MZMLFile(file[0])
+def get_isotope_intensity(lipid_details, filepair, scan_delta=2):
+    print("FILEPATH", type(filepair))
+    filepair[0] = MZMLFile(filepair[0])
 
     scans_in_range = list(filter(lambda x: x.rt_in_seconds >= lipid_details['retentionTime'] - lipid_details['retentionTimeTolerance'] and
-                                 x.rt_in_seconds <= lipid_details['retentionTime'] + lipid_details['retentionTimeTolerance'], file[0].scans))
+                                 x.rt_in_seconds <= lipid_details['retentionTime'] + lipid_details['retentionTimeTolerance'], filepair[0].scans))
 
     spectrum = lipid_details['formula'].spectrum()
     print(spectrum)
