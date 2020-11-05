@@ -140,3 +140,11 @@
 ## 31 Oct 2020
 
 - _2.5 hour_ - Began work implementing lipid kinetics. Decyphering some code is proving challenging.
+
+## 4 Nov 2020
+
+- _2 hours_ - Continued work on lipid kinetics.
+
+## 5 Nov 2020
+
+- _2 hours_ - Further lipid kinetics work. Also created reduced test files, and figured out the cause of performance issues: AdductTransformer was downloading a file many times in its constructor, which was being called in a loop. By using a single AdductTransformer, we can do this much faster.

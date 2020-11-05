@@ -6,17 +6,10 @@ import sys
 
 
 class LipidKineticsTests(unittest.TestCase):
-
-    @classmethod
-    def setUpClass(cls):
-        cls.test_path = os.path.abspath(os.path.join('../../test_files'))
-        if cls.test_path not in sys.path:
-            sys.path.append(cls.test_path)
-
     def test_compute_lipid_kinetics(self):
         os.chdir('..')
         os.chdir('..')
-        os.chdir('test_files')
+        os.chdir('test_files_reduced')
         compute_lipid_kinetics({
             "formula": Formula("C4356H4"),
             "adduct": '[M+H]+',
@@ -27,7 +20,7 @@ class LipidKineticsTests(unittest.TestCase):
             "massTolerance": 20.0,
             "massToleranceUnits": 'ppm'
         }, [["0_pp_d20_pos_1.mzML", 0], [
-            "8_pp_d20_pos_1.mzML", 8], ["24_pp_s3_pos_1.mzML", 24], ["48_pp_d20_pos_1.mzML", 48], ["72_pp_d20_pos_1.mzML", 72], [["96_pp_d20_pos_1.mzML", 96]]])
+            "8_pp_d20_pos_1.mzML", 8], ["24_pp_s3_pos_1.mzML", 24], ["48_pp_d20_pos_1.mzML", 48], ["72_pp_d20_pos_1.mzML", 72], ["96_pp_d20_.mzML", 96]])
 
     def test_get_isotope_intensity(self):
         get_isotope_intensity({
