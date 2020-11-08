@@ -33,12 +33,19 @@
 
 - **Week 7**
   - Begin work on excel data output.
-  - Carry out 'self code review', checking for test coverage etc.
   - Gather feedback on UI with client.
 - **Week 8**
+
+  - Finish implementing analysis pipeline.
+  - Carry out 'self code review', checking for test coverage etc.
+  - Hook analysis pipeline up to UI
+
 - **Week 9**
+  - Implement custom adduct file.
+  - Implement saving of lipid runs.
 - **Week 10**
 - **Week 11 [PROJECT WEEK]**
+  - Implement multiple lipids
 - **Week 12 [PROJECT WEEK]** Status report submitted.
 
 ## Winter break
