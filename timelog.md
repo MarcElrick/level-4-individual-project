@@ -148,3 +148,15 @@
 ## 5 Nov 2020
 
 - _2 hours_ - Further lipid kinetics work. Also created reduced test files, and figured out the cause of performance issues: AdductTransformer was downloading a file many times in its constructor, which was being called in a loop. By using a single AdductTransformer, we can do this much faster.
+
+## 6 Oct 2020
+
+- _1 hour_ - Further work on lipid kinetics - having issues where values are not being added to data matrix, trying to resolve.
+
+## 7 Oct 2020
+
+- _2 hours_ - Further work on lipid kinetics, full pipeline is now implemented. Now need to spend time working on tests for individual component functions.
+
+## 8 Oct 2020
+
+- _1 hour_ - Working on lipid kinetics tests. Added label property to lipids, need to add this ability on Lipid info page.
