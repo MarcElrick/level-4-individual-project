@@ -1,10 +1,11 @@
-from PyQt5.QtWidgets import QWidget, QFormLayout, QLabel, QVBoxLayout, QHBoxLayout, QSpacerItem, QComboBox, QLabel, QLineEdit, QSpinBox, QDoubleSpinBox, QCheckBox
-from gui.nav_buttons import NavigationButtons
-from PyQt5.QtCore import Qt
-from gui.custom_components import CustomTitle, CustomFieldLabel
-from molmass import Formula, FormulaError
-
 import sys
+from molmass import Formula, FormulaError
+from gui.custom_components import CustomTitle, CustomFieldLabel
+from PyQt5.QtCore import Qt
+from gui.nav_buttons import NavigationButtons
+from PyQt5.QtWidgets import (QWidget, QFormLayout, QVBoxLayout, QHBoxLayout,
+                             QComboBox, QLineEdit, QSpinBox, QDoubleSpinBox,
+                             QCheckBox, QRadioButton, QButtonGroup)
 
 
 class LipidDetailsScreen(QWidget):
@@ -70,6 +71,10 @@ class LipidDetailsScreen(QWidget):
         self.content_layout = QFormLayout()
         self.content_layout.addRow(CustomFieldLabel(
             "Lipid Formula"), self.lipid_formula)
+
+        charge_mode_group = QButtonGroup()
+        charge_mode_group.addButton(QRadioButton('Positive'))
+        charge_mode_group.addButton(QRadioButton('Negative'))
 
         self.lipid_formula_label = CustomFieldLabel("", alignment='left')
         hill_not_label = CustomFieldLabel("Hill Notation: ")
