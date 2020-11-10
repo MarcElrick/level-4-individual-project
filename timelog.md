@@ -161,10 +161,11 @@
 
 - _1 hour_ - Working on lipid kinetics tests. Added label property to lipids, need to add this ability on Lipid info page.
 
-## 10 Oct 2020
+## 9 Oct 2020
 
 - _1.5 hours_ - Writing tests for isotope pipeline - Have successfully written a test for get_max_mass which attempts to get the max value of a specific scan read from TOPPView.
 
-## 11 Oct 2020
+## 10 Oct 2020
 
 - _1 hour_ - Code cleanup
+- _2.5 hours_ - Implemented importing adducts from csv file as well as calculating mass on fly when adducts change.

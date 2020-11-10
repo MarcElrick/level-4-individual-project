@@ -1,0 +1,28 @@
+#title {
+  font-size: 30px;
+}
+
+#field {
+  font-size: 15px;
+  padding: 5px;
+}
+
+#deleteButton {
+  color: #fff;
+  background-color: #b71c1c;
+}
+
+#actionButton {
+  color: #fff;
+  background-color: #01579b;
+  qproperty-sizePolicy: Minimum;
+}
+
+#summaryLabel {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+#summaryValue {
+  font-size: 22px;
+}
