@@ -1,3 +1,4 @@
 PyQt5==5.15.1
 mass-spec-utils==0.0.12
 molmass==2020.6.10
+matplotlib==3.3.2
