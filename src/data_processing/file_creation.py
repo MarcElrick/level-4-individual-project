@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.optimize import minimize
 import xlsxwriter
+import os
 
 
 def fit(times, data_matrix, fix_ends=True, make_plot=True,

@@ -166,3 +166,5 @@
 - _1.5 hours_ - Writing tests for isotope pipeline - Have successfully written a test for get_max_mass which attempts to get the max value of a specific scan read from TOPPView.
 
 ## 11 Oct 2020
+
+- _1 hour_ - Code cleanup
