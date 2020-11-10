@@ -12,5 +12,5 @@ class FilePickerScreenState:
     def remove_record(self, index):
         del self.file_time_pairs[index]
 
-    def get_data_summary(self):
+    def get_data_string_summary(self):
         return self.file_time_pairs

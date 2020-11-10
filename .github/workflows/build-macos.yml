@@ -1,11 +1,6 @@
 name: Package MacOS application with PyInstaller
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
-    paths:
-      - "src/**"
 
   pull_request:
     branches:

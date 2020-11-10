@@ -2,6 +2,7 @@ import unittest
 from state.file_picker_screen_state import FilePickerScreenState
 from state.lipid_details_screen_state import LipidDetailsScreenState
 from state.input_summary_screen_state import InputSummaryScreenState
+from data_processing.lipid_kinetics import *
 from molmass import Formula
 
 # Smoke test to verify test suite runs
@@ -42,7 +43,7 @@ class InputSummaryScreenStateTests(unittest.TestCase):
         cls.lipid_state = LipidDetailsScreenState()
         cls.file_picker_state = FilePickerScreenState()
         cls.state = InputSummaryScreenState(
-            get_lipid_info=cls.lipid_state.get_data_summary, get_file_info=cls.file_picker_state.get_data_summary)
+            get_lipid_info=cls.lipid_state.get_data_string_summary, get_file_info=cls.file_picker_state.get_data_string_summary)
 
     def test_lipid_info_is_correct(self):
         self.lipid_state.setLipidFormula("C4356H4")
@@ -67,7 +68,3 @@ class InputSummaryScreenStateTests(unittest.TestCase):
 
         self.assertEqual(self.state.get_file_info(), [["zero.mzML", 0], [
                          "one.mzML", 1], ["two.mzML", 2], ["three.mzML", 3]])
-
-
-if __name__ == '__main__':
-    unittest.main()
