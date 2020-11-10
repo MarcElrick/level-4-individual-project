@@ -45,7 +45,7 @@
   - Implement saving of lipid runs.
 - **Week 10**
 - **Week 11 [PROJECT WEEK]**
-  - Implement multiple lipids
+  - Implement multiple lipids within analysis
 - **Week 12 [PROJECT WEEK]** Status report submitted.
 
 ## Winter break
