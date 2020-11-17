@@ -149,23 +149,31 @@
 
 - _2 hours_ - Further lipid kinetics work. Also created reduced test files, and figured out the cause of performance issues: AdductTransformer was downloading a file many times in its constructor, which was being called in a loop. By using a single AdductTransformer, we can do this much faster.
 
-## 6 Oct 2020
+## 6 Nov 2020
 
 - _1 hour_ - Further work on lipid kinetics - having issues where values are not being added to data matrix, trying to resolve.
 
-## 7 Oct 2020
+## 7 Nov 2020
 
 - _2 hours_ - Further work on lipid kinetics, full pipeline is now implemented. Now need to spend time working on tests for individual component functions.
 
-## 8 Oct 2020
+## 8 Nov 2020
 
 - _1 hour_ - Working on lipid kinetics tests. Added label property to lipids, need to add this ability on Lipid info page.
 
-## 9 Oct 2020
+## 9 Nov 2020
 
 - _1.5 hours_ - Writing tests for isotope pipeline - Have successfully written a test for get_max_mass which attempts to get the max value of a specific scan read from TOPPView.
 
-## 10 Oct 2020
+## 10 Nov 2020
 
 - _1 hour_ - Code cleanup
 - _2.5 hours_ - Implemented importing adducts from csv file as well as calculating mass on fly when adducts change.
+
+## 13 Nov 2020
+
+- _2 Hours_ - Created form to add new custom adducts, as well as a menubar which can open this form or quit the application.
+
+## 17 Nov 2020
+
+- _1.5 hours_ - Hookd up form to write to csv files

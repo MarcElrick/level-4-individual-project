@@ -27,7 +27,7 @@ class LipidDetailsScreenState:
     def get_data_string_summary(self):
         return {
             "Lipid Formula": self.lipid_formula,
-            "Adduct": self.adduct_list[self.adduct_index],
+            "Adduct": self.adduct_list[self.adduct_index][0],
             "Charge Mode": self.charge_mode,
             "Isotope Depth": self.isotope_depth,
             "Retention Time": str(self.retention_time) + "s",

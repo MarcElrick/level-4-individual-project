@@ -1,4 +1,3 @@
-import sys
 from molmass import Formula, FormulaError
 from gui.custom_components import CustomTitle, CustomFieldLabel
 from PyQt5.QtCore import Qt
@@ -6,7 +5,7 @@ from helper import mass2iso
 from gui.nav_buttons import NavigationButtons
 from PyQt5.QtWidgets import (QWidget, QFormLayout, QVBoxLayout, QHBoxLayout,
                              QComboBox, QLineEdit, QSpinBox, QDoubleSpinBox,
-                             QCheckBox, QRadioButton, QButtonGroup)
+                             QRadioButton)
 
 
 class LipidDetailsScreen(QWidget):
