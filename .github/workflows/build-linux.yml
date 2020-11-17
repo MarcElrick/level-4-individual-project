@@ -34,7 +34,7 @@ jobs:
       - name: Build Executable
         run: |
           cd src/
-          pyinstaller -F --add-data "assets/styles.css:assets/" --add-data "assets/positive.csv:assets/" --add-data "assets/negative.csv:assets/" main.py          ls dist
+          pyinstaller -F --add-data "assets/styles.css:assets/" --add-data "assets/positive.csv:assets/" --add-data "assets/negative.csv:assets/" main.py
       - uses: actions/upload-artifact@v2
         with:
           name: main-executable
