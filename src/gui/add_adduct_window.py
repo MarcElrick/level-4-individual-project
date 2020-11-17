@@ -86,8 +86,8 @@ class AddAdductWindow(QWidget):
                 os.sep.join(['assets', 'negative.csv']))
 
         with open(filepath, 'a') as f:
-            f.write(','.join([self.adductFormula, str(self.adduct_add), str(
-                self.adduct_mult), self.adduct_label]))
+            f.write('\n' + ','.join([self.adductFormula, str(self.adduct_add), str(
+                self.adduct_mult), self.adduct_label]) + ',')
 
         self.state.adduct_list.append([self.adductFormula, str(
             self.adduct_add), str(self.adduct_mult), str(self.adduct_label)])
