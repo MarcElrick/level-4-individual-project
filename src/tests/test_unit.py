@@ -58,6 +58,7 @@ class InputSummaryScreenStateTests(unittest.TestCase):
         self.assertDictEqual({"Lipid Formula": Formula("C4356H4").formula, "Isotope Depth": 5,
                               "Adduct": "[M+H]+", "Mass": 100.0, "Mass Tolerance": "20ppm",
                               "Retention Time": "100.0s",
+                              "Charge Mode": 'Positive',
                               "Retention Time Tolerance": "20s"}, self.state.get_lipid_info())
 
     def test_file_info_is_correct(self):
