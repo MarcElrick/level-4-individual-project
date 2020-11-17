@@ -1,40 +1,13 @@
 from PyQt5.QtWidgets import QLabel, QPushButton, QVBoxLayout, QWidget, QLayout, QSizePolicy
 from PyQt5.QtCore import Qt
+from assets.pathFinder import get_resource_path
 import os
-
 # To work with PyInstaller, we need to get the absolute path for css file.
-stylesheet = """
-    #title {
-        font-size: 30px;
-    }
 
-    #field {
-        font-size: 15px;
-        padding: 5px;
-    }
-
-    #deleteButton {
-        color: #FFF;
-        background-color: #B71C1C;
-    }
-
-    #actionButton {
-        color: #FFF;
-        background-color: #01579B;
-        qproperty-sizePolicy: Minimum;
-
-    }
-
-    #summaryLabel {
-        font-size:16px;
-        color:rgba(0, 0, 0, 0.5);
-    }
-
-    #summaryValue{
-        font-size:22px;
-    }
-
-"""
+stylesheet_file = get_resource_path(os.sep.join(["assets", "styles.css"]))
+with open(stylesheet_file, "r") as style:
+    stylesheet = style.read()
+print("STYLE", stylesheet)
 
 
 class SummaryDisplayCard(QWidget):

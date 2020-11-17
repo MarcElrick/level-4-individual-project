@@ -30,7 +30,7 @@ class LipidKineticsTests(unittest.TestCase):
     def test_compute_lipid_kinetics(self):
         os.chdir(self.test_files_folder)
         output = compute_lipid_kinetics(self.lipid, [["0_pp_d20_pos_1.mzML", 0], [
-            "8_pp_d20_pos_1.mzML", 8], ["24_pp_s3_pos_1.mzML", 24], ["48_pp_d20_pos_1.mzML", 48], ["72_pp_d20_pos_1.mzML", 72], ["96_pp_d20_.mzML", 96]])
+            "8_pp_d20_pos_1.mzML", 8], ["48_pp_d20_pos_1.mzML", 48], ["72_pp_d20_pos_1.mzML", 72], ["96_pp_d20_.mzML", 96]])
 
         create_plot(
             self.lipid['label'], output, output_filename=os.getcwd() + os.sep + re.sub(r'[^\w]', ' ', self.lipid['label']).replace(' ', '_')+'.png')

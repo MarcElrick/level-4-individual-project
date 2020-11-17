@@ -1,10 +1,11 @@
-from PyQt5.QtWidgets import QWidget, QFormLayout, QLabel, QVBoxLayout, QHBoxLayout, QSpacerItem, QComboBox, QLabel, QLineEdit, QSpinBox, QDoubleSpinBox, QCheckBox
-from gui.nav_buttons import NavigationButtons
-from PyQt5.QtCore import Qt
-from gui.custom_components import CustomTitle, CustomFieldLabel
 from molmass import Formula, FormulaError
-
-import sys
+from gui.custom_components import CustomTitle, CustomFieldLabel
+from PyQt5.QtCore import Qt
+from helper import mass2iso
+from gui.nav_buttons import NavigationButtons
+from PyQt5.QtWidgets import (QWidget, QFormLayout, QVBoxLayout, QHBoxLayout,
+                             QComboBox, QLineEdit, QSpinBox, QDoubleSpinBox,
+                             QRadioButton)
 
 
 class LipidDetailsScreen(QWidget):
@@ -16,22 +17,36 @@ class LipidDetailsScreen(QWidget):
         self.lipid_formula.setText(page_state.lipid_formula)
         self.lipid_formula.textChanged.connect(self.validate_lipid_formula)
 
+        self.btn_positive = QRadioButton('Positive')
+        self.btn_negative = QRadioButton('Negative')
+        if self.page_state.charge_mode == 'Negative':
+            self.btn_negative.setChecked(True)
+        else:
+            self.btn_positive.setChecked(True)
+
+        self.btn_positive.toggled.connect(
+            lambda: self.charge_mode_toggled('Positive'))
+        self.btn_negative.toggled.connect(
+            lambda: self.charge_mode_toggled('Negative'))
+
         self.adduct_type = QComboBox()
-        self.adduct_type.addItems(page_state.adduct_list)
+        self.adduct_type.addItems(
+            page_state.getAdductLabels(page_state.adduct_list))
         self.adduct_type.setCurrentIndex(page_state.adduct_index)
-        self.adduct_type.currentIndexChanged.connect(page_state.setAdductIndex)
+        self.adduct_type.currentIndexChanged.connect(
+            self.updateAdduct)
 
         self.isotope_depth = QSpinBox()
         self.isotope_depth.setRange(0, 9)
         self.isotope_depth.setValue(page_state.isotope_depth)
         self.isotope_depth.valueChanged.connect(page_state.setIsotopeDepth)
 
-        self.retention_time = QDoubleSpinBox(decimals=6)
+        self.retention_time = QDoubleSpinBox(decimals=0)
         self.retention_time.setRange(0, 1000)
         self.retention_time.setValue(page_state.retention_time)
         self.retention_time.valueChanged.connect(page_state.setRetentionTime)
 
-        self.retention_time_tolerance = QDoubleSpinBox(decimals=6)
+        self.retention_time_tolerance = QDoubleSpinBox(decimals=0)
         self.retention_time_tolerance.setRange(0, 100)
         self.retention_time_tolerance.setValue(
             page_state.retention_time_tolerance)
@@ -77,6 +92,13 @@ class LipidDetailsScreen(QWidget):
         self.content_layout.addRow(CustomFieldLabel(
             "Hill Notation: "), self.lipid_formula_label)
 
+        charge_btn_container = QHBoxLayout()
+        charge_btn_container.addWidget(CustomFieldLabel("Charge Mode"))
+        charge_btn_container.addWidget(self.btn_positive)
+        charge_btn_container.addWidget(self.btn_negative)
+
+        self.content_layout.addRow(charge_btn_container)
+
         self.content_layout.addRow(CustomFieldLabel(
             "Adduct Type"), self.adduct_type)
 
@@ -91,14 +113,10 @@ class LipidDetailsScreen(QWidget):
             "tolerance(s)"))
         rt_container.addWidget(self.retention_time_tolerance)
 
-        self.override = QCheckBox("Override Mass")
-        self.override.setChecked(False)
-        self.override.stateChanged.connect(self.override_toggled)
         self.mass.setDisabled(True)
         mass_container = QHBoxLayout()
         mass_container.addWidget(CustomFieldLabel("Mass(m/z)"))
         mass_container.addWidget(self.mass)
-        mass_container.addWidget(self.override)
         mass_container.addWidget(CustomFieldLabel("tolerance"))
         mass_container.addWidget(self.mass_tolerance_units)
         mass_container.addWidget(self.mass_tolerance)
@@ -112,22 +130,29 @@ class LipidDetailsScreen(QWidget):
 
         self.setLayout(self.screen_layout)
 
+    def charge_mode_toggled(self, value):
+        self.page_state.setChargeMode(value)
+        self.adduct_type.clear()
+        self.adduct_type.addItems(
+            self.page_state.getAdductLabels(self.page_state.adduct_list))
+
+    def updateAdduct(self, value):
+        self.page_state.setAdductIndex(value)
+        self.mass.setValue(self.page_state.mass)
+
     def validate_lipid_formula(self, text):
         f = Formula(text)
         try:
-            formula = f.formula
             self.page_state.setLipidFormula(text)
             self.lipid_formula.setStyleSheet("border: 1px solid green")
             self.lipid_formula_label.setText(f.formula)
             self.nav_buttons.btn_next.setDisabled(False)
-            self.mass.setValue(f.isotope.mass)
+            self.mass.setValue(
+                mass2iso(f.isotope.mass,
+                         self.page_state.adduct_list[self.page_state.adduct_index][2],
+                         self.page_state.adduct_list[self.page_state.adduct_index][1]))
+            self.mass.update()
         except FormulaError:
             self.lipid_formula.setStyleSheet("border: 1px solid red")
             self.lipid_formula_label.setText("")
             self.nav_buttons.btn_next.setDisabled(True)
-
-    def override_toggled(self):
-        if self.override.isChecked():
-            self.mass.setDisabled(False)
-        else:
-            self.mass.setDisabled(True)
