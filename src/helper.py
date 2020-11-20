@@ -1,9 +1,12 @@
-# A collection of single purpose, general functions that are used in multiple places
 import os
 
 
 def mass2iso(mono_iso_mass, mass_multi, mass_add):
     return mono_iso_mass * mass_multi + mass_add
+
+
+def sortFileTimeList(file_time_list):
+    return sorted(file_time_list, key=lambda x: x[1])
 
 
 def getFilenameFromPath(filepath):

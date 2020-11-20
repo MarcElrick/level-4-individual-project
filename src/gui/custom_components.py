@@ -7,7 +7,6 @@ import os
 stylesheet_file = get_resource_path(os.sep.join(["assets", "styles.css"]))
 with open(stylesheet_file, "r") as style:
     stylesheet = style.read()
-print("STYLE", stylesheet)
 
 
 class SummaryDisplayCard(QWidget):

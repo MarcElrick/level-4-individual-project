@@ -176,4 +176,15 @@
 
 ## 17 Nov 2020
 
-- _1.5 hours_ - Hookd up form to write to csv files
+- _1.5 hours_ - Hookd up form to write to csv files.
+- _2 hours_ - Fixing issues with pyinstaller, namely that new values were not persistent. Had to switch to one-dir mode. Also removed unnecessary steps from builds.
+
+## 18 Nov 2020
+
+- _3 hours_ - Working on bug whereby all values in data matrix were being set to 0.2. I think this is being done when each row is normalised, and I think this may be because of floating point inaccuracies.
+
+## 19 Nov 2020
+
+- _0.5 hours_ - I hyave successfully identified, and partially rectified, the issue. A simple miss-indent was causing only the first isotope to be run.
+- _1 hour_ - In actual fact, the issue was not a floating point error, but instead, was caused by an 'else' clause that was slightly unindented.
+- _2 hours_ - Further work on lipid pipeline. Pleased to report that it is about ready to go, and I will soon start work on integrating with GUI.
