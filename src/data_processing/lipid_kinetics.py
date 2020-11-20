@@ -5,7 +5,8 @@ from data_processing.file_creation import fit
 
 
 def compute_lipid_kinetics(lipid_details, files):
-    data_matrix = np.zeros((len(files), lipid_details['isotopeDepth'] + 1))
+    data_matrix = np.zeros(
+        (len(files), lipid_details['isotopeDepth'] + 1))
 
     discard_index = -1
     all_isos = []
@@ -30,7 +31,7 @@ def compute_lipid_kinetics(lipid_details, files):
         data_matrix = data_matrix[:, :discard_index+1]
 
     times = [t for (f, t) in files]
-
+    print(data_matrix)
     data_matrix /= data_matrix.sum(axis=1)[:, None]
     p = fit(times, data_matrix, fix_ends=False, make_plot=False)
     k, a0, ai = p
@@ -54,6 +55,7 @@ def get_isotope_intensities(lipid_details, filepair, scan_delta=2):
                                  lipid_details['retentionTime'] +
                                  lipid_details['retentionTimeTolerance'],
                                  filepair[0].scans))
+    #print("SCANS", list(map(lambda x: x.scan_no, scans_in_range)))
 
     spectrum = lipid_details['formula'].spectrum()
 
@@ -105,8 +107,8 @@ def get_isotope_intensities(lipid_details, filepair, scan_delta=2):
         if lipid_details['massToleranceUnits'] == 'ppm':
             absolute_mass_tolerance = ppm_to_da(
                 current_mass, lipid_details['massTolerance'])
-    else:
-        absolute_mass_tolerance = lipid_details['massTolerance']
+        else:
+            absolute_mass_tolerance = lipid_details['massTolerance']
 
         for scan_index in range(max_intensity_index-scan_delta,
                                 max_intensity_index+scan_delta+1):
@@ -122,8 +124,6 @@ def get_isotope_intensities(lipid_details, filepair, scan_delta=2):
                     max_scan_no = scan.scan_no
         isotopes.append((isotope_num, current_mass, max_intensity,
                          max_mass, max_retention_time, max_scan_no))
-
-        print(isotopes)
     return isotopes
 
 

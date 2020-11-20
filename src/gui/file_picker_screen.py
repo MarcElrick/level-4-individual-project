@@ -1,9 +1,8 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QFileDialog, QPushButton, QMainWindow, QLabel, QSpinBox
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QFileDialog, QPushButton,  QSpinBox
 from PyQt5.QtCore import Qt
 from gui.nav_buttons import NavigationButtons
 from gui.custom_components import CustomTitle, CustomFieldLabel, DeleteButton, ActionButton
-from helper import getFilenameFromPath
-import sys
+from helper import getFilenameFromPath, sortFileTimeList
 import os
 
 
@@ -28,7 +27,7 @@ class FilePickerScreen(QWidget):
                 PairListItem(self.state.file_time_pairs[i], lambda i=i: self.remove_pairing(i), lambda i=i: self.state.update_record(self.state.file_time_pairs[i], i)))
 
         self.nav_buttons = NavigationButtons(
-            on_next=self.on_next, on_back=self.on_back)
+            on_next=self.onNextClick, on_back=self.on_back)
         self.nav_buttons.btn_next.setDisabled(
             len(self.state.file_time_pairs) == 0)
 
@@ -55,6 +54,11 @@ class FilePickerScreen(QWidget):
         self.redraw()
         if(len(self.state.file_time_pairs) == 0):
             self.nav_buttons.btn_next.setDisabled(True)
+
+    def onNextClick(self):
+        self.state.file_time_pairs = sortFileTimeList(
+            self.state.file_time_pairs)
+        self.on_next()
 
 
 class PairListItem(QHBoxLayout):

@@ -1,5 +1,5 @@
 from data_processing.lipid_kinetics import compute_lipid_kinetics, get_isotope_intensities, get_max_mass
-from data_processing.file_creation import create_plot
+from data_processing.file_creation import create_plot, create_xlsx_output
 import unittest
 from molmass import Formula
 import os
@@ -29,16 +29,20 @@ class LipidKineticsTests(unittest.TestCase):
 
     def test_compute_lipid_kinetics(self):
         os.chdir(self.test_files_folder)
-        output = compute_lipid_kinetics(self.lipid, [["0_pp_d20_pos_1.mzML", 0], [
-            "8_pp_d20_pos_1.mzML", 8], ["48_pp_d20_pos_1.mzML", 48], ["72_pp_d20_pos_1.mzML", 72], ["96_pp_d20_.mzML", 96]])
+        output = compute_lipid_kinetics(self.lipid, [["0_pp_d20_pos_1.mzML", 0],
+                                                     ["8_pp_d20_pos_1.mzML", 8],
+                                                     ["48_pp_d20_pos_1.mzML", 48],
+                                                     ["72_pp_d20_pos_1.mzML", 72],
+                                                     ["96_pp_d20_.mzML", 96]])
 
         create_plot(
             self.lipid['label'], output, output_filename=os.getcwd() + os.sep + re.sub(r'[^\w]', ' ', self.lipid['label']).replace(' ', '_')+'.png')
+        create_xlsx_output(output, [self.lipid], [
+                           '0_pp_d20_pos_1.mzML', '8_pp_d20_pos_1.mzML', '48_pp_d20_pos_1.mzML', '72_pp_d20_pos_1.mzML', '96_pp_d20_.mzML'])
 
     def test_get_isotope_intensities(self):
         os.chdir(self.test_files_folder)
         get_isotope_intensities(self.lipid, ["0_pp_d20_pos_1.mzML", 0])
-        print
 
     def test_get_max_mass(self):
         os.chdir(self.test_files_folder)

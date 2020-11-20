@@ -24,9 +24,9 @@ def fit(times, data_matrix, fix_ends=True, make_plot=True,
 
     end = minimize(min_func, zinit, args=args, method=method)
 
-    if fix_ends:
-        k = end['x'][0]
-    else:
+    k = end['x'][0]
+
+    if not fix_ends:
         a0 = end['x'][1]
         ai = end['x'][2]
 
@@ -39,6 +39,7 @@ def fit(times, data_matrix, fix_ends=True, make_plot=True,
 
 
 def create_plot(lipid_name, output_dict, output_filename=None):
+    print(output_dict)
     times = output_dict['times']
     data_mat = output_dict['data_matrix']
     k, a0, ai = output_dict['kinetic_parameters']
@@ -104,33 +105,33 @@ def write_xlsx_block(worksheet, list_vals, row_num, start_col):
         worksheet.write(cell, v)
 
 
-def create_xlsx_output(output_dict, output_filename='test.xlsx'):
+def create_xlsx_output(output_dict, lipids, filenames, output_filename='test.xlsx'):
     workbook = xlsxwriter.Workbook(
         output_filename, {'nan_inf_to_errors': True})
-    for lipid_no, lipid in enumerate(output_dict):
+    for lipid in lipids:
         row_num = 1
-        sheet_name = lipid.replace(':', ' ')
+        sheet_name = lipid['label'].replace(':', ' ')
         sheet_name = sheet_name.replace('[', '(')
         sheet_name = sheet_name.replace(']', ')')
         worksheet = workbook.add_worksheet(sheet_name)
         cell = col2alphabet(1) + str(row_num)
-        worksheet.write(cell, lipid)
+        worksheet.write(cell, lipid['label'])
         row_num += 1
         write_list = ['Kinetic Parameters', 'k:',
-                      output_dict[lipid]['kinetic_parameters'][0],
+                      output_dict['kinetic_parameters'][0],
                       'ai:',
-                      output_dict[lipid]['kinetic_parameters'][1],
+                      output_dict['kinetic_parameters'][1],
                       'a0:',
-                      output_dict[lipid]['kinetic_parameters'][2]]
+                      output_dict['kinetic_parameters'][2]]
         write_xlsx_block(worksheet, write_list, row_num, 1)
         row_num += 2
         write_xlsx_block(worksheet, ['isotope data'], row_num, 1)
 
-        data_mat = output_dict[lipid]['data_mat']
+        data_mat = output_dict['data_matrix']
         n_time, n_iso = data_mat.shape
 
         iso_list = range(n_iso)
-        times = output_dict[lipid]['times']
+        times = output_dict['times']
         write_xlsx_block(worksheet, iso_list, row_num, 3)
         row_num += 1
         for i, row in enumerate(data_mat):
@@ -142,22 +143,19 @@ def create_xlsx_output(output_dict, output_filename='test.xlsx'):
         write_xlsx_block(worksheet, ['isotope details', 'file', 'iso number',
                                      'theoretical m/z', 'intensity', 'mz', 'rt', 'scan number'], row_num, 1)
         row_num += 1
-        all_isos = output_dict[lipid]['all_isos']
-        for filename, iso_data in all_isos.items():
-            write_xlsx_block(worksheet, [filename], row_num, 2)
+        all_isos = output_dict['all_isos']
+        for index, iso_data in enumerate(all_isos):
+            write_xlsx_block(worksheet, [filenames[index]], row_num, 2)
             row_num += 1
             for row in iso_data:
                 write_xlsx_block(worksheet, row, row_num, 3)
                 row_num += 1
 
         create_plot(
-            lipid, output_dict[lipid],
-            output_filename='temp_{}.png'.format(lipid_no))
-        worksheet.insert_image('N4', 'temp_{}.png'.format(lipid_no))
+            lipid['label'], output_dict,
+            output_filename='temp_{}.png'.format(lipid['label']))
+        worksheet.insert_image('N4', 'temp_{}.png'.format(lipid['label']))
     workbook.close()
-
-    for lipid_no, lipid in enumerate(output_dict):
-        os.system('rm temp_{}.png'.format(lipid_no))
 
 
 def min_func(x, *args):
