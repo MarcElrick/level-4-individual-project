@@ -31,7 +31,6 @@ def compute_lipid_kinetics(lipid_details, files):
         data_matrix = data_matrix[:, :discard_index+1]
 
     times = [t for (f, t) in files]
-    print(data_matrix)
     data_matrix /= data_matrix.sum(axis=1)[:, None]
     p = fit(times, data_matrix, fix_ends=False, make_plot=False)
     k, a0, ai = p

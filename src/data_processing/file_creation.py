@@ -2,14 +2,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.optimize import minimize
 import xlsxwriter
-import os
 
 
 def fit(times, data_matrix, fix_ends=True, make_plot=True,
         options={}, method='L-BFGS-B'):
 
     t = np.array(times)
-    print('times', times)
     a0 = data_matrix[0, 0]
     ai = data_matrix[-1, 0]
 
@@ -39,12 +37,9 @@ def fit(times, data_matrix, fix_ends=True, make_plot=True,
 
 
 def create_plot(lipid_name, output_dict, output_filename=None):
-    print(output_dict)
     times = output_dict['times']
     data_mat = output_dict['data_matrix']
     k, a0, ai = output_dict['kinetic_parameters']
-
-    print("OUTPUT", output_dict['times'])
 
     plt.figure(figsize=(20, 4))
     plt.subplot(1, 3, 1)
@@ -81,8 +76,6 @@ def create_plot(lipid_name, output_dict, output_filename=None):
     plt.legend()
 
     if output_filename:
-        #         plt.savefig(os.path.join('plots',plt_name))
-        #         print("Writing: ",plt_name)
         plt.savefig(output_filename)
         print("Writing: ", output_filename)
     plt.close()
@@ -159,22 +152,15 @@ def create_xlsx_output(output_dict, lipids, filenames, output_filename='test.xls
 
 
 def min_func(x, *args):
-    # x = k: the rate constant
-    # *args
-
     p = args
-    if p[0] == True:
-        t = p[1]
-        data = p[2]
+    k = x[0]
+    t = p[1]
+    data = p[2]
+
+    if p[0]:
         a0 = p[3]
         ai = p[4]
-
-        k = x[0]
     else:
-        t = p[1]
-        data = p[2]
-
-        k = x[0]
         a0 = x[1]
         ai = x[2]
     preds = a0 + (ai-a0)*(1-np.exp(-k*t))
