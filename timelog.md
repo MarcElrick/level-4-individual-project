@@ -188,3 +188,8 @@
 - _0.5 hours_ - I hyave successfully identified, and partially rectified, the issue. A simple miss-indent was causing only the first isotope to be run.
 - _1 hour_ - In actual fact, the issue was not a floating point error, but instead, was caused by an 'else' clause that was slightly unindented.
 - _2 hours_ - Further work on lipid pipeline. Pleased to report that it is about ready to go, and I will soon start work on integrating with GUI.
+- _2.5 hours_ - Work on integrating GUI with lipiid pipeline. We can successfully run from start to finish. Need to run analysis in a new thread and tie to progress bar.
+
+## 20 Nov 2020
+
+- _2.5 hours_ - Finished progress screen page. Loading bar increases as each file analysis is completed. Ready to merge.

@@ -1,7 +1,7 @@
 import os
 
 
-def mass2iso(mono_iso_mass, mass_multi, mass_add):
+def mass2ion(mono_iso_mass, mass_multi, mass_add):
     return mono_iso_mass * mass_multi + mass_add
 
 

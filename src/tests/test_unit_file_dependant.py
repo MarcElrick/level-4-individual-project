@@ -5,8 +5,7 @@ import os
 from molmass import Formula
 import unittest
 from data_processing.file_creation import create_plot, create_xlsx_output, min_func
-from data_processing.lipid_kinetics import (compute_lipid_kinetics,
-                                            get_isotope_intensities, get_max_mass)
+from data_processing.lipid_kinetics import LipidKinetics
 
 
 class LipidKineticsTests(unittest.TestCase):
@@ -14,33 +13,34 @@ class LipidKineticsTests(unittest.TestCase):
     def setUpClass(cls):
         cls.lipid = {
             "label": 'PC 34:1',
-            "formula": Formula("C42H82NO8P"),
-            "adduct": '[M+H]+',
+            "formula": "C42H82NO8P",
+            "adduct": ['[M+H]+', 1.007276452, 1],
             "isotopeDepth": 6,
             "retentionTime": 10.47*60,
             "retentionTimeTolerance": 60,
             "mass": 760.5836,
-            "massTolerance": 50.0,
+            "massTolerance": 50,
             "massToleranceUnits": 'ppm'
         }
+        cls.kinetics_obj = LipidKinetics()
         cls.test_folder = (os.getcwd())
         os.chdir('..')
         os.chdir('..')
         os.chdir('test_files_reduced')
         cls.test_files_folder = os.getcwd()
-        cls.global_output = compute_lipid_kinetics(cls.lipid, [["0_pp_d20_pos_1.mzML", 0],
-                                                               ["8_pp_d20_pos_1.mzML", 8],
-                                                               ["48_pp_d20_pos_1.mzML", 48],
-                                                               ["72_pp_d20_pos_1.mzML", 72],
-                                                               ["96_pp_d20_.mzML", 96]])
+        cls.global_output = cls.kinetics_obj.compute_lipid_kinetics(cls.lipid, [["0_pp_d20_pos_1.mzML", 0],
+                                                                                ["8_pp_d20_pos_1.mzML", 8],
+                                                                                ["48_pp_d20_pos_1.mzML", 48],
+                                                                                ["72_pp_d20_pos_1.mzML", 72],
+                                                                                ["96_pp_d20_.mzML", 96]])
 
     def test_compute_lipid_kinetics(self):
         os.chdir(self.test_files_folder)
-        output = compute_lipid_kinetics(self.lipid, [["0_pp_d20_pos_1.mzML", 0],
-                                                     ["8_pp_d20_pos_1.mzML", 8],
-                                                     ["48_pp_d20_pos_1.mzML", 48],
-                                                     ["72_pp_d20_pos_1.mzML", 72],
-                                                     ["96_pp_d20_.mzML", 96]])
+        output = self.kinetics_obj.compute_lipid_kinetics(self.lipid, [["0_pp_d20_pos_1.mzML", 0],
+                                                                       ["8_pp_d20_pos_1.mzML", 8],
+                                                                       ["48_pp_d20_pos_1.mzML", 48],
+                                                                       ["72_pp_d20_pos_1.mzML", 72],
+                                                                       ["96_pp_d20_.mzML", 96]])
         self.assertEqual(output['kinetic_parameters'],
                          (0.03600730844758999, 0.625699723108793, 0.21129762105351985))
         self.assertEqual(np.shape(output['data_matrix']), (5, 6))
@@ -62,13 +62,13 @@ class LipidKineticsTests(unittest.TestCase):
 
     def test_get_isotope_intensities(self):
         os.chdir(self.test_files_folder)
-        self.assertEqual(len(get_isotope_intensities(
+        self.assertEqual(len(self.kinetics_obj.get_isotope_intensities(
             self.lipid, ["0_pp_d20_pos_1.mzML", 0])), 7)
 
     def test_get_max_mass(self):
         os.chdir(self.test_files_folder)
         test_file = MZMLFile("0_pp_d20_pos_1.mzML")
-        (max_i, max_mz) = get_max_mass(
+        (max_i, max_mz) = self.kinetics_obj.get_max_mass(
             test_file.scans[0], 0, 1000)
 
         # These values were manually read for this specific scan via TOPPView

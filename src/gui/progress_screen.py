@@ -1,12 +1,17 @@
-from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel
-from gui.nav_buttons import NavigationButtons
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QProgressBar
+from gui.custom_components import CustomTitle
+
 
 class ProgressScreen(QWidget):
-    def __init__(self, on_next=None, on_back=None):
+    def __init__(self, numLipids, numFiles, page_state=None):
         super(ProgressScreen, self).__init__()
+        layout = QVBoxLayout()
+        progress_bar = QProgressBar()
+        progress_bar.setRange(0, 100)
+        page_state.setIncrementSize(100 // (numLipids * numFiles))
+        page_state.setProgressIncrementFunction(progress_bar.setValue)
 
-        nav_buttons = NavigationButtons(on_next=on_next, on_back=on_back)
-
-        layout = QGridLayout()
-        layout.addWidget(nav_buttons)
+        layout.addWidget(CustomTitle('Performing Analysis'))
+        layout.addWidget(progress_bar)
         self.setLayout(layout)
+        page_state.startAnalysis()

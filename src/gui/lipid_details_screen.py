@@ -1,7 +1,7 @@
 from molmass import Formula, FormulaError
 from gui.custom_components import CustomTitle, CustomFieldLabel
 from PyQt5.QtCore import Qt
-from helper import mass2iso
+from helper import mass2ion
 from gui.nav_buttons import NavigationButtons
 from PyQt5.QtWidgets import (QWidget, QFormLayout, QVBoxLayout, QHBoxLayout,
                              QComboBox, QLineEdit, QSpinBox, QDoubleSpinBox,
@@ -148,7 +148,7 @@ class LipidDetailsScreen(QWidget):
             self.lipid_formula_label.setText(f.formula)
             self.nav_buttons.btn_next.setDisabled(False)
             self.mass.setValue(
-                mass2iso(f.isotope.mass,
+                mass2ion(f.isotope.mass,
                          self.page_state.adduct_list[self.page_state.adduct_index][2],
                          self.page_state.adduct_list[self.page_state.adduct_index][1]))
             self.mass.update()
