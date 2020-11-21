@@ -22,7 +22,7 @@ class LipidKineticsTests(unittest.TestCase):
             "massTolerance": 50,
             "massToleranceUnits": 'ppm'
         }
-        cls.kinetics_obj = LipidKinetics()
+        cls.kinetics_obj = LipidKinetics(lambda: 0)
         cls.test_folder = (os.getcwd())
         os.chdir('..')
         os.chdir('..')

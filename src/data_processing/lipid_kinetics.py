@@ -33,7 +33,6 @@ class LipidKinetics:
                     data_matrix[index, i] = 0
                 else:
                     data_matrix[index, i] = intensity
-                    print("INSERTING", intensity)
 
             all_isos.append(isotopes)
             self.increment_progress()
@@ -41,7 +40,6 @@ class LipidKinetics:
         if discard_index > -1:
             data_matrix = data_matrix[:, :discard_index+1]
         times = [t for (f, t) in files]
-        print(data_matrix)
         data_matrix /= data_matrix.sum(axis=1)[:, None]
         p = fit(times, data_matrix, fix_ends=False, make_plot=False)
         k, a0, ai = p
