@@ -1,6 +1,6 @@
 from molmass import Formula, FormulaError
 from assets.pathFinder import get_resource_path
-from helper import mass2iso, parse_adduct_file
+from helper import mass2ion, parse_adduct_file
 
 import os
 
@@ -37,16 +37,17 @@ class LipidDetailsScreenState:
             self.mass_tolerance_units_list[self.mass_tolerance_units_index]
         }
 
-    def get_data_summary(self):
+    def get_lipid_data(self):
         return {
+            "label": "changeTHislabel",
             "formula": self.lipid_formula,
             "adduct": self.adduct_list[self.adduct_index],
             "chargeMode": self.charge_mode,
             "isotopeDepth": self.isotope_depth,
-            "retentionTime": str(self.retention_time) + "s",
-            "retentionTimeTolerance": str(self.retention_time_tolerance) + "s",
+            "retentionTime": self.retention_time,
+            "retentionTimeTolerance": self.retention_time_tolerance,
             "mass": self.mass,
-            "massTolerance": str(self.mass_tolerance),
+            "massTolerance": self.mass_tolerance,
             "massToleranceUnits": self.mass_tolerance_units_list[self.mass_tolerance_units_index]
         }
 
@@ -59,7 +60,7 @@ class LipidDetailsScreenState:
         mass_add = self.adduct_list[self.adduct_index][1]
         try:
             mono_iso_mass = Formula(self.lipid_formula).mass
-            self.setMass(mass2iso(
+            self.setMass(mass2ion(
                 mono_iso_mass, mass_multi, mass_add))
         except FormulaError:
             pass

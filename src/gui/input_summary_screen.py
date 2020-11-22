@@ -27,6 +27,7 @@ class InputSummaryScreen(QWidget):
         self.btn_back = QPushButton('Back')
         self.btn_back.clicked.connect(on_back)
         self.btn_back.setMaximumWidth(150)
+        self.btn_start.clicked.connect(on_next)
 
         self.outer_layout.addWidget(self.btn_back)
         self.outer_layout.setAlignment(Qt.AlignHCenter)

@@ -138,7 +138,7 @@ def create_xlsx_output(output_dict, lipids, filenames, output_filename='test.xls
         row_num += 1
         all_isos = output_dict['all_isos']
         for index, iso_data in enumerate(all_isos):
-            write_xlsx_block(worksheet, [filenames[index]], row_num, 2)
+            write_xlsx_block(worksheet, filenames[index], row_num, 2)
             row_num += 1
             for row in iso_data:
                 write_xlsx_block(worksheet, row, row_num, 3)
