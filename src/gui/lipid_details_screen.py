@@ -5,17 +5,13 @@ from helper import mass2ion
 from gui.nav_buttons import NavigationButtons
 from PyQt5.QtWidgets import (QWidget, QFormLayout, QVBoxLayout, QHBoxLayout,
                              QComboBox, QLineEdit, QSpinBox, QDoubleSpinBox,
-                             QRadioButton)
+                             QRadioButton, QScrollArea, QSizePolicy)
 
 
 class LipidDetailsScreen(QWidget):
     def __init__(self, page_state=None, on_next=None, on_back=None):
         super(LipidDetailsScreen, self).__init__()
-
         self.page_state = page_state
-        self.lipid_formula = QLineEdit()
-        self.lipid_formula.setText(page_state.lipid_formula)
-        self.lipid_formula.textChanged.connect(self.validate_lipid_formula)
 
         self.btn_positive = QRadioButton('Positive')
         self.btn_negative = QRadioButton('Negative')
@@ -29,52 +25,6 @@ class LipidDetailsScreen(QWidget):
         self.btn_negative.toggled.connect(
             lambda: self.charge_mode_toggled('Negative'))
 
-        self.adduct_type = QComboBox()
-        self.adduct_type.addItems(
-            page_state.getAdductLabels(page_state.adduct_list))
-        self.adduct_type.setCurrentIndex(page_state.adduct_index)
-        self.adduct_type.currentIndexChanged.connect(
-            self.updateAdduct)
-
-        self.isotope_depth = QSpinBox()
-        self.isotope_depth.setRange(0, 9)
-        self.isotope_depth.setValue(page_state.isotope_depth)
-        self.isotope_depth.valueChanged.connect(page_state.setIsotopeDepth)
-
-        self.retention_time = QDoubleSpinBox(decimals=0)
-        self.retention_time.setRange(0, 1000)
-        self.retention_time.setValue(page_state.retention_time)
-        self.retention_time.valueChanged.connect(page_state.setRetentionTime)
-
-        self.retention_time_tolerance = QDoubleSpinBox(decimals=0)
-        self.retention_time_tolerance.setRange(0, 100)
-        self.retention_time_tolerance.setValue(
-            page_state.retention_time_tolerance)
-        self.retention_time_tolerance.valueChanged.connect(
-            page_state.setRetentionTimeTolerance)
-
-        self.mass = QDoubleSpinBox(decimals=20)
-        self.mass.setRange(0, 10000)
-        self.mass.setValue(
-            page_state.mass)
-        self.mass.valueChanged.connect(
-            page_state.setMass)
-
-        self.mass_tolerance = QDoubleSpinBox(decimals=6)
-        self.mass_tolerance.setRange(0, 100)
-        self.mass_tolerance.setValue(
-            page_state.mass_tolerance)
-        self.mass_tolerance.valueChanged.connect(
-            page_state.setMassTolerance)
-
-        self.mass_tolerance_units = QComboBox()
-        self.mass_tolerance_units.addItems(
-            page_state.mass_tolerance_units_list)
-        self.mass_tolerance_units.setCurrentIndex(
-            page_state.mass_tolerance_units_index)
-        self.mass_tolerance_units.currentIndexChanged.connect(
-            page_state.setMassToleranceUnits)
-
         self.build_ui(on_next=on_next, on_back=on_back)
 
     def build_ui(self, on_next, on_back):
@@ -82,27 +32,109 @@ class LipidDetailsScreen(QWidget):
         self.title = CustomTitle("Step 1: Enter lipid Information")
         self.screen_layout.addWidget(self.title)
 
-        self.content_layout = QFormLayout()
-        self.content_layout.addRow(CustomFieldLabel(
+        charge_btn_container = QHBoxLayout()
+        charge_btn_container.addWidget(CustomFieldLabel("Charge Mode"))
+        charge_btn_container.addWidget(self.btn_positive)
+        charge_btn_container.addWidget(self.btn_negative)
+        self.screen_layout.addLayout(charge_btn_container)
+
+        wrapper = QWidget()
+        wrapper.setSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
+
+        content_layout = QVBoxLayout(wrapper)
+        content_layout.setSizeConstraint(5)
+
+        for lipid in self.page_state.lipids:
+            content_layout.addWidget(LipidListItem(self.page_state, lipid))
+
+        scroll_area = QScrollArea()
+        scroll_area.setWidget(wrapper)
+        scroll_area.setWidgetResizable(True)
+
+        self.screen_layout.addWidget(scroll_area)
+        self.nav_buttons = NavigationButtons(on_next=on_next)
+        self.screen_layout.addWidget(self.nav_buttons)
+        self.setLayout(self.screen_layout)
+
+    def charge_mode_toggled(self, value):
+        self.page_state.setChargeMode(value)
+        self.adduct_type.clear()
+        self.adduct_type.addItems(
+            self.page_state.getAdductLabels(self.page_state.adduct_list))
+
+
+class LipidListItem(QWidget):
+    def __init__(self, page_state, lipid):
+        super(QWidget, self).__init__()
+        print('CREATED')
+        self.lipid_layout = QFormLayout()
+        self.lipid = lipid
+
+        self.lipid_formula = QLineEdit()
+        self.lipid_formula.setText(self.lipid.lipid_formula)
+        self.lipid_formula.textChanged.connect(self.validate_lipid_formula)
+
+        self.adduct_type = QComboBox()
+        self.adduct_type.addItems(
+            page_state.getAdductLabels(page_state.adduct_list))
+        self.adduct_type.setCurrentIndex(self.lipid.adduct_index)
+        self.adduct_type.currentIndexChanged.connect(
+            self.updateAdduct)
+
+        self.isotope_depth = QSpinBox()
+        self.isotope_depth.setRange(0, 9)
+        self.isotope_depth.setValue(self.lipid.isotope_depth)
+        self.isotope_depth.valueChanged.connect(self.lipid.setIsotopeDepth)
+
+        self.retention_time = QDoubleSpinBox(decimals=0)
+        self.retention_time.setRange(0, 1000)
+        self.retention_time.setValue(self.lipid.retention_time)
+        self.retention_time.valueChanged.connect(self.lipid.setRetentionTime)
+
+        self.retention_time_tolerance = QDoubleSpinBox(decimals=0)
+        self.retention_time_tolerance.setRange(0, 100)
+        self.retention_time_tolerance.setValue(
+            self.lipid.retention_time_tolerance)
+        self.retention_time_tolerance.valueChanged.connect(
+            self.lipid.setRetentionTimeTolerance)
+
+        self.mass = QDoubleSpinBox(decimals=20)
+        self.mass.setRange(0, 10000)
+        self.mass.setValue(
+            self.lipid.mass)
+        self.mass.valueChanged.connect(
+            self.lipid.setMass)
+
+        self.mass_tolerance = QDoubleSpinBox(decimals=6)
+        self.mass_tolerance.setRange(0, 100)
+        self.mass_tolerance.setValue(
+            self.lipid.mass_tolerance)
+        self.mass_tolerance.valueChanged.connect(
+            self.lipid.setMassTolerance)
+
+        self.mass_tolerance_units = QComboBox()
+        self.mass_tolerance_units.addItems(
+            self.lipid.mass_tolerance_units_list)
+        self.mass_tolerance_units.setCurrentIndex(
+            self.lipid.mass_tolerance_units_index)
+        self.mass_tolerance_units.currentIndexChanged.connect(
+            self.lipid.setMassToleranceUnits)
+        self.build_ui()
+
+    def build_ui(self):
+        self.lipid_layout.addRow(CustomFieldLabel(
             "Lipid Formula"), self.lipid_formula)
 
         self.lipid_formula_label = CustomFieldLabel("", alignment='left')
         hill_not_label = CustomFieldLabel("Hill Notation: ")
         hill_not_label.setAlignment(Qt.AlignLeft)
-        self.content_layout.addRow(CustomFieldLabel(
+        self.lipid_layout.addRow(CustomFieldLabel(
             "Hill Notation: "), self.lipid_formula_label)
 
-        charge_btn_container = QHBoxLayout()
-        charge_btn_container.addWidget(CustomFieldLabel("Charge Mode"))
-        charge_btn_container.addWidget(self.btn_positive)
-        charge_btn_container.addWidget(self.btn_negative)
-
-        self.content_layout.addRow(charge_btn_container)
-
-        self.content_layout.addRow(CustomFieldLabel(
+        self.lipid_layout.addRow(CustomFieldLabel(
             "Adduct Type"), self.adduct_type)
 
-        self.content_layout.addRow(CustomFieldLabel(
+        self.lipid_layout.addRow(CustomFieldLabel(
             "Isotope Depth"), self.isotope_depth)
 
         rt_container = QHBoxLayout()
@@ -121,24 +153,10 @@ class LipidDetailsScreen(QWidget):
         mass_container.addWidget(self.mass_tolerance_units)
         mass_container.addWidget(self.mass_tolerance)
 
-        self.content_layout.addRow(rt_container)
-        self.content_layout.addRow(mass_container)
-        self.screen_layout.addLayout(self.content_layout)
-        self.nav_buttons = NavigationButtons(on_next=on_next)
-        self.screen_layout.addWidget(self.nav_buttons)
-        self.validate_lipid_formula(self.lipid_formula.text())
+        self.lipid_layout.addRow(rt_container)
+        self.lipid_layout.addRow(mass_container)
 
-        self.setLayout(self.screen_layout)
-
-    def charge_mode_toggled(self, value):
-        self.page_state.setChargeMode(value)
-        self.adduct_type.clear()
-        self.adduct_type.addItems(
-            self.page_state.getAdductLabels(self.page_state.adduct_list))
-
-    def updateAdduct(self, value):
-        self.page_state.setAdductIndex(value)
-        self.mass.setValue(self.page_state.mass)
+        self.setLayout(self.lipid_layout)
 
     def validate_lipid_formula(self, text):
         f = Formula(text)
@@ -149,10 +167,14 @@ class LipidDetailsScreen(QWidget):
             self.nav_buttons.btn_next.setDisabled(False)
             self.mass.setValue(
                 mass2ion(f.isotope.mass,
-                         self.page_state.adduct_list[self.page_state.adduct_index][2],
-                         self.page_state.adduct_list[self.page_state.adduct_index][1]))
+                         self.lipid.adduct_list[self.lipid.adduct_index][2],
+                         self.lipid.adduct_list[self.lipid.adduct_index][1]))
             self.mass.update()
         except FormulaError:
             self.lipid_formula.setStyleSheet("border: 1px solid red")
             self.lipid_formula_label.setText("")
             self.nav_buttons.btn_next.setDisabled(True)
+
+    def updateAdduct(self, value):
+        self.lipid.setAdductIndex(value)
+        self.mass.setValue(self.page_state.mass)

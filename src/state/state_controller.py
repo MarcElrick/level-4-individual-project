@@ -7,9 +7,9 @@ from state.progress_screen_state import ProgressScreenState
 class StateController:
     def __init__(self):
         self.screen1 = LipidDetailsScreenState()
-        self.screen2 = FilePickerScreenState()
-        self.screen3 = InputSummaryScreenState(
-            self.screen1.get_data_string_summary,
-            self.screen2.get_data_string_summary)
-        self.screen4 = ProgressScreenState(
-            self.screen1.get_lipid_data, self.screen2.get_data_string_summary)
+      #  self.screen2 = FilePickerScreenState()
+    #    self.screen3 = InputSummaryScreenState(
+     #       self.screen1.get_data_string_summary,
+     #       self.screen2.get_data_string_summary)
+      #  self.screen4 = ProgressScreenState(
+       #     self.screen1.get_lipid_data, self.screen2.get_data_string_summary)
