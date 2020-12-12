@@ -1,9 +1,11 @@
-from PyQt5.QtWidgets import QLabel, QPushButton, QVBoxLayout, QWidget, QLayout, QSizePolicy
-from PyQt5.QtCore import Qt
-from assets.pathFinder import get_resource_path
 import os
-# To work with PyInstaller, we need to get the absolute path for css file.
+from assets.pathFinder import get_resource_path
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import (QLabel, QPushButton, QVBoxLayout,
+                             QWidget, QLayout, QSizePolicy)
 
+
+# To work with PyInstaller, we need to get the absolute path for css file.
 stylesheet_file = get_resource_path(os.sep.join(["assets", "styles.css"]))
 with open(stylesheet_file, "r") as style:
     stylesheet = style.read()

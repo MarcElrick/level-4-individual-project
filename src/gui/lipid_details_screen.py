@@ -1,5 +1,6 @@
 from molmass import Formula, FormulaError
-from gui.custom_components import CustomTitle, CustomFieldLabel
+from gui.custom_components import (
+    CustomTitle, CustomFieldLabel, ActionButton, DeleteButton)
 from PyQt5.QtCore import Qt
 from helper import mass2ion
 from gui.nav_buttons import NavigationButtons
@@ -41,34 +42,53 @@ class LipidDetailsScreen(QWidget):
         wrapper = QWidget()
         wrapper.setSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
 
-        content_layout = QVBoxLayout(wrapper)
-        content_layout.setSizeConstraint(5)
+        self.content_layout = QVBoxLayout(wrapper)
+        self.content_layout.setSizeConstraint(5)
 
         for lipid in self.page_state.lipids:
-            content_layout.addWidget(LipidListItem(self.page_state, lipid))
+            self.content_layout.addWidget(
+                LipidListItem(self.page_state, lipid))
 
         scroll_area = QScrollArea()
         scroll_area.setWidget(wrapper)
         scroll_area.setWidgetResizable(True)
 
+        new_lipid_btn = ActionButton('Add Lipid')
+        new_lipid_btn.clicked.connect(self.add_lipid)
+
         self.screen_layout.addWidget(scroll_area)
         self.nav_buttons = NavigationButtons(on_next=on_next)
+        self.screen_layout.addWidget(new_lipid_btn)
         self.screen_layout.addWidget(self.nav_buttons)
         self.setLayout(self.screen_layout)
 
     def charge_mode_toggled(self, value):
+        print(value)
         self.page_state.setChargeMode(value)
-        self.adduct_type.clear()
-        self.adduct_type.addItems(
-            self.page_state.getAdductLabels(self.page_state.adduct_list))
+        print(self.content_layout.itemAt(0))
+
+        for i in range(self.content_layout.count()):
+            print(self.content_layout.itemAt(0).widget())
+            self.content_layout.itemAt(i).widget().charge_mode_toggled(value)
+
+    def add_lipid(self):
+        self.page_state.add_lipid()
+        self.content_layout.addWidget(LipidListItem(
+            self.page_state, self.page_state.lipids[-1]))
 
 
 class LipidListItem(QWidget):
     def __init__(self, page_state, lipid):
         super(QWidget, self).__init__()
-        print('CREATED')
+        self.valid = False
+
         self.lipid_layout = QFormLayout()
         self.lipid = lipid
+        self.page_state = page_state
+
+        self.lipid_name = QLineEdit()
+        self.lipid_name.setText(self.lipid.name)
+        self.lipid_name.textChanged.connect(lambda x: self.lipid.setName(x))
 
         self.lipid_formula = QLineEdit()
         self.lipid_formula.setText(self.lipid.lipid_formula)
@@ -76,7 +96,7 @@ class LipidListItem(QWidget):
 
         self.adduct_type = QComboBox()
         self.adduct_type.addItems(
-            page_state.getAdductLabels(page_state.adduct_list))
+            self.page_state.getAdductLabels(self.lipid.adduct_list))
         self.adduct_type.setCurrentIndex(self.lipid.adduct_index)
         self.adduct_type.currentIndexChanged.connect(
             self.updateAdduct)
@@ -119,9 +139,16 @@ class LipidListItem(QWidget):
             self.lipid.mass_tolerance_units_index)
         self.mass_tolerance_units.currentIndexChanged.connect(
             self.lipid.setMassToleranceUnits)
+
+        self.remove_btn = DeleteButton('Remove Lipid')
+        self.remove_btn.clicked.connect(self.remove_lipid)
         self.build_ui()
 
     def build_ui(self):
+
+        self.lipid_layout.addRow(
+            CustomFieldLabel('Lipid Name'), self.lipid_name)
+
         self.lipid_layout.addRow(CustomFieldLabel(
             "Lipid Formula"), self.lipid_formula)
 
@@ -155,16 +182,26 @@ class LipidListItem(QWidget):
 
         self.lipid_layout.addRow(rt_container)
         self.lipid_layout.addRow(mass_container)
-
+        self.lipid_layout.addWidget(self.remove_btn)
         self.setLayout(self.lipid_layout)
+
+    def charge_mode_toggled(self, value):
+        print(value)
+        self.adduct_type.clear()
+        self.adduct_type.addItems(
+            self.page_state.getAdductLabels(self.lipid.adduct_list))
+
+    def remove_lipid(self):
+        self.setParent(None)
+        self.page_state.remove_lipid(self.lipid.key)
 
     def validate_lipid_formula(self, text):
         f = Formula(text)
         try:
-            self.page_state.setLipidFormula(text)
+            self.lipid.setLipidFormula(text)
             self.lipid_formula.setStyleSheet("border: 1px solid green")
             self.lipid_formula_label.setText(f.formula)
-            self.nav_buttons.btn_next.setDisabled(False)
+            self.valid = True
             self.mass.setValue(
                 mass2ion(f.isotope.mass,
                          self.lipid.adduct_list[self.lipid.adduct_index][2],
@@ -173,8 +210,8 @@ class LipidListItem(QWidget):
         except FormulaError:
             self.lipid_formula.setStyleSheet("border: 1px solid red")
             self.lipid_formula_label.setText("")
-            self.nav_buttons.btn_next.setDisabled(True)
+            self.valid = False
 
     def updateAdduct(self, value):
         self.lipid.setAdductIndex(value)
-        self.mass.setValue(self.page_state.mass)
+        self.mass.setValue(self.lipid.mass)

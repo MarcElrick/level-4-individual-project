@@ -102,13 +102,15 @@ def create_xlsx_output(output_dict, lipids, filenames, output_filename='test.xls
     workbook = xlsxwriter.Workbook(
         output_filename, {'nan_inf_to_errors': True})
     for lipid in lipids:
+        label = list(lipid.keys())[0]
+
         row_num = 1
-        sheet_name = lipid['label'].replace(':', ' ')
+        sheet_name = label.replace(':', ' ')
         sheet_name = sheet_name.replace('[', '(')
         sheet_name = sheet_name.replace(']', ')')
         worksheet = workbook.add_worksheet(sheet_name)
         cell = col2alphabet(1) + str(row_num)
-        worksheet.write(cell, lipid['label'])
+        worksheet.write(cell, label)
         row_num += 1
         write_list = ['Kinetic Parameters', 'k:',
                       output_dict['kinetic_parameters'][0],
@@ -145,9 +147,9 @@ def create_xlsx_output(output_dict, lipids, filenames, output_filename='test.xls
                 row_num += 1
 
         create_plot(
-            lipid['label'], output_dict,
-            output_filename='temp_{}.png'.format(lipid['label']))
-        worksheet.insert_image('N4', 'temp_{}.png'.format(lipid['label']))
+            label, output_dict,
+            output_filename='temp_{}.png'.format(label))
+        worksheet.insert_image('N4', 'temp_{}.png'.format(label))
     workbook.close()
 
 

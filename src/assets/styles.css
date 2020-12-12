@@ -15,7 +15,7 @@
 #actionButton {
   color: #fff;
   background-color: #01579b;
-  qproperty-sizePolicy: Minimum;
+  qproperty-sizepolicy: Minimum;
 }
 
 #summaryLabel {
