@@ -13,3 +13,6 @@ class StateController:
             self.screen2.get_data_string_summary)
         self.screen4 = ProgressScreenState(
             self.screen1.get_lipid_data, self.screen2.get_data_string_summary)
+
+    def wipe_state(self):
+        self.__init__()

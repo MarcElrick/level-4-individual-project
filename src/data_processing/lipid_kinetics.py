@@ -12,7 +12,9 @@ class LipidKinetics:
         self.increment_progress = increment_progress
 
     def compute_lipid_kinetics(self, lipids, files):
+        output_list = []
         for lipid in lipids:
+            print('Processing Lipid "{}"'.format(list(lipid.keys())[0]))
             lipid_details = list(lipid.values())[0]
 
             data_matrix = np.zeros(
@@ -22,6 +24,7 @@ class LipidKinetics:
             all_isos = []
 
             for index, (filepath, time) in enumerate(files):
+                print('    Analysing timepoint {} hours'.format(time))
 
                 isotopes = self.get_isotope_intensities(
                     lipid_details, [filepath, time])
@@ -53,19 +56,20 @@ class LipidKinetics:
             output_dict['times'] = times
             output_dict['all_isos'] = all_isos
 
-            return output_dict
+            output_list.append(output_dict)
+
+        return output_list
 
     def get_isotope_intensities(self, lipid_details, filepair, scan_delta=2):
         filepair[0] = MZMLFile(filepair[0])
 
         scans_in_range = list(filter(lambda x: x.rt_in_seconds >=
                                      lipid_details['retentionTime'] -
-                                     lipid_details['retentionTimeTolerance'] and
-                                     x.rt_in_seconds <=
+                                     lipid_details['retentionTimeTolerance']
+                                     and x.rt_in_seconds <=
                                      lipid_details['retentionTime'] +
                                      lipid_details['retentionTimeTolerance'],
                                      filepair[0].scans))
-        # print("SCANS", list(map(lambda x: x.scan_no, scans_in_range)))
 
         spectrum = Formula(lipid_details['formula']).spectrum()
         adduct = lipid_details['adduct']

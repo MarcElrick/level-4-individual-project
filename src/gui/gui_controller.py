@@ -51,4 +51,8 @@ class MainApp(QMainWindow):
 
     def init_progress_screen(self):
         self.setCentralWidget(ProgressScreen(numLipids=len(self.state.screen1.lipids), numFiles=len(self.state.screen2.file_time_pairs),
-                                             page_state=self.state.screen4))
+                                             page_state=self.state.screen4, on_next=self.reset_state))
+
+    def reset_state(self):
+        self.state.wipe_state()
+        self.init_lipid_details_screen()

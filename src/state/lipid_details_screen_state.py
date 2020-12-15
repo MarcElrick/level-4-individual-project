@@ -24,8 +24,6 @@ class LipidDetailsScreenState:
             self.keyCount, self.charge_mode))
         self.keyCount += 1
 
-        print(self.get_lipid_data())
-
     def remove_lipid(self, key):
         for lipid in self.lipids:
             if(lipid.key == key):
@@ -40,9 +38,16 @@ class LipidDetailsScreenState:
     def get_data_string_summary(self):
         return list(map(lambda x: x.get_data_string_summary(), self.lipids))
 
+    def check_lipids_valid(self):
+        for lipid in self.lipids:
+            if not lipid.valid:
+                return False
+        return True
+
 
 class IndividualLipid:
     def __init__(self, key, charge_mode):
+        self.valid = False
 
         self.lipid_formula = ""
         self.name = ""

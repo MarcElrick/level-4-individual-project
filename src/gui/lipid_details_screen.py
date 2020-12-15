@@ -1,7 +1,7 @@
 from molmass import Formula, FormulaError
 from gui.custom_components import (
     CustomTitle, CustomFieldLabel, ActionButton, DeleteButton)
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, pyqtSignal
 from helper import mass2ion
 from gui.nav_buttons import NavigationButtons
 from PyQt5.QtWidgets import (QWidget, QFormLayout, QVBoxLayout, QHBoxLayout,
@@ -25,6 +25,7 @@ class LipidDetailsScreen(QWidget):
             lambda: self.charge_mode_toggled('Positive'))
         self.btn_negative.toggled.connect(
             lambda: self.charge_mode_toggled('Negative'))
+        self.nav_buttons = NavigationButtons(on_next=on_next)
 
         self.build_ui(on_next=on_next, on_back=on_back)
 
@@ -47,7 +48,7 @@ class LipidDetailsScreen(QWidget):
 
         for lipid in self.page_state.lipids:
             self.content_layout.addWidget(
-                LipidListItem(self.page_state, lipid))
+                LipidListItem(self.page_state, lipid,  self.nav_buttons.btn_next.setEnabled))
 
         scroll_area = QScrollArea()
         scroll_area.setWidget(wrapper)
@@ -57,31 +58,27 @@ class LipidDetailsScreen(QWidget):
         new_lipid_btn.clicked.connect(self.add_lipid)
 
         self.screen_layout.addWidget(scroll_area)
-        self.nav_buttons = NavigationButtons(on_next=on_next)
+        self.nav_buttons.btn_next.setEnabled(False)
         self.screen_layout.addWidget(new_lipid_btn)
         self.screen_layout.addWidget(self.nav_buttons)
         self.setLayout(self.screen_layout)
 
     def charge_mode_toggled(self, value):
-        print(value)
         self.page_state.setChargeMode(value)
-        print(self.content_layout.itemAt(0))
 
         for i in range(self.content_layout.count()):
-            print(self.content_layout.itemAt(0).widget())
             self.content_layout.itemAt(i).widget().charge_mode_toggled(value)
 
     def add_lipid(self):
         self.page_state.add_lipid()
         self.content_layout.addWidget(LipidListItem(
-            self.page_state, self.page_state.lipids[-1]))
+            self.page_state, self.page_state.lipids[-1], self.nav_buttons.btn_next.setEnabled))
 
 
 class LipidListItem(QWidget):
-    def __init__(self, page_state, lipid):
+    def __init__(self, page_state, lipid, on_valid):
         super(QWidget, self).__init__()
-        self.valid = False
-
+        self.on_valid = on_valid
         self.lipid_layout = QFormLayout()
         self.lipid = lipid
         self.page_state = page_state
@@ -186,7 +183,6 @@ class LipidListItem(QWidget):
         self.setLayout(self.lipid_layout)
 
     def charge_mode_toggled(self, value):
-        print(value)
         self.adduct_type.clear()
         self.adduct_type.addItems(
             self.page_state.getAdductLabels(self.lipid.adduct_list))
@@ -201,16 +197,18 @@ class LipidListItem(QWidget):
             self.lipid.setLipidFormula(text)
             self.lipid_formula.setStyleSheet("border: 1px solid green")
             self.lipid_formula_label.setText(f.formula)
-            self.valid = True
             self.mass.setValue(
                 mass2ion(f.isotope.mass,
                          self.lipid.adduct_list[self.lipid.adduct_index][2],
                          self.lipid.adduct_list[self.lipid.adduct_index][1]))
             self.mass.update()
+            self.lipid.valid = True
         except FormulaError:
             self.lipid_formula.setStyleSheet("border: 1px solid red")
             self.lipid_formula_label.setText("")
-            self.valid = False
+            self.lipid.valid = False
+        finally:
+            self.on_valid(self.page_state.check_lipids_valid())
 
     def updateAdduct(self, value):
         self.lipid.setAdductIndex(value)

@@ -194,18 +194,33 @@
 
 - _2.5 hours_ - Finished progress screen page. Loading bar increases as each file analysis is completed. Ready to merge.
 
-## 9 Nov 2020
+## 9 Dec 2020
 
 - _2 hours_ - Began preparing for switch to multiple lipids. Altered lipid screen state to accomodate for this.
 
-## 11 Nov 2020
+## 11 Dec 2020
 
 - _3 hours_ - Made GUI changes for multiple lipids - lipid forms are shown in a scroll area. Still need to link with state.
 
-## 12 Nov 2020
+## 12 Dec 2020
 
 - _2 hours_ - Final changes to lipid details screen - addition of label. Appropriate changes made to state.
 
 - _3 hours_ - Complete reworking of summary screen with ScrollAreas and fixed to work with new lipid details screen.
 
 - _1 hour_ - Fixed pipeline to work with multiple lipids.
+
+## 13 Dec 2020
+
+- _2 hours_ - Noticed that all pages are identical for multiple lipids. Attempted to find the cause but got nowhere.
+
+## 14 Dec 2020
+
+- _2 hours_ - Work on yesterday's bug - found it was caused by later lipid runs overwriting previous runs.
+
+- _1 hour_ - Added console into progress screen to show what is happening within the analysis pipeline.
+
+## 15 Dec 2020
+
+- _1 hour_ - Re-implemented validation on lipid screen.
+- _1 hour_ - Added restart button to progress screen.
