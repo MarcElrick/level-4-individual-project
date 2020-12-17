@@ -65,7 +65,7 @@
 
 ## 13 Oct 2020
 
-- _1 hour_ - Continued work developing GUI - now have a nice framework set uo for switching between screens.
+- _1 hour_ - Continued work developing GUI - now have a nice framework set up for switching between screens.
 - _1 hour_ - Further GUI work - now have a solid grasp on PyQt and have an idea of state management procedure.
 
 ## 14 Oct 2020
@@ -224,3 +224,11 @@
 
 - _1 hour_ - Re-implemented validation on lipid screen.
 - _1 hour_ - Added restart button to progress screen.
+
+## 16 Dec 2020
+
+- _2 hours_ - Writing status report.
+
+## 17 Oct 2020
+
+- _2 hours_ - Finished rewriting unit tests.

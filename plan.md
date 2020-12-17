@@ -47,19 +47,33 @@
 - **Week 11 [PROJECT WEEK]**
   - Implement multiple lipids within analysis
 - **Week 12 [PROJECT WEEK]** Status report submitted.
+  - Code cleanup.
+  - Ensure test coverage.
+  - Begin work on stretch goals.
 
 ## Winter break
 
 ## Spring Semester
 
 - **Week 13**
+  - Plan end user evaluation and secure ethics approval.
+  - Carry out evaluations.
 - **Week 14**
+  - Plan dissertation format.
 - **Week 15**
+  - Begin writing disseration.
 - **Week 16**
+  - Continue writing disseration.
 - **Week 17**
+  - Continue writing disseration.
 - **Week 19**
+  - Continue writing disseration.
 - **Week 20**
+  - Continue writing disseration.
 - **Week 21**
+  - Continue writing disseration.
 - **Week 22**
+  - Continue writing disseration.
+  - Presentation
 - **Week 23 [TERM ENDS]**
 - **Week 24** Dissertation submission deadline and presentations.

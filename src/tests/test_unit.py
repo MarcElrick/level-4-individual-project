@@ -1,6 +1,6 @@
 import unittest
 from state.file_picker_screen_state import FilePickerScreenState
-from state.lipid_details_screen_state import LipidDetailsScreenState
+from state.lipid_details_screen_state import LipidDetailsScreenState, IndividualLipid
 from state.input_summary_screen_state import InputSummaryScreenState
 from data_processing.lipid_kinetics import *
 from molmass import Formula
@@ -46,20 +46,20 @@ class InputSummaryScreenStateTests(unittest.TestCase):
             get_lipid_info=cls.lipid_state.get_data_string_summary, get_file_info=cls.file_picker_state.get_data_string_summary)
 
     def test_lipid_info_is_correct(self):
-        self.lipid_state.setLipidFormula("C4356H4")
-        self.lipid_state.setAdductIndex(0)
-        self.lipid_state.setIsotopeDepth(5)
-        self.lipid_state.setMass(100.000)
-        self.lipid_state.setMassTolerance(20)
-        self.lipid_state.setMassToleranceUnits(0)
-        self.lipid_state.setRetentionTime(100.000)
-        self.lipid_state.setRetentionTimeTolerance(20)
+        self.lipid_state.lipids = [IndividualLipid(0, 'positive')]
+        self.myLipid = self.lipid_state.lipids[0]
+        self.myLipid.setLipidFormula("C4356H4")
+        self.myLipid.setAdductIndex(0)
+        self.myLipid.setIsotopeDepth(5)
+        self.myLipid.setMass(100.000)
+        self.myLipid.setMassTolerance(20)
+        self.myLipid.setMassToleranceUnits(0)
+        self.myLipid.setRetentionTime(100.000)
+        self.myLipid.setRetentionTimeTolerance(20)
+        self.maxDiff = None
 
-        self.assertDictEqual({"Lipid Formula": Formula("C4356H4").formula, "Isotope Depth": 5,
-                              "Adduct": "[M+H]+", "Mass": 100.0, "Mass Tolerance": "20ppm",
-                              "Retention Time": "100.0s",
-                              "Charge Mode": 'Positive',
-                              "Retention Time Tolerance": "20s"}, self.state.get_lipid_info())
+        self.assertDictEqual({'': {'formula': 'C4356H4', 'adduct': ['[M+H]+', 1.007276452, 1.0, ''], 'isotopeDepth': '5', 'retentionTime': '100.0s',
+                                   'retentionTimeTolerance': '20s', 'mass': '100.0', 'massTolerance': '20', 'massToleranceUnits': 'ppm'}}, self.state.get_lipid_info()[0])
 
     def test_file_info_is_correct(self):
         self.file_picker_state.add_record(["zero.mzML", 0])
