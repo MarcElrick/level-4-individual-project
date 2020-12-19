@@ -26,9 +26,9 @@ class ProgressScreenState():
 
     def performAnalysis(self):
         kinetics_obj = LipidKinetics(self.incrementProgress)
-        output = kinetics_obj.compute_lipid_kinetics(
+        output_list = kinetics_obj.compute_lipid_kinetics(
             self.get_lipid_data(), self.get_file_data())
-        create_xlsx_output(output, [self.get_lipid_data()],
+        create_xlsx_output(output_list, self.get_lipid_data(),
                            list(filter(lambda x: x[0], self.get_file_data())))
 
     def incrementProgress(self):

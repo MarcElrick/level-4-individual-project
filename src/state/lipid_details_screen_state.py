@@ -7,13 +7,55 @@ import os
 
 class LipidDetailsScreenState:
     def __init__(self):
-        self.lipid_formula = ""
-
         self.charge_mode = 'Positive'
+        self.lipids = [IndividualLipid(0, self.charge_mode)]
+        self.lipids[0].setAdductList(self.charge_mode)
+        self.keyCount = 1
 
-        self.setAdductList('positive.csv')
+    def setChargeMode(self, value):
+        self.charge_mode = value
+
+        for lipid in self.lipids:
+            lipid.setAdductList(value)
+            lipid.setAdductIndex(0)
+
+    def add_lipid(self):
+        self.lipids.append(IndividualLipid(
+            self.keyCount, self.charge_mode))
+        self.keyCount += 1
+
+    def remove_lipid(self, key):
+        for lipid in self.lipids:
+            if(lipid.key == key):
+                self.lipids.remove(lipid)
+
+    def getAdductLabels(self, adduct_list):
+        return list(map(lambda x: x[0], adduct_list))
+
+    def get_lipid_data(self):
+        return list(map(lambda x: x.get_lipid_data(), self.lipids))
+
+    def get_data_string_summary(self):
+        return list(map(lambda x: x.get_data_string_summary(), self.lipids))
+
+    def check_lipids_valid(self):
+        for lipid in self.lipids:
+            if not lipid.valid:
+                return False
+        return True
+
+
+class IndividualLipid:
+    def __init__(self, key, charge_mode):
+        self.valid = False
+
+        self.lipid_formula = ""
+        self.name = ""
+        self.setAdductList(charge_mode)
+        self.setAdductIndex(0)
+
+        self.key = key
         self.adduct_index = 0
-
         self.isotope_depth = 0
 
         self.retention_time = 0.0
@@ -26,29 +68,32 @@ class LipidDetailsScreenState:
 
     def get_data_string_summary(self):
         return {
-            "Lipid Formula": self.lipid_formula,
-            "Adduct": self.adduct_list[self.adduct_index][0],
-            "Charge Mode": self.charge_mode,
-            "Isotope Depth": self.isotope_depth,
-            "Retention Time": str(self.retention_time) + "s",
-            "Retention Time Tolerance": str(self.retention_time_tolerance) + "s",
-            "Mass": self.mass,
-            "Mass Tolerance": str(self.mass_tolerance) +
-            self.mass_tolerance_units_list[self.mass_tolerance_units_index]
+            self.name: {
+                "formula": self.lipid_formula,
+                "adduct": self.adduct_list[self.adduct_index],
+                "isotopeDepth": str(self.isotope_depth),
+                "retentionTime": str(self.retention_time) + "s",
+                "retentionTimeTolerance": str(self.retention_time_tolerance) + "s",
+                "mass": str(self.mass),
+                "massTolerance": str(self.mass_tolerance),
+                "massToleranceUnits":
+                self.mass_tolerance_units_list[self.mass_tolerance_units_index]
+            }
         }
 
     def get_lipid_data(self):
         return {
-            "label": "changeTHislabel",
-            "formula": self.lipid_formula,
-            "adduct": self.adduct_list[self.adduct_index],
-            "chargeMode": self.charge_mode,
-            "isotopeDepth": self.isotope_depth,
-            "retentionTime": self.retention_time,
-            "retentionTimeTolerance": self.retention_time_tolerance,
-            "mass": self.mass,
-            "massTolerance": self.mass_tolerance,
-            "massToleranceUnits": self.mass_tolerance_units_list[self.mass_tolerance_units_index]
+            self.name: {
+                "formula": self.lipid_formula,
+                "adduct": self.adduct_list[self.adduct_index],
+                "isotopeDepth": self.isotope_depth,
+                "retentionTime": self.retention_time,
+                "retentionTimeTolerance": self.retention_time_tolerance,
+                "mass": self.mass,
+                "massTolerance": self.mass_tolerance,
+                "massToleranceUnits":
+                self.mass_tolerance_units_list[self.mass_tolerance_units_index]
+            }
         }
 
     def setLipidFormula(self, text):
@@ -64,6 +109,9 @@ class LipidDetailsScreenState:
                 mono_iso_mass, mass_multi, mass_add))
         except FormulaError:
             pass
+
+    def setName(self, text):
+        self.name = text
 
     def setIsotopeDepth(self, value):
         self.isotope_depth = value
@@ -83,14 +131,6 @@ class LipidDetailsScreenState:
     def setMassToleranceUnits(self, value):
         self.mass_tolerance_units_index = value
 
-    def setChargeMode(self, value):
-        self.charge_mode = value
-        self.setAdductList(value.lower()+'.csv')
-        self.setAdductIndex(0)
-
     def setAdductList(self, filename):
         self.adduct_list = parse_adduct_file(get_resource_path(
-            os.sep.join(['assets', filename])))
-
-    def getAdductLabels(self, adduct_list):
-        return list(map(lambda x: x[0], adduct_list))
+            os.sep.join(['assets', filename.lower() + '.csv'])))
