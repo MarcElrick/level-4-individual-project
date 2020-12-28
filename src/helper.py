@@ -6,7 +6,7 @@ def mass2ion(mono_iso_mass, mass_multi, mass_add):
 
 
 def sortFileTimeList(file_time_list):
-    return sorted(file_time_list, key=lambda x: x[1])
+    return sorted(file_time_list, key=lambda x: x.time)
 
 
 def getFilenameFromPath(filepath):

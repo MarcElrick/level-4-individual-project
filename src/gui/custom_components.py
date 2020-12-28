@@ -12,8 +12,8 @@ with open(stylesheet_file, "r") as style:
 
 
 class SummaryDisplayCard(QWidget):
-    def __init__(self, label, *values):
-        super(QWidget, self).__init__()
+    def __init__(self, label, *values, parent=None):
+        super(QWidget, self).__init__(parent)
         self.setObjectName('summaryCard')
         self.layout = QVBoxLayout()
         self.label = QLabel(label)
