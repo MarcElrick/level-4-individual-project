@@ -43,7 +43,7 @@ class FilePickerScreen(QWidget):
 
     def add_new_pairing(self):
         self.nav_buttons.btn_next.setDisabled(False)
-        self.state.add_record(
+        self.state.add_recordz(
             ["", 0])
         length = len(self.state.file_time_pairs)
         self.innerLayout.addLayout(

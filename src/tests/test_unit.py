@@ -1,9 +1,9 @@
+from molmass import Formula
+from data_processing.lipid_kinetics import *
+from state.input_summary_screen_state import InputSummaryScreenState
 import unittest
 from state.file_picker_screen_state import FilePickerScreenState
 from state.lipid_details_screen_state import LipidDetailsScreenState, IndividualLipid
-from state.input_summary_screen_state import InputSummaryScreenState
-from data_processing.lipid_kinetics import *
-from molmass import Formula
 
 # Smoke test to verify test suite runs
 
@@ -21,18 +21,18 @@ class FilePickerScreenStateTests(unittest.TestCase):
         cls.files = cls.state.file_time_pairs
 
     def test_update_record_exists(self):
-        self.state.add_record(['test.mzml', 8])
+        self.state.add_recordz(['test.mzml', 8])
         self.state.update_record(['another.mzml', 8], 0)
         self.assertEqual(self.files[0], ['another.mzml', 8])
 
     def test_add_pair_to_empty_index(self):
         self.assertEqual(self.files, [])
-        self.state.add_record(['test.mzml'])
+        self.state.add_recordz(['test.mzml'])
         self.assertEqual(self.files[0], ['test.mzml'])
 
     def test_remove_pair_removes_correct_pair(self):
-        self.state.add_record(['test8.mzml', 8, 0])
-        self.state.add_record(['test16.mzml', 16, 0])
+        self.state.add_recordz(['test8.mzml', 8, 0])
+        self.state.add_recordz(['test16.mzml', 16, 0])
         self.state.remove_record(0)
         self.assertEqual(self.files, [['test16.mzml', 16, 0]])
 
@@ -62,10 +62,10 @@ class InputSummaryScreenStateTests(unittest.TestCase):
                                    'retentionTimeTolerance': '20s', 'mass': '100.0', 'massTolerance': '20', 'massToleranceUnits': 'ppm'}}, self.state.get_lipid_info()[0])
 
     def test_file_info_is_correct(self):
-        self.file_picker_state.add_record(["zero.mzML", 0])
-        self.file_picker_state.add_record(["one.mzML", 1])
-        self.file_picker_state.add_record(["two.mzML", 2])
-        self.file_picker_state.add_record(["three.mzML", 3])
+        self.file_picker_state.add_recordz(["zero.mzML", 0])
+        self.file_picker_state.add_recordz(["one.mzML", 1])
+        self.file_picker_state.add_recordz(["two.mzML", 2])
+        self.file_picker_state.add_recordz(["three.mzML", 3])
 
         self.assertEqual(self.state.get_file_info(), [["zero.mzML", 0], [
                          "one.mzML", 1], ["two.mzML", 2], ["three.mzML", 3]])
