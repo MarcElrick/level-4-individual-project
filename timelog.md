@@ -229,6 +229,28 @@
 
 - _2 hours_ - Writing status report.
 
-## 17 Oct 2020
+## 17 Dec 2020
 
 - _2 hours_ - Finished rewriting unit tests.
+
+## 19 Dec 2020
+
+- _6 hours_ - Implemented multiple lipids making many changes throughout pipeline to accomodate this. Changes also required rewrites of lipid kinetics screen.
+
+---
+
+## Winter Break
+
+---
+
+## 28 Dec 2020
+
+- _6 hours_ - Following final supervisor meeting, it was decided that another view style was required to make the software less unwieldy when working with lots of lipids. I therefore spent this time looking for a publicly available "collapsible" Qt widget that I could use. I found one publicly and it was as part of a pull request under an MIT license. I therefore decided to use and modify this for my own needs.
+
+## 29 Dec 2020
+
+- _2 hours_ - Yesterdays PR failed in CI - after running again, everything seems to have gone through without any problem. This is something to keep an eye on.
+
+## 2 Jan 2020
+
+- _2 hours_ - It turns out the previous tests were passing locally becuase I was running on another branch (duh). Spent time updating unit tests, as well as adding a few missing ones.

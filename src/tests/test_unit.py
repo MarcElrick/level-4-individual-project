@@ -14,27 +14,50 @@ class SmokeTest(unittest.TestCase):
         self.assertEqual('foo'.upper(), 'FOO')
 
 
+class LipidDetailsScreenStateTests(unittest.TestCase):
+    @classmethod
+    def setUp(cls):
+        cls.state = LipidDetailsScreenState()
+        cls.state.lipids = [IndividualLipid(0, 'positive')]
+        cls.myLipid = cls.state.lipids[0]
+        cls.myLipid.setLipidFormula("C4356H4")
+        cls.myLipid.setAdductIndex(0)
+        cls.myLipid.setIsotopeDepth(5)
+        cls.myLipid.setMass(100.000)
+        cls.myLipid.setMassTolerance(20)
+        cls.myLipid.setMassToleranceUnits(0)
+        cls.myLipid.setRetentionTime(100.000)
+        cls.myLipid.setRetentionTimeTolerance(20)
+
+    def test_get_lipid_data(self):
+        self.assertDictEqual({'': {'formula': 'C4356H4', 'adduct': ['[M+H]+', 1.007276452, 1.0, ''], 'isotopeDepth': 5,
+                                   'retentionTime': 100.0, 'retentionTimeTolerance': 20, 'mass': 100.0, 'massTolerance': 20, 'massToleranceUnits': 'ppm'}}, self.state.get_lipid_data()[0])
+
+    def test_get_data_string_summary_returns_correct(self):
+        self.assertDictEqual({'': {'formula': 'C4356H4', 'adduct': ['[M+H]+', 1.007276452, 1.0, ''], 'isotopeDepth': '5', 'retentionTime': '100.0s',
+                                   'retentionTimeTolerance': '20s', 'mass': '100.0', 'massTolerance': '20', 'massToleranceUnits': 'ppm'}}, self.state.get_data_string_summary()[0])
+
+
 class FilePickerScreenStateTests(unittest.TestCase):
     @classmethod
     def setUp(cls):
         cls.state = FilePickerScreenState()
         cls.files = cls.state.file_time_pairs
 
-    def test_update_record_exists(self):
-        self.state.add_record(['test.mzml', 8])
-        self.state.update_record(['another.mzml', 8], 0)
-        self.assertEqual(self.files[0], ['another.mzml', 8])
-
     def test_add_pair_to_empty_index(self):
         self.assertEqual(self.files, [])
-        self.state.add_record(['test.mzml'])
-        self.assertEqual(self.files[0], ['test.mzml'])
+        self.state.add_record()
+        self.files[0].filepath = 'test.mzml'
+        self.assertEqual(self.files[0].filepath, 'test.mzml')
 
     def test_remove_pair_removes_correct_pair(self):
-        self.state.add_record(['test8.mzml', 8, 0])
-        self.state.add_record(['test16.mzml', 16, 0])
+        self.state.add_record()
+        self.files[-1].filepath = "one.mzml"
+        self.state.add_record()
+        self.files[-1].filepath = "two.mzml"
+
         self.state.remove_record(0)
-        self.assertEqual(self.files, [['test16.mzml', 16, 0]])
+        self.assertEqual(self.files[0].filepath, 'two.mzml')
 
 
 class InputSummaryScreenStateTests(unittest.TestCase):
@@ -62,10 +85,17 @@ class InputSummaryScreenStateTests(unittest.TestCase):
                                    'retentionTimeTolerance': '20s', 'mass': '100.0', 'massTolerance': '20', 'massToleranceUnits': 'ppm'}}, self.state.get_lipid_info()[0])
 
     def test_file_info_is_correct(self):
-        self.file_picker_state.add_record(["zero.mzML", 0])
-        self.file_picker_state.add_record(["one.mzML", 1])
-        self.file_picker_state.add_record(["two.mzML", 2])
-        self.file_picker_state.add_record(["three.mzML", 3])
+        for i in range(4):
+            self.file_picker_state.add_record()
+
+        self.file_picker_state.file_time_pairs[0].filepath = "zero.mzML"
+        self.file_picker_state.file_time_pairs[0].time = 0
+        self.file_picker_state.file_time_pairs[1].filepath = "one.mzML"
+        self.file_picker_state.file_time_pairs[1].time = 1
+        self.file_picker_state.file_time_pairs[2].filepath = "two.mzML"
+        self.file_picker_state.file_time_pairs[2].time = 2
+        self.file_picker_state.file_time_pairs[3].filepath = "three.mzML"
+        self.file_picker_state.file_time_pairs[3].time = 3
 
         self.assertEqual(self.state.get_file_info(), [["zero.mzML", 0], [
                          "one.mzML", 1], ["two.mzML", 2], ["three.mzML", 3]])

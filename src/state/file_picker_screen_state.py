@@ -8,13 +8,6 @@ class FilePickerScreenState:
         self.file_time_pairs.append(FileTimePair(self.keyCount))
         self.keyCount += 1
 
-    def update_record(self, filepath, time, key):
-        for pairing in self.file_time_pairs:
-            if pairing.key == key:
-                pairing.filepath = filepath
-                pairing.time = time
-                break
-
     def remove_record(self, key):
         for pairing in self.file_time_pairs:
             if(pairing.key == key):
