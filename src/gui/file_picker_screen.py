@@ -7,12 +7,12 @@ import os
 
 
 class FilePickerScreen(QWidget):
-    def __init__(self, page_state=None, on_next=None, on_back=None, redraw=None):
+    def __init__(self, page_state=None, on_next=None, on_back=None,  redraw=None):
         super(FilePickerScreen, self).__init__()
         self.state = page_state
         self.on_next = on_next
         self.on_back = on_back
-        self.redraw = redraw
+        #self.redraw = redraw
         self.build_ui()
 
     def build_ui(self):
@@ -22,9 +22,9 @@ class FilePickerScreen(QWidget):
         self.innerLayout = QVBoxLayout()
 
         # Create all pairing items from existing pairs.
-        for i in range(0, len(self.state.file_time_pairs)):
-            self.innerLayout.addLayout(
-                PairListItem(self.state.file_time_pairs[i], lambda i=i: self.remove_pairing(i), lambda i=i: self.state.update_record(self.state.file_time_pairs[i], i)))
+        for pairing in self.state.file_time_pairs:
+            self.innerLayout.addWidget(
+                PairListItem(pairing, self.remove_pairing))
 
         self.nav_buttons = NavigationButtons(
             on_next=self.onNextClick, on_back=self.on_back)
@@ -43,58 +43,62 @@ class FilePickerScreen(QWidget):
 
     def add_new_pairing(self):
         self.nav_buttons.btn_next.setDisabled(False)
-        self.state.add_record(
-            ["", 0])
-        length = len(self.state.file_time_pairs)
-        self.innerLayout.addLayout(
-            PairListItem(self.state.file_time_pairs[-1], lambda i=length: self.remove_pairing(i-1), lambda i=length: self.state.update_record(self.state.file_time_pairs[i-1], i-1)))
+        self.state.add_record()
+        self.innerLayout.addWidget(
+            PairListItem(self.state.file_time_pairs[-1], self.remove_pairing))
 
-    def remove_pairing(self, index):
-        self.state.remove_record(index)
-        self.redraw()
+    def remove_pairing(self, record):
+        self.state.remove_record(record.key)
+       # self.redraw()
         if(len(self.state.file_time_pairs) == 0):
             self.nav_buttons.btn_next.setDisabled(True)
 
     def onNextClick(self):
+        print(self.state.file_time_pairs)
         self.state.file_time_pairs = sortFileTimeList(
             self.state.file_time_pairs)
         self.on_next()
 
 
-class PairListItem(QHBoxLayout):
-    def __init__(self, record, on_delete, on_change):
-        super(QHBoxLayout, self).__init__()
+class PairListItem(QWidget):
+    def __init__(self, record, on_delete):
+        super(QWidget, self).__init__()
         self.record = record
-        self.on_change = on_change
+        self.on_delete = on_delete
+        self.layout = QHBoxLayout()
 
         self.path_label = CustomFieldLabel('File')
 
         self.btn_choose_file = QPushButton("Choose File...")
-        if record[0] != "":
-            self.btn_choose_file.setText(getFilenameFromPath(record[0]))
+        if record.filepath != "":
+            self.btn_choose_file.setText(getFilenameFromPath(record.filepath))
         else:
             self.getFilepath()
         self.btn_choose_file.clicked.connect(self.getFilepath)
 
         self.time_entry = QSpinBox()
-        self.time_entry.setValue(record[1])
+        self.time_entry.setValue(record.time)
         self.time_entry.valueChanged.connect(self.onTimeChange)
 
         self.btn_delete = DeleteButton("Delete")
-        self.btn_delete.clicked.connect(lambda: on_delete())
+        self.btn_delete.clicked.connect(self.deletePairing)
 
-        self.addWidget(self.path_label)
-        self.addWidget(self.btn_choose_file)
-        self.addWidget(CustomFieldLabel("Time"))
-        self.addWidget(self.time_entry)
-        self.addWidget(self.btn_delete)
+        self.layout.addWidget(self.path_label)
+        self.layout.addWidget(self.btn_choose_file)
+        self.layout.addWidget(CustomFieldLabel("Time"))
+        self.layout.addWidget(self.time_entry)
+        self.layout.addWidget(self.btn_delete)
+        self.layout.setAlignment(Qt.AlignTop)
+        self.setLayout(self.layout)
+
+    def deletePairing(self):
+        self.on_delete(self.record)
+        self.setParent(None)
 
     def getFilepath(self):
-        self.record[0] = os.path.abspath(QFileDialog.getOpenFileName(
+        self.record.filepath = os.path.abspath(QFileDialog.getOpenFileName(
             QFileDialog(), "Open File", "~", "Mass Spec files(*.mzML)")[0])
-        self.btn_choose_file.setText(getFilenameFromPath(self.record[0]))
-        self.on_change()
+        self.btn_choose_file.setText(getFilenameFromPath(self.record.filepath))
 
     def onTimeChange(self, value):
-        self.record[1] = value
-        self.on_change()
+        self.record.time = value

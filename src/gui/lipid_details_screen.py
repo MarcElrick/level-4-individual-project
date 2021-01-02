@@ -1,12 +1,14 @@
 from molmass import Formula, FormulaError
 from gui.custom_components import (
     CustomTitle, CustomFieldLabel, ActionButton, DeleteButton)
-from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtCore import Qt
 from helper import mass2ion
 from gui.nav_buttons import NavigationButtons
 from PyQt5.QtWidgets import (QWidget, QFormLayout, QVBoxLayout, QHBoxLayout,
                              QComboBox, QLineEdit, QSpinBox, QDoubleSpinBox,
                              QRadioButton, QScrollArea, QSizePolicy)
+
+from gui.collapsible_section import Section
 
 
 class LipidDetailsScreen(QWidget):
@@ -78,58 +80,63 @@ class LipidDetailsScreen(QWidget):
 class LipidListItem(QWidget):
     def __init__(self, page_state, lipid, on_valid):
         super(QWidget, self).__init__()
+
         self.on_valid = on_valid
-        self.lipid_layout = QFormLayout()
         self.lipid = lipid
         self.page_state = page_state
 
-        self.lipid_name = QLineEdit()
-        self.lipid_name.setText(self.lipid.name)
-        self.lipid_name.textChanged.connect(lambda x: self.lipid.setName(x))
+        self.section = Section("", 100, self)
 
-        self.lipid_formula = QLineEdit()
+        self.lipid_layout = QFormLayout()
+
+        self.lipid_name = QLineEdit(parent=self.section)
+        self.lipid_name.setText(self.lipid.name)
+        self.lipid_name.textChanged.connect(self.update_lipid_name)
+
+        self.lipid_formula = QLineEdit(parent=self.section)
         self.lipid_formula.setText(self.lipid.lipid_formula)
         self.lipid_formula.textChanged.connect(self.validate_lipid_formula)
 
-        self.adduct_type = QComboBox()
+        self.adduct_type = QComboBox(parent=self.section)
         self.adduct_type.addItems(
             self.page_state.getAdductLabels(self.lipid.adduct_list))
         self.adduct_type.setCurrentIndex(self.lipid.adduct_index)
         self.adduct_type.currentIndexChanged.connect(
             self.updateAdduct)
 
-        self.isotope_depth = QSpinBox()
+        self.isotope_depth = QSpinBox(parent=self.section)
         self.isotope_depth.setRange(0, 9)
         self.isotope_depth.setValue(self.lipid.isotope_depth)
         self.isotope_depth.valueChanged.connect(self.lipid.setIsotopeDepth)
 
-        self.retention_time = QDoubleSpinBox(decimals=0)
+        self.retention_time = QDoubleSpinBox(decimals=0, parent=self.section)
         self.retention_time.setRange(0, 1000)
         self.retention_time.setValue(self.lipid.retention_time)
         self.retention_time.valueChanged.connect(self.lipid.setRetentionTime)
 
-        self.retention_time_tolerance = QDoubleSpinBox(decimals=0)
+        self.retention_time_tolerance = QDoubleSpinBox(
+            decimals=0, parent=self.section)
         self.retention_time_tolerance.setRange(0, 100)
         self.retention_time_tolerance.setValue(
             self.lipid.retention_time_tolerance)
         self.retention_time_tolerance.valueChanged.connect(
             self.lipid.setRetentionTimeTolerance)
 
-        self.mass = QDoubleSpinBox(decimals=20)
+        self.mass = QDoubleSpinBox(decimals=20, parent=self.section)
         self.mass.setRange(0, 10000)
         self.mass.setValue(
             self.lipid.mass)
         self.mass.valueChanged.connect(
             self.lipid.setMass)
 
-        self.mass_tolerance = QDoubleSpinBox(decimals=6)
+        self.mass_tolerance = QDoubleSpinBox(decimals=6, parent=self.section)
         self.mass_tolerance.setRange(0, 100)
         self.mass_tolerance.setValue(
             self.lipid.mass_tolerance)
         self.mass_tolerance.valueChanged.connect(
             self.lipid.setMassTolerance)
 
-        self.mass_tolerance_units = QComboBox()
+        self.mass_tolerance_units = QComboBox(parent=self.section)
         self.mass_tolerance_units.addItems(
             self.lipid.mass_tolerance_units_list)
         self.mass_tolerance_units.setCurrentIndex(
@@ -180,12 +187,20 @@ class LipidListItem(QWidget):
         self.lipid_layout.addRow(rt_container)
         self.lipid_layout.addRow(mass_container)
         self.lipid_layout.addWidget(self.remove_btn)
-        self.setLayout(self.lipid_layout)
+        self.section.setContentLayout(self.lipid_layout)
+
+        mainLayout = QVBoxLayout(self)
+        mainLayout.addWidget(self.section)
+        self.section.toggle(True)
 
     def charge_mode_toggled(self, value):
         self.adduct_type.clear()
         self.adduct_type.addItems(
             self.page_state.getAdductLabels(self.lipid.adduct_list))
+
+    def update_lipid_name(self, text):
+        self.section.setTitle(text)
+        self.lipid.setName(text)
 
     def remove_lipid(self):
         self.setParent(None)
