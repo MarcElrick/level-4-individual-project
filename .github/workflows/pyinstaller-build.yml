@@ -33,6 +33,7 @@ jobs:
           pip install pyinstaller
           pip install pymzml
           pip install -r src/requirements.txt
+          ls -r ../..
       - name: Build Executable
         run: |
           cd src/
