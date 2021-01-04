@@ -4,12 +4,23 @@ block_cipher = None
 
 import site
 import os
+import pymzml
+
+
+def dir_files(path, rel):
+    ret = []
+    for p, d, f in os.walk(path):
+        relpath = p.replace(path, '')[1:]
+        for fname in f:
+            ret.append((os.path.join(rel, relpath, fname),
+                        os.path.join(p, fname), 'DATA'))
+    return ret
 
 a = Analysis(['main.py'],
              pathex=[os.getcwd()],
              binaries=[],
              datas=[('assets/styles.css', 'assets/'), ('assets/positive.csv', 'assets/'), ('assets/negative.csv', 'assets/')],
-             hiddenimports=[],
+             hiddenimports=['pymzml','pymzml.run', 'pymzml.plot', 'pymzml.obo'],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],
@@ -20,9 +31,11 @@ a = Analysis(['main.py'],
 
 
 pymzml_dir = os.sep.join([site.getsitepackages()[0], 'lib' , 'site-packages' ,'pymzml', 'version.txt'])
-print('DIR', pymzml_dir)
+
 
 a.datas += [('pymzml' + os.sep +'version.txt', pymzml_dir, 'DATA')]
+a.datas.extend(dir_files(os.path.join(os.path.dirname(pymzml.__file__), 'obo'), 'obo'))
+
 
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
