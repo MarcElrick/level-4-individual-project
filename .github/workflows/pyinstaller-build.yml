@@ -33,7 +33,7 @@ jobs:
           pip install pyinstaller
           pip install pymzml
           pip install -r src/requirements.txt
-          ls -r ../..
+          ls -r c:\hostedtoolcache\windows\python\3.7.9\x64\lib\site-packages\
       - name: Build Executable
         run: |
           cd src/
