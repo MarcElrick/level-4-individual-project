@@ -39,6 +39,7 @@ jobs:
         run: |
           cd src/
           pyinstaller -D main.spec
+      - uses: actions/upload-artifact@v2
         with:
           name: main-executable
           path: src/dist/main
