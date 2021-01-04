@@ -34,12 +34,11 @@ jobs:
           pip install pyinstaller
           pip install pymzml
           pip install -r src/requirements.txt
-          
+
       - name: Build Executable
         run: |
           cd src/
-          pyinstaller -D --add-data "assets/styles.css;assets/" --add-data "assets/positive.csv;assets/" --add-data "assets/negative.csv;assets/" --version-file=c:\hostedtoolcache\windows\python\3.7.9\x64\lib\site-packages\pymzml\version.txt main.py
-      - uses: actions/upload-artifact@v2
+          pyinstaller -D main.spec
         with:
           name: main-executable
           path: src/dist/main
