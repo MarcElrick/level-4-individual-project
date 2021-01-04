@@ -254,3 +254,7 @@
 ## 2 Jan 2020
 
 - _2 hours_ - It turns out the previous tests were passing locally becuase I was running on another branch (duh). Spent time updating unit tests, as well as adding a few missing ones.
+
+## 3 Jan 2020
+
+- _1 hours_ - Triaged all dependencies to decide on a license and added license.
