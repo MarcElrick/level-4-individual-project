@@ -19,7 +19,7 @@ a = Analysis(['main.py'],
              noarchive=False)
 
 
-pymzml_dir = os.sep.join([site.getusersitepackages(), 'pymzml', 'version.txt'])
+pymzml_dir = os.sep.join([site.getsitepackages()[0], 'lib' , 'site-packages' ,'pymzml', 'version.txt'])
 print('DIR', pymzml_dir)
 
 a.datas += [('pymzml' + os.sep +'version.txt', pymzml_dir, 'DATA')]
