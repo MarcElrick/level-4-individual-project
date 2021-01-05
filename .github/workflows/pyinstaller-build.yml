@@ -39,7 +39,20 @@ jobs:
         run: |
           cd src/
           pyinstaller -D main.spec
+          
       - uses: actions/upload-artifact@v2
         with:
-          name: main-executable
+          name: lipid_isotope_inference_software
           path: src/dist/main
+      
+      - name: Zip Release
+        run: zip -r lipid_isotope_inference.zip src/dist/main
+          
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          title: Lipid Isotope Inference Software
+          files: |
+            lipid_isotope_inference.zip
+          
