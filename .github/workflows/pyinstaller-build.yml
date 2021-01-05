@@ -46,7 +46,7 @@ jobs:
           path: src/dist/main
       
       - name: Zip Release
-        run: zip -r lipid_isotope_inference.zip src/dist/main
+        run: Compress-Archive src/dist/main lipid_isotope_inference.zip
           
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
