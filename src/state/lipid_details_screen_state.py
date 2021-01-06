@@ -1,7 +1,7 @@
 from molmass import Formula, FormulaError
 from assets.pathFinder import get_resource_path
 from helper import mass2ion, parse_adduct_file
-
+import jsonpickle
 import os
 
 
@@ -43,6 +43,24 @@ class LipidDetailsScreenState:
             if not lipid.valid:
                 return False
         return True
+
+    def save_lipids(self, filename):
+        if not os.path.exists('saved_runs'):
+            os.makedirs('saved_runs')
+
+        with open("saved_runs/{}.json".format(filename), 'w') as f:
+            f.write(jsonpickle.encode(self.lipids))
+
+    def restore_lipids(self, filename):
+        if not os.path.exists('saved_runs'):
+            os.makedirs('saved_runs')
+            print(filename)
+
+        try:
+            with open("saved_runs/{}".format(filename), 'r') as f:
+                self.lipids = jsonpickle.decode(f.read())
+        except:
+            raise Exception
 
 
 class IndividualLipid:

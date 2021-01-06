@@ -5,6 +5,8 @@ from gui.file_picker_screen import FilePickerScreen
 from gui.input_summary_screen import InputSummaryScreen
 from gui.progress_screen import ProgressScreen
 from gui.add_adduct_window import AddAdductWindow
+from gui.export_lipids_window import ExportLipidsWindow
+from gui.import_lipids_window import ImportLipidsWindow
 
 
 class MainApp(QMainWindow):
@@ -19,13 +21,27 @@ class MainApp(QMainWindow):
         fileMenu = mainMenu.addMenu('&File')
 
         add_adduct_action = QAction('&Add New Adduct', self)
-        self.w = AddAdductWindow(self.state.screen1)
-        add_adduct_action.triggered.connect(lambda: self.w.show())
+        adduct_window = AddAdductWindow(self.state.screen1)
+        add_adduct_action.triggered.connect(lambda: adduct_window.show())
+
+        export_lipid_action = QAction("&Export Lipids", self)
+        export_lipid_window = ExportLipidsWindow(
+            self.state.screen1.save_lipids)
+        export_lipid_action.triggered.connect(
+            lambda: export_lipid_window.show())
+
+        import_lipid_action = QAction("&Import Lipids", self)
+        import_lipid_window = ImportLipidsWindow(
+            self.import_lipids)
+        import_lipid_action.triggered.connect(
+            lambda: import_lipid_window.show())
 
         quit_action = QAction('&Quit', self)
         quit_action.triggered.connect(lambda: sys.exit())
 
         fileMenu.addAction(add_adduct_action)
+        fileMenu.addAction(export_lipid_action)
+        fileMenu.addAction(import_lipid_action)
         fileMenu.addAction(quit_action)
 
     def init_ui(self):
@@ -55,4 +71,8 @@ class MainApp(QMainWindow):
 
     def reset_state(self):
         self.state.wipe_state()
+        self.init_lipid_details_screen()
+
+    def import_lipids(self, filename):
+        self.state.screen1.restore_lipids(filename)
         self.init_lipid_details_screen()

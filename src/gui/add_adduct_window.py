@@ -9,6 +9,8 @@ import os
 
 class AddAdductWindow(QWidget):
     def __init__(self, state):
+        super(AddAdductWindow,self).__init__()
+
         self.state = state
         self.adductFormula = ""
         self.adduct_mult = 0.0
@@ -16,7 +18,6 @@ class AddAdductWindow(QWidget):
         self.adduct_label = ""
         self.charge_mode = ""
 
-        super().__init__()
         self.setWindowModality(Qt.ApplicationModal)
 
         self.setWindowTitle('New Adduct')

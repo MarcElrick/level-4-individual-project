@@ -258,3 +258,15 @@
 ## 3 Jan 2020
 
 - _1 hours_ - Triaged all dependencies to decide on a license and added license.
+
+## 4 Jan 2020
+
+- _5 hours_ - Fixed PyInstaller build. This was a massive issue and was very difficult to fix.
+
+## 5 Jan 2020
+
+- _2 hours_ - Added a release item to windows build. This should allow users to download and use for unit testing.
+
+## 6 Jan 2020
+
+- _5 hours_ - Implemented saving of lipid state.
