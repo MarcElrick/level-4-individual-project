@@ -1,18 +1,11 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: Package Windows application with PyInstaller
+name: Package Windows application with PyInstaller and release.
 on:
-  workflow_dispatch:
   push:
     branches:
-      - master
-    paths:
-      - "src/**"
-
-  pull_request:
-    branches:
-      - master
+      - release
     paths:
       - "src/**"
 
