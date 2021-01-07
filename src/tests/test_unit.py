@@ -37,6 +37,20 @@ class LipidDetailsScreenStateTests(unittest.TestCase):
         self.assertDictEqual({'': {'formula': 'C4356H4', 'adduct': ['[M+H]+', 1.007276452, 1.0, ''], 'isotopeDepth': '5', 'retentionTime': '100.0s',
                                    'retentionTimeTolerance': '20s', 'mass': '100.0', 'massTolerance': '20', 'massToleranceUnits': 'ppm'}}, self.state.get_data_string_summary()[0])
 
+    def test_save_lipids_creates_file(self):
+        self.state.save_lipids("test")
+        assert(os.path.exists('saved_runs/test.json'))
+        os.remove('saved_runs/test.json')
+
+    def test_restore_lipids_restores_state(self):
+        self.state.save_lipids("test")
+        self.state.lipids = []
+        assert(len(self.state.lipids) == 0)
+
+        self.state.restore_lipids("test.json")
+        assert(len(self.state.lipids) == 1)
+        os.remove('saved_runs/test.json')
+
 
 class FilePickerScreenStateTests(unittest.TestCase):
     @classmethod
