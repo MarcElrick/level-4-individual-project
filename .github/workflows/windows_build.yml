@@ -44,16 +44,4 @@ jobs:
         with:
           name: lipid_isotope_inference_software
           path: src/dist/main
-      
-      - name: Zip Release
-        run: Compress-Archive src/dist/main lipid_isotope_inference.zip
-          
-      - uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          title: Lipid Isotope Inference Software
-          automatic_release_tag: latest 
-          files: |
-            lipid_isotope_inference.zip
           

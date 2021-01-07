@@ -1,0 +1,52 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Package Windows application with PyInstaller and release.
+on:
+  push:
+    branches:
+      - release
+    paths:
+      - "src/**"
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      - name: Install dependencies
+        run: |
+          ls ~
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          pip install pyinstaller
+          pip install pymzml
+          pip install -r src/requirements.txt
+
+      - name: Build Executable
+        run: |
+          cd src/
+          pyinstaller -D main.spec
+          
+      - uses: actions/upload-artifact@v2
+        with:
+          name: lipid_isotope_inference_software
+          path: src/dist/main
+      
+      - name: Zip Release
+        run: Compress-Archive src/dist/main lipid_isotope_inference.zip
+          
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          title: Lipid Isotope Inference Software
+          automatic_release_tag: latest 
+          files: |
+            lipid_isotope_inference.zip
+          
