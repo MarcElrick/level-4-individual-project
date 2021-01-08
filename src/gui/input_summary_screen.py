@@ -57,7 +57,6 @@ class InputSummaryScreen(QWidget):
 
         table = QTableWidget(len(lipid_info), 9)
         table.setEnabled(False)
-        print(list(lipid_info[0].values()))
         data = {'Name': [list(x.keys())[0] for x in lipid_info],
                 'Formula': [list(x.values())[0]['formula'] for x in lipid_info],
                 'Adduct': [list(x.values())[0]['adduct'][0] for x in lipid_info],
@@ -74,11 +73,9 @@ class InputSummaryScreen(QWidget):
         horHeaders = []
         for n, key in enumerate(data.keys()):
             horHeaders.append(key)
-            print(key)
             for m, item in enumerate(data[key]):
                 newitem = QTableWidgetItem(item)
                 table.setItem(m, n, newitem)
-        print(horHeaders)
         table.horizontalHeader().setStretchLastSection(True)
         table.horizontalHeader(
         ).setSectionResizeMode(QHeaderView.Stretch)

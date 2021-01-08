@@ -270,3 +270,13 @@
 ## 6 Jan 2020
 
 - _5 hours_ - Implemented saving of lipid state.
+
+## 7 Jan 2020
+
+- _1.5 hours_ - Created new issues, created new branching strategy and separated build and release actions.
+- _1.5 hours_ - Started implementing the selection of multiple files.
+
+## 8 Jan 2020
+
+- _2 hours_ - Finished implementing selection of multiple files.
+- _3 hour_ - Fixed the validation mess of lipid details screen and fixed the custom Adduct form.

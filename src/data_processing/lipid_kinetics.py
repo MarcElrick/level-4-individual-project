@@ -46,6 +46,7 @@ class LipidKinetics:
             if discard_index > -1:
                 data_matrix = data_matrix[:, :discard_index+1]
             times = [t for (f, t) in files]
+            print(data_matrix.sum(axis=1)[:, None])
             data_matrix /= data_matrix.sum(axis=1)[:, None]
             p = fit(times, data_matrix, fix_ends=False, make_plot=False)
             k, a0, ai = p

@@ -30,6 +30,7 @@ class ProgressScreenState():
             self.get_lipid_data(), self.get_file_data())
         create_xlsx_output(output_list, self.get_lipid_data(),
                            list(filter(lambda x: x[0], self.get_file_data())))
+        self.incrementProgressBar(100)
 
     def incrementProgress(self):
         self.progress_percentage += self.incrementSize

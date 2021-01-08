@@ -8,20 +8,22 @@ import os
 class LipidDetailsScreenState:
     def __init__(self):
         self.charge_mode = 'Positive'
-        self.lipids = [IndividualLipid(0, self.charge_mode)]
-        self.lipids[0].setAdductList(self.charge_mode)
+        self.setAdductList(self.charge_mode)
+
+        self.lipids = [IndividualLipid(0, self.adduct_list)]
+        self.setAdductList(self.charge_mode)
         self.keyCount = 1
 
     def setChargeMode(self, value):
         self.charge_mode = value
+        self.setAdductList(value)
 
         for lipid in self.lipids:
-            lipid.setAdductList(value)
             lipid.setAdductIndex(0)
 
     def add_lipid(self):
         self.lipids.append(IndividualLipid(
-            self.keyCount, self.charge_mode))
+            self.keyCount, self.adduct_list))
         self.keyCount += 1
 
     def remove_lipid(self, key):
@@ -32,17 +34,15 @@ class LipidDetailsScreenState:
     def getAdductLabels(self, adduct_list):
         return list(map(lambda x: x[0], adduct_list))
 
+    def setAdductList(self, filename):
+        self.adduct_list = parse_adduct_file(get_resource_path(
+            os.sep.join(['assets', filename.lower() + '.csv'])))
+
     def get_lipid_data(self):
         return list(map(lambda x: x.get_lipid_data(), self.lipids))
 
     def get_data_string_summary(self):
         return list(map(lambda x: x.get_data_string_summary(), self.lipids))
-
-    def check_lipids_valid(self):
-        for lipid in self.lipids:
-            if not lipid.valid:
-                return False
-        return True
 
     def save_lipids(self, filename):
         if not os.path.exists('saved_runs'):
@@ -54,7 +54,6 @@ class LipidDetailsScreenState:
     def restore_lipids(self, filename):
         if not os.path.exists('saved_runs'):
             os.makedirs('saved_runs')
-            print(filename)
 
         try:
             with open("saved_runs/{}".format(filename), 'r') as f:
@@ -62,14 +61,21 @@ class LipidDetailsScreenState:
         except:
             raise Exception
 
+    def validate_lipids(self):
+        for lipid in self.lipids:
+            if not lipid.isValid():
+                return False
+        return True
+
 
 class IndividualLipid:
-    def __init__(self, key, charge_mode):
+    def __init__(self, key, adduct_list):
+
+        self.adduct_list = adduct_list
         self.valid = False
 
         self.lipid_formula = ""
         self.name = ""
-        self.setAdductList(charge_mode)
         self.setAdductIndex(0)
 
         self.key = key
@@ -149,6 +155,13 @@ class IndividualLipid:
     def setMassToleranceUnits(self, value):
         self.mass_tolerance_units_index = value
 
-    def setAdductList(self, filename):
-        self.adduct_list = parse_adduct_file(get_resource_path(
-            os.sep.join(['assets', filename.lower() + '.csv'])))
+    def isValid(self):
+        if self.isotope_depth <= 0:
+            return False
+        if self.lipid_formula == "":
+            return False
+        if self.retention_time <= 0:
+            return False
+        if self.mass_tolerance <= 0:
+            return False
+        return True
