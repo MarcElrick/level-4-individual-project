@@ -30,6 +30,7 @@ class LipidDetailsScreen(QWidget):
         self.nav_buttons = NavigationButtons(on_next=on_next)
 
         self.build_ui(on_next=on_next, on_back=on_back)
+        self.validate_and_enable_progression()
 
     def build_ui(self, on_next, on_back):
         self.screen_layout = QVBoxLayout()
@@ -49,8 +50,10 @@ class LipidDetailsScreen(QWidget):
         self.content_layout.setSizeConstraint(5)
 
         for lipid in self.page_state.lipids:
-            self.content_layout.addWidget(
-                LipidListItem(self.page_state, lipid,  self.nav_buttons.btn_next.setEnabled))
+            newLipid = LipidListItem(
+                self.page_state, lipid,  self.validate_and_enable_progression)
+            self.content_layout.addWidget(newLipid)
+            newLipid.validate_lipid_formula(newLipid.lipid.lipid_formula)
 
         scroll_area = QScrollArea()
         scroll_area.setWidget(wrapper)
@@ -74,18 +77,22 @@ class LipidDetailsScreen(QWidget):
     def add_lipid(self):
         self.page_state.add_lipid()
         self.content_layout.addWidget(LipidListItem(
-            self.page_state, self.page_state.lipids[-1], self.nav_buttons.btn_next.setEnabled))
+            self.page_state, self.page_state.lipids[-1], self.validate_and_enable_progression))
+
+    def validate_and_enable_progression(self):
+        self.nav_buttons.btn_next.setEnabled(
+            self.page_state.validate_lipids())
 
 
 class LipidListItem(QWidget):
-    def __init__(self, page_state, lipid, on_valid):
+    def __init__(self, page_state, lipid, on_change):
         super(QWidget, self).__init__()
 
-        self.on_valid = on_valid
+        self.on_change = on_change
         self.lipid = lipid
         self.page_state = page_state
 
-        self.section = Section("", 100, self)
+        self.section = Section(self.lipid.name, 100, self)
 
         self.lipid_layout = QFormLayout()
 
@@ -107,12 +114,12 @@ class LipidListItem(QWidget):
         self.isotope_depth = QSpinBox(parent=self.section)
         self.isotope_depth.setRange(0, 9)
         self.isotope_depth.setValue(self.lipid.isotope_depth)
-        self.isotope_depth.valueChanged.connect(self.lipid.setIsotopeDepth)
+        self.isotope_depth.valueChanged.connect(self.update_isotope_depth)
 
         self.retention_time = QDoubleSpinBox(decimals=0, parent=self.section)
         self.retention_time.setRange(0, 1000)
         self.retention_time.setValue(self.lipid.retention_time)
-        self.retention_time.valueChanged.connect(self.lipid.setRetentionTime)
+        self.retention_time.valueChanged.connect(self.update_retention_time)
 
         self.retention_time_tolerance = QDoubleSpinBox(
             decimals=0, parent=self.section)
@@ -120,7 +127,7 @@ class LipidListItem(QWidget):
         self.retention_time_tolerance.setValue(
             self.lipid.retention_time_tolerance)
         self.retention_time_tolerance.valueChanged.connect(
-            self.lipid.setRetentionTimeTolerance)
+            self.update_retention_time_tolerance)
 
         self.mass = QDoubleSpinBox(decimals=20, parent=self.section)
         self.mass.setRange(0, 10000)
@@ -134,7 +141,7 @@ class LipidListItem(QWidget):
         self.mass_tolerance.setValue(
             self.lipid.mass_tolerance)
         self.mass_tolerance.valueChanged.connect(
-            self.lipid.setMassTolerance)
+            self.update_mass_tolerance)
 
         self.mass_tolerance_units = QComboBox(parent=self.section)
         self.mass_tolerance_units.addItems(
@@ -147,6 +154,7 @@ class LipidListItem(QWidget):
         self.remove_btn = DeleteButton('Remove Lipid')
         self.remove_btn.clicked.connect(self.remove_lipid)
         self.build_ui()
+        self.on_change()
 
     def build_ui(self):
 
@@ -196,15 +204,31 @@ class LipidListItem(QWidget):
     def charge_mode_toggled(self, value):
         self.adduct_type.clear()
         self.adduct_type.addItems(
-            self.page_state.getAdductLabels(self.lipid.adduct_list))
+            self.page_state.getAdductLabels(self.page_state.adduct_list))
 
     def update_lipid_name(self, text):
         self.section.setTitle(text)
         self.lipid.setName(text)
 
+    def update_retention_time(self, value):
+        self.lipid.setRetentionTime(value)
+        self.on_change()
+
+    def update_retention_time_tolerance(self, value):
+        self.lipid.setRetentionTimeTolerance(value)
+
+    def update_mass_tolerance(self, value):
+        self.lipid.setMassTolerance(value)
+        self.on_change()
+
+    def update_isotope_depth(self, value):
+        self.lipid.setIsotopeDepth(value)
+        self.on_change()
+
     def remove_lipid(self):
         self.setParent(None)
         self.page_state.remove_lipid(self.lipid.key)
+        self.on_change()
 
     def validate_lipid_formula(self, text):
         f = Formula(text)
@@ -217,13 +241,11 @@ class LipidListItem(QWidget):
                          self.lipid.adduct_list[self.lipid.adduct_index][2],
                          self.lipid.adduct_list[self.lipid.adduct_index][1]))
             self.mass.update()
-            self.lipid.valid = True
         except FormulaError:
             self.lipid_formula.setStyleSheet("border: 1px solid red")
             self.lipid_formula_label.setText("")
-            self.lipid.valid = False
         finally:
-            self.on_valid(self.page_state.check_lipids_valid())
+            self.on_change()
 
     def updateAdduct(self, value):
         self.lipid.setAdductIndex(value)

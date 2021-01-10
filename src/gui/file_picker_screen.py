@@ -24,15 +24,15 @@ class FilePickerScreen(QWidget):
         # Create all pairing items from existing pairs.
         for pairing in self.state.file_time_pairs:
             self.innerLayout.addWidget(
-                PairListItem(pairing, self.remove_pairing))
+                PairListItem(pairing, self.remove_pairing, self.validate))
 
         self.nav_buttons = NavigationButtons(
             on_next=self.onNextClick, on_back=self.on_back)
         self.nav_buttons.btn_next.setDisabled(
             len(self.state.file_time_pairs) == 0)
 
-        self.btn_add = ActionButton("Add File")
-        self.btn_add.clicked.connect(self.add_new_pairing)
+        self.btn_add = ActionButton("Add Files")
+        self.btn_add.clicked.connect(self.add_files)
 
         self.outerLayout.addWidget(self.title)
         self.outerLayout.addLayout(self.innerLayout)
@@ -40,31 +40,50 @@ class FilePickerScreen(QWidget):
         self.outerLayout.addWidget(self.nav_buttons)
 
         self.setLayout(self.outerLayout)
+        self.validate()
 
-    def add_new_pairing(self):
-        self.nav_buttons.btn_next.setDisabled(False)
-        self.state.add_record()
-        self.innerLayout.addWidget(
-            PairListItem(self.state.file_time_pairs[-1], self.remove_pairing))
+    def add_files(self):
+        filter = "Mass Spec Files (*.mzml)"
+        dialog = QFileDialog()
+        dialog.setFileMode(QFileDialog.ExistingFiles)
+        files = dialog.getOpenFileNames(
+            self, "Open files", "~", filter)[0]
+
+        for f in files:
+            self.state.add_record(filepath=f)
+            self.innerLayout.addWidget(
+                PairListItem(self.state.file_time_pairs[-1], self.remove_pairing, self.validate))
+        self.validate()
 
     def remove_pairing(self, record):
         self.state.remove_record(record.key)
-       # self.redraw()
         if(len(self.state.file_time_pairs) == 0):
             self.nav_buttons.btn_next.setDisabled(True)
 
+        self.validate()
+
     def onNextClick(self):
-        print(self.state.file_time_pairs)
         self.state.file_time_pairs = sortFileTimeList(
             self.state.file_time_pairs)
         self.on_next()
 
+    def validate(self):
+        filepaths = list(map(lambda x: x.filepath, self.state.file_time_pairs))
+        times = list(map(lambda x: x.time, self.state.file_time_pairs))
+
+        self.nav_buttons.btn_next.setEnabled(
+            not any(filepaths.count(x) > 1 for x in filepaths) and not any(
+                times.count(x) > 1 for x in times) and len(filepaths) >= 5
+
+        )
+
 
 class PairListItem(QWidget):
-    def __init__(self, record, on_delete):
+    def __init__(self, record, on_delete, on_validate):
         super(QWidget, self).__init__()
         self.record = record
         self.on_delete = on_delete
+        self.on_validate = on_validate
         self.layout = QHBoxLayout()
 
         self.path_label = CustomFieldLabel('File')
@@ -72,12 +91,11 @@ class PairListItem(QWidget):
         self.btn_choose_file = QPushButton("Choose File...")
         if record.filepath != "":
             self.btn_choose_file.setText(getFilenameFromPath(record.filepath))
-        else:
-            self.getFilepath()
         self.btn_choose_file.clicked.connect(self.getFilepath)
 
         self.time_entry = QSpinBox()
         self.time_entry.setValue(record.time)
+        self.time_entry.setRange(0, 1000)
         self.time_entry.valueChanged.connect(self.onTimeChange)
 
         self.btn_delete = DeleteButton("Delete")
@@ -99,6 +117,8 @@ class PairListItem(QWidget):
         self.record.filepath = os.path.abspath(QFileDialog.getOpenFileName(
             QFileDialog(), "Open File", "~", "Mass Spec files(*.mzML)")[0])
         self.btn_choose_file.setText(getFilenameFromPath(self.record.filepath))
+        self.on_validate()
 
     def onTimeChange(self, value):
         self.record.time = value
+        self.on_validate()

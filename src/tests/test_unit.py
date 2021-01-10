@@ -18,7 +18,8 @@ class LipidDetailsScreenStateTests(unittest.TestCase):
     @classmethod
     def setUp(cls):
         cls.state = LipidDetailsScreenState()
-        cls.state.lipids = [IndividualLipid(0, 'positive')]
+        cls.state.lipids = [IndividualLipid(
+            0, [['[M+H]+', 1.007276452, 1.0, '']])]
         cls.myLipid = cls.state.lipids[0]
         cls.myLipid.setLipidFormula("C4356H4")
         cls.myLipid.setAdductIndex(0)
@@ -83,7 +84,8 @@ class InputSummaryScreenStateTests(unittest.TestCase):
             get_lipid_info=cls.lipid_state.get_data_string_summary, get_file_info=cls.file_picker_state.get_data_string_summary)
 
     def test_lipid_info_is_correct(self):
-        self.lipid_state.lipids = [IndividualLipid(0, 'positive')]
+        self.lipid_state.lipids = [IndividualLipid(
+            0, [['[M+H]+', 1.007276452, 1.0, '']])]
         self.myLipid = self.lipid_state.lipids[0]
         self.myLipid.setLipidFormula("C4356H4")
         self.myLipid.setAdductIndex(0)
