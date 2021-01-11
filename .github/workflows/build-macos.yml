@@ -31,6 +31,7 @@ jobs:
         run: |
           cd src/
           pyinstaller -D main.spec
+          ls -r
 
       - uses: actions/upload-artifact@v2
         with:
