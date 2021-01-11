@@ -28,14 +28,19 @@ jobs:
           python-version: 3.7
       - name: Install dependencies
         run: |
+          ls ~
           python -m pip install --upgrade pip
+          pip install flake8 pytest
           pip install pyinstaller
+          pip install pymzml
           pip install -r src/requirements.txt
+
       - name: Build Executable
         run: |
           cd src/
-          pyinstaller -D --add-data "assets/styles.css:assets/" --add-data "assets/positive.csv:assets/" --add-data "assets/negative.csv:assets/" main.py
+          pyinstaller -D main.spec
+
       - uses: actions/upload-artifact@v2
         with:
-          name: main-executable
+          name: lipid_isotope_inference_software
           path: src/dist/main

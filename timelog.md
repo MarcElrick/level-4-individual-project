@@ -280,3 +280,11 @@
 
 - _2 hours_ - Finished implementing selection of multiple files.
 - _3 hour_ - Fixed the validation mess of lipid details screen and fixed the custom Adduct form.
+
+## 10 Jan 2020
+
+- _0.5 hours_ - Spent some time cleaning up repo and merge PRs
+
+## 11 Jan 2020
+
+- _1 hour_ -
