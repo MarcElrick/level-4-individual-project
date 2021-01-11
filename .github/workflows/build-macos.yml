@@ -30,7 +30,7 @@ jobs:
       - name: Build Executable
         run: |
           cd src/
-          pyinstaller -D --windowed main.spec
+          pyinstaller -D --windowed --name main.app main.spec
           cd dist
           ls -la
 
