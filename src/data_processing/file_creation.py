@@ -3,6 +3,7 @@ import numpy as np
 from scipy.optimize import minimize
 import xlsxwriter
 import datetime
+import os
 
 
 def fit(times, data_matrix, fix_ends=True, make_plot=True,
@@ -101,7 +102,7 @@ def write_xlsx_block(worksheet, list_vals, row_num, start_col):
 def create_xlsx_output(output_list, lipids, filenames, output_filename=None):
     if not output_filename:
         now = str(datetime.datetime.now()).split(' ')
-        output_filename = now[
+        output_filename = 'output' + os.sep + now[
             0].replace('-', '_') + '_'+now[1].replace(':', '_') + '.xlsx'
 
     workbook = xlsxwriter.Workbook(
@@ -158,6 +159,9 @@ def create_xlsx_output(output_list, lipids, filenames, output_filename=None):
         worksheet.insert_image('N4', 'temp_{}.png'.format(label))
     workbook.close()
     print('\nComplete!')
+    print(os.sep.join(
+        ['Output File at: ', os.getcwd(), output_filename]))
+    os.system(output_filename)
 
 
 def min_func(x, *args):
