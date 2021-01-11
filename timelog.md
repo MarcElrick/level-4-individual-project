@@ -287,4 +287,4 @@
 
 ## 11 Jan 2020
 
-- _1 hour_ -
+- _1 hour_ - Fixing mac build and linuc builds - had issues with the way pyinstaller works with mac. This may need revisited.
