@@ -31,8 +31,8 @@ jobs:
         run: |
           cd src/
           pyinstaller -D --windowed --name main.app main.spec
-          cd dist
-          ls -la
+          cd dist/main
+          ls -a
 
       - uses: actions/upload-artifact@v2
         with:
