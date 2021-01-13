@@ -29,9 +29,11 @@ jobs:
       - name: Build Executable
         run: |
           cd src/
-          pyinstaller -D --windowed main.spec
+          pyinstaller --windowed -D  main.spec
           ls -a
           cd dist/
+          ls -a
+          cd main/
           ls -a
 
       - uses: actions/upload-artifact@v2
