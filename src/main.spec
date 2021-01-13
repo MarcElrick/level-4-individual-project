@@ -16,6 +16,11 @@ def dir_files(path, rel):
                         os.path.join(p, fname), 'DATA'))
     return ret
 
+app = BUNDLE(exe,
+         name='LipidIsotopeInference.app',
+         icon=None,
+         bundle_identifier=None)
+
 a = Analysis(['main.py'],
              pathex=[os.getcwd()],
              binaries=[],
