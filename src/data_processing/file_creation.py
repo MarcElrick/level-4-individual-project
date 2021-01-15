@@ -159,9 +159,9 @@ def create_xlsx_output(output_list, lipids, filenames, output_filename=None):
         worksheet.insert_image('N4', 'temp_{}.png'.format(label))
     workbook.close()
     print('\nComplete!')
-    print(os.sep.join(
-        ['Output File at: ', os.getcwd(), output_filename]))
-    os.system(output_filename)
+    print('Output File at: ' +
+          os.getcwd() + os.sep + output_filename)
+    os.system(os.getcwd() + os.sep + output_filename)
 
 
 def min_func(x, *args):

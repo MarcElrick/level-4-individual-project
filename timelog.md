@@ -289,3 +289,11 @@
 
 - _1 hour_ - Fixing mac build and linuc builds - had issues with the way pyinstaller works with mac. This may need revisited.
 - _1 hours_ - Changed the default location of output files, output file now opened by default upon completion of analysis.
+
+## 13 Jan 2020
+
+- _3 hours_ - Spent time trying to fix mac build so that evaluation participants can use a mac.
+
+## 14 Jan 2020
+
+- _2 hours_ - Created powerpoint with evaluation plan. This will be used to give participants an idea of what to expect.
