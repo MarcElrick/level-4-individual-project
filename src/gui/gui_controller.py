@@ -21,23 +21,20 @@ class MainApp(QMainWindow):
         fileMenu = mainMenu.addMenu('&File')
 
         add_adduct_action = QAction('&Add New Adduct', self)
-        # adduct_window = AddAdductWindow(self.state.screen1)
         add_adduct_action.triggered.connect(
             lambda: AddAdductWindow(self.state.screen1).show())
 
         export_lipid_action = QAction("&Export Lipids", self)
-        # export_lipid_window = ExportLipidsWindow(
-        #     self.state.screen1.save_lipids)
+
         export_lipid_action.triggered.connect(
             lambda: ExportLipidsWindow(
                 self.state.screen1.save_lipids).show())
 
         import_lipid_action = QAction("&Import Lipids", self)
-        # import_lipid_window = ImportLipidsWindow(
-        #     self.import_lipids)
+
         import_lipid_action.triggered.connect(
             lambda: ImportLipidsWindow(
-                sself.import_lipids).show())
+                self.import_lipids).show())
 
         quit_action = QAction('&Quit', self)
         quit_action.triggered.connect(lambda: sys.exit())
