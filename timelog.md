@@ -297,3 +297,7 @@
 ## 14 Jan 2020
 
 - _2 hours_ - Created powerpoint with evaluation plan. This will be used to give participants an idea of what to expect.
+
+## 18 Jan 2020
+
+- _2 hours_ - Attempted to fix mac build. This failed. I believe it may have something to do with Big Sur.
