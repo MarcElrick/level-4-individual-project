@@ -300,4 +300,6 @@
 
 ## 18 Jan 2020
 
-- _2 hours_ - Attempted to fix mac build. This failed. I believe it may have something to do with Big Sur.
+- _3 hours_ - Attempted to fix mac build. This failed. I believe it may have something to do with Big Sur.
+
+- _1 hour_ - Fixed bug where charge wasn't being preserved upon export/import. Also fixed bug where dialog windows were being preserved for export/import/new adduct.

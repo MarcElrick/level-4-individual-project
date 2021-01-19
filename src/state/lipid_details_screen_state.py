@@ -49,7 +49,8 @@ class LipidDetailsScreenState:
             os.makedirs('saved_runs')
 
         with open("saved_runs/{}.json".format(filename), 'w') as f:
-            f.write(jsonpickle.encode(self.lipids))
+            f.write(jsonpickle.encode(
+                {'lipids': self.lipids, 'charge': self.charge_mode}))
 
     def restore_lipids(self, filename):
         if not os.path.exists('saved_runs'):
@@ -57,7 +58,9 @@ class LipidDetailsScreenState:
 
         try:
             with open("saved_runs/{}".format(filename), 'r') as f:
-                self.lipids = jsonpickle.decode(f.read())
+                to_import = jsonpickle.decode(f.read())
+                self.lipids = to_import['lipids']
+                self.charge_mode = to_import['charge']
         except:
             raise Exception
 
