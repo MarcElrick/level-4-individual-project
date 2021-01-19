@@ -29,7 +29,7 @@ jobs:
       - name: Build Executable
         run: |
           cd src/
-          pyinstaller --windowed -D  main.spec
+          pyinstaller --onefile  main.spec
 
 
       - uses: actions/upload-artifact@v2
