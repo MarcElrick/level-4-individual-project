@@ -4,6 +4,7 @@ from state.input_summary_screen_state import InputSummaryScreenState
 import unittest
 from state.file_picker_screen_state import FilePickerScreenState
 from state.lipid_details_screen_state import LipidDetailsScreenState, IndividualLipid
+import os
 
 # Smoke test to verify test suite runs
 

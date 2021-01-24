@@ -6,6 +6,7 @@ import unittest
 from data_processing.file_creation import (create_plot, create_xlsx_output,
                                            min_func)
 from data_processing.lipid_kinetics import LipidKinetics
+import numpy as np
 
 
 class LipidKineticsTests(unittest.TestCase):
@@ -23,9 +24,7 @@ class LipidKineticsTests(unittest.TestCase):
         }}
         cls.kinetics_obj = LipidKinetics(lambda: 0)
         cls.test_folder = (os.getcwd())
-        os.chdir('..')
-        os.chdir('..')
-        os.chdir('test_files_reduced')
+        os.chdir(os.sep.join(['tests', 'test_files']))
         cls.test_files_folder = os.getcwd()
         cls.global_output = cls.kinetics_obj.compute_lipid_kinetics([cls.lipid], [["0_pp_d20_pos_1.mzML", 0],
                                                                                   ["8_pp_d20_pos_1.mzML", 8],
@@ -38,12 +37,12 @@ class LipidKineticsTests(unittest.TestCase):
         output = self.kinetics_obj.compute_lipid_kinetics([self.lipid],
                                                           [["0_pp_d20_pos_1.mzML", 0],
                                                            ["8_pp_d20_pos_1.mzML", 8],
-                                                              ["48_pp_d20_pos_1.mzML", 48],
-                                                              ["72_pp_d20_pos_1.mzML", 72],
-                                                              ["96_pp_d20_.mzML", 96]])
-        self.assertEqual(output[0]['kinetic_parameters'],
-                         (0.03600730844758999, 0.625699723108793,
-                          0.21129762105351985))
+                                                           ["48_pp_d20_pos_1.mzML", 48],
+                                                           ["72_pp_d20_pos_1.mzML", 72],
+                                                           ["96_pp_d20_.mzML", 96]])
+        np.testing.assert_array_almost_equal(output[0]['kinetic_parameters'],
+                                             (0.03600730844758999, 0.625699723108793,
+                                              0.21129762105351985))
         self.assertEqual(np.shape(output[0]['data_matrix']), (5, 6))
 
     def test_create_plot_creates_file(self):
@@ -59,7 +58,7 @@ class LipidKineticsTests(unittest.TestCase):
         create_xlsx_output(self.global_output, [self.lipid], [
             '0_pp_d20_pos_1.mzML', '8_pp_d20_pos_1.mzML',
             '48_pp_d20_pos_1.mzML', '72_pp_d20_pos_1.mzML',
-            '96_pp_d20_.mzML'])
+            '96_pp_d20_.mzML'], 'test.xlsx', auto_open=False)
         self.assertTrue(os.path.exists(os.getcwd() + os.sep + 'test.xlsx'))
 
     def test_min_func(self):
