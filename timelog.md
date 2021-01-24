@@ -303,3 +303,9 @@
 - _3 hours_ - Attempted to fix mac build. This failed. I believe it may have something to do with Big Sur.
 
 - _1 hour_ - Fixed bug where charge wasn't being preserved upon export/import. Also fixed bug where dialog windows were being preserved for export/import/new adduct.
+
+## 24 Jan 2020
+
+- _1 hour_ - Fixed some failing unit tests.
+- _1 hour_ - Added deepsource to the project to perform some static analysis in an attempt to find smells.
+- _1 hour_ - Added test files to repo.

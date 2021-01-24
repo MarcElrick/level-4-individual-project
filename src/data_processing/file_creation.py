@@ -99,7 +99,7 @@ def write_xlsx_block(worksheet, list_vals, row_num, start_col):
         worksheet.write(cell, v)
 
 
-def create_xlsx_output(output_list, lipids, filenames, output_filename=None):
+def create_xlsx_output(output_list, lipids, filenames, output_filename=None, auto_open=True):
     if not output_filename:
         now = str(datetime.datetime.now()).split(' ')
         output_filename = 'output' + os.sep + now[
@@ -161,7 +161,8 @@ def create_xlsx_output(output_list, lipids, filenames, output_filename=None):
     print('\nComplete!')
     print('Output File at: ' +
           os.getcwd() + os.sep + output_filename)
-    os.system(os.getcwd() + os.sep + output_filename)
+    if auto_open:
+        os.system(os.getcwd() + os.sep + output_filename)
 
 
 def min_func(x, *args):
