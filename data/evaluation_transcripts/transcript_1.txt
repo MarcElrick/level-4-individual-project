@@ -1,0 +1,360 @@
+E: The first task is to perform analysis on three lipids from the positive data set.
+
+P: OK.
+Let's give this a shot. So now we have three lipids here in the spreadsheet, and let's just go with the first one here. 
+So the name of it is this.
+and we have a formula as well. 
+I'll paste that in there.
+And the adduct is M+H
+Isotope depth is 6.
+
+Retention time should be about 660 seconds and let's give a tolerance of 20 seconds.
+And the mass tolerance will be 5ppm here. 
+
+OK, so let's add lipids here.
+
+OK, so I'm just looking at that. OK so I see that it's sort of out of it in and then I can remove it.
+
+I want it, but it also gave me a brand new one to enter, so I'll enter in all those lipids now actually.
+
+
+But I'm just wondering actually.
+
+I'm just wondering out loud as I'm doing this. 
+
+Is there a sense of being able
+
+ to carryover information from lipid to lipid so that if you send anything shared, I'm wondering how often these things 
+are shared actually from when you're looking at a bunch of lipids, I've no idea actually.
+
+That's 5 ppm as well. 
+
+I would have expected the add lipid button to be up around here <indicates next to delete lipid button> and I was down here and it took me a second to realize where it was.
+
+ Whoops, what happened there? OK so I accidentally change some information on this thing here.
+
+I'm not actually sure if it made a difference or not. I'm just going to put it back to what it should have been and hopefully it was actually changed in the lipid
+
+that's been added in.
+
+I did find it odd that you be able to change information on something that you've already added in, and I'm not sure if that's what, if that is the behavior actually
+wants or not, and I don't know if actually changing it on the form here actually changes in the underlying system or not.
+
+OK.
+
+Yes, retention time here is 638.  Tolerance is 20 against mass tolerance five PPM. 
+
+OK, so now we have three lipids added in positive modes. 
+
+Where do I go to now? And there's no next button here.
+
+
+So should I remove this lipid and then click next<indicates accidentally added empty lipid>? Maybe I should? I'll give that shot. 
+
+Pick files on enter times. OK so I downloaded the files earlier
+
+
+So I'm going to click on this button and hopefully it brings my file selector. Here we are.
+
+
+Now I think they were in downloads so let me, Yeah, here we go.
+
+
+I'm looking for positive files and I guess all the files? I don't know.
+
+
+Let's pick them all.
+
+
+Enter times? I'm not quite sure what times I'm meant to be entering here. I don't think there's anything on the spreadsheet?
+
+Oh so are these the times here at the start of the file. So 0, 8,  48 and so on. OK, gotcha, so yeah, 
+
+I just wasn't sure what the the convention was there, but I think I can see now. Let's go with this anyway. See what happens there.
+
+OK, uh, let's go review analysis details, so I've added in these lipids and I think i'm gonna double check these just to make sure that these are the right...
+
+Oh, that was weird. 
+
+Retention time tolerance has changed. I need to go back actually on one of these things it went to 7 seconds. 
+
+I don't remember putting 7, but maybe I did I can't actually remember, so just go back.
+
+Maybe I hit it by accident.
+
+Has that changed it? Yes it has.
+
+So. They're all 20 seconds now, and the mass isn't relevant.
+
+Mass tolerance is 5ppm for each of these so I think that's right, and I think the times are right there. 
+
+So let's start the analysis here.
+
+Let's see what happens.
+
+So it's going through each of the timepoints for the analysis on each of the lipids, so I presume its going to do each lipid for all the time points just a case of just waiting for those three lipids to come back.
+
+It's fairly quick so it looks as if it'll be yeah, not too long to get back the information we need.
+
+OK, we have a little spreadsheet as well. That's been output.
+
+And...
+ 
+I'm guessing it's still writing t the moment 'cause the bar is
+
+not done, so I'm gonna wait.
+
+And...
+
+It's possibly still writing at the moment.
+
+I'm presuming when this is finished a button or something will come up indicating that it's finished and that I can perform a new analysis or do something.
+
+
+<BUG WAS IDENTIFIED HERE WHEREBY OUTPUT FOLDER DID NOT EXIST ON MAC>
+
+
+
+
+E: So the second task.
+
+Define three negative lipids, so the ones you've been provided,  and export them.
+So don't don't do the analysis, export them.
+
+
+
+
+
+P: OK, So let's see if we can do that.
+
+I'm gonna do the same thing I did before so we're in negative mode this time and I'm gonna add in the negative mode lipids here.
+
+Now, the adduct in this case is M - H plus formic acid OK.
+
+Retention times around 586 seconds and tolerance of 20 seconds.
+
+Again, this mass tolerance is 5ppm.
+
+Second, the same Formula.
+
+This time the sodium adduct.
+
+Retention time 680 seconds, tolerances are 20 seconds and finally the last lipid, same foramt again.
+
+This time its an M-H adduct, isotope depth is 3, retention Time is 654 and the tolerance is 20.
+
+
+OK so I think that's that. I'll just click next on that. So I'm not sure if I'm doing this right, but let me just.
+
+
+Wait, I'm going to the negative mode.
+
+OK then.
+<PROCEEDS TO START ADDING TIMES>
+Times, I'll add them in here.
+
+Now the task was to export?
+
+E:
+Yes, to export lipids so they can be imported later.
+
+
+P:
+I am I'm trying to figure out how to do that so I have two buttons here. At the moment one is back and one is start analysis but you said not to do the analysis so at the moment I am struggling to figure out how I could actually do the export at this stage.
+
+If I go back I can see the information I added in again.
+
+I'm looking at. I don't see any button which enables me to do an export.
+
+So I'm kind of stuck now at the moment actually.
+
+
+
+
+
+E: OK, well I'll give you another minute to try and try to figure out and if not I'll intervene. 
+
+
+
+
+
+P:
+Yeah course so select here on this page.
+
+No, it's not there.
+
+So these are the three lipids we had before.
+
+<STUCK TIME EXPIRES, EVALUATOR INTERVENES>
+
+
+
+
+E: OK, I'll point you in the right direction. If you look at the top of your screen, the file menu, the global menu.
+
+
+
+P:
+Oh yes.
+
+
+I see it now export lipids. There we go. That wasn't, yeah, I found something... 
+
+For some reason I just never think to look at these in the Python
+
+applications ever, because normally there's never anything in those menus.
+
+But in this case there was something in the menu.
+
+
+So OK, now I need to choose a file name, but I don't know where the file is going to be stored, but hopefully it's gonna be in right place. Let me just call it testexport.
+
+I don't know what format it's gonna be in so I'm just going to testexport and hopefully it's gonna save it somewhere. 
+
+I'm gonna to have a look, so let me just see if I can find it and... yeah, so I have actually a file here. textexport.json
+
+So it's a json file. Yep, OK, that works fine.
+
+
+
+
+
+
+E:
+
+Our next task is to restart the application again and import the lipids you just exported and run analysis on them.
+
+
+P:
+OK so now I seem to  hopefully have a better idea of this structure.
+
+So look, nicely,  It's gone to the saved runs folder directly, so I don't have to hunt around for it.
+
+File is there and I can import so all the tickets appear to have imported nicely. Everything seems to.
+
+Wait a second that looks a bit weird. Thats right.
+
+
+Now I don't know if this is something I did earlier or not.
+
+The other type for the first one, not the formic acid one.
+
+
+I'm either, when I was moving stuff around, it got moved around as well, or perhaps something didn't import
+
+correctly in at start and in any case I'm going to switch this.
+
+That's weird. Oh...
+
+
+<BUG IDENTIFIED HERE WITH ADDUCT BEING INCORRECT, BUG WAS IGNORED AND EVALUATION PROCEEDED>
+
+P:
+OK, so I removed that one there so now we have two lipids here and I'm just going to check just to make sure that their way we thought
+
+they would be so we got that 608,  20 and this one here.
+
+The tolerance here is changed.
+
+Actually it's at 29 again. Maybe it was when I was scrolling it messed up slightly.
+
+And a ppm has changed as well actually in this one too.
+
+So I'm going to put this PPM back to five.
+
+So not sure if it was something I did when I was scrolling up and down my mouse. Maybe I was on that button and then it just
+
+scrolled'cause it's got a scrolling bar on here so it could be something to do with that anyway Let's keep going. So I need to pick the files again.
+
+
+And so it's probably, chance is not going to work this time either.
+
+
+It would be nice actually if it's not saved where 'cause I had selected the files last time.
+
+Yeah, I don't know. This is probably not part of it, but if it sort of remembered where the files were for analysis, remember the information I had in for this.
+
+Good, so I think that's all looking good.
+
+And then, you start analysis.
+
+<PREVIOUSLY MENTIONED BUG RESURFACED, APPLICATION RESTARTED>
+
+
+
+
+
+
+
+E: And so the 4th and final task:
+
+Define a new positive adductt, that's not in the current list of positive adults. An example of this would be M+H-H2O.
+
+The add and multiplication values for the calculation do not need to be correct.
+
+
+
+
+P: Ok, OK so let's start it up again.
+
+So.
+
+Here we have it at the top here.
+
+So I'll open that
+
+M+H-H20 and... so...
+
+Yeah, obviously it's gonna make a difference,
+
+but let's just say it's -24, multiplication value one.
+
+Nickname protonated water loss oK, so let's see if that works.
+
+Um?
+
+So if I put go to, pick that perhaps? Let's try and see if I can pick that one.
+
+<BUG IDENTIFICATION>
+
+It didn't seem to come up
+
+on the lists of ones here.
+
+OK, let me let me just have
+
+a look and see, try again just to see what happens.
+
+Positive mode. Let me just put it. I put a negative number last time. Let me put it positive number this time.
+
+
+No, it's not coming up with anything I can select. There's no exception as
+
+far as I can see on the appication
+
+
+P:Restarting it, I'll shut this down. Yeah yes there it is. I put in twice.
+
+Gotcha, OK, so I should be able to...
+
+Select that.
+
+Let me just put one of
+
+these here.
+
+That seems to work. Then
+
+let's just put in the rest of the information for this one.
+
+Okay and then I should be able to run the analysis on that I guess?
+
+
+
+
+
+E: Yes, but you have no completed the final task
+
+So that's us done.
+
+I'll stop recording now. 

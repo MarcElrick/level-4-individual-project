@@ -1,0 +1,237 @@
+E: So the first task is to perform analysis on three lipids from the positive data set using the lipids provided.
+
+P: OK.
+
+E:
+Yeah, if you can, just try and verbalize what you're doing and just thinkaloud.
+
+
+P: I'm choosing the top lipid, I've entered the name and now I'll enter the formula.
+
+And its the M+H adduct and then... isotope depth 6,
+
+Retention time 660, tolerance 20, and 5 PPM.
+
+So just double check.
+
+And then... so it's three so I might add a lipid and see if I can do them all at once.
+
+<LOST AUDIO AT THIS POINT FOR A FEW SECONDS>
+
+tolerance of 20, 5ppm.
+
+And then I'll add the last one:
+
+So PC 36:2, C44H84NO8P.
+
+Positive with isotope depth of six, retention time of 638
+
+tolerances 20 and 5 PPM.
+
+Then I'll click next.
+
+Add the files, so I saved them on my desktop under conditions pos.
+
+So open.
+
+I'll see if I can add them all at once.
+
+Yep, okay. So that this time 0, that's fine. This one I set to 8.
+
+That one's 48, this ones 72 and this one 96.
+
+I'll double check then click next.
+
+OK, so review analysis details.
+
+So just checking... I've not made any mistakes.
+
+OK, so start the analysis.
+
+OK.
+
+
+E:
+So task 2: Define any three negative lipids and export them.
+And when I say export them, you've not to perform the analysis so you have to export them so they can be imported later.
+
+
+P:
+OK.
+I'm guessing that means put in the data and then save that input. 
+
+E:
+Yeah.
+
+P:
+OK.
+So.
+I'll put in the lipid name.
+
+And then the formula.
+
+And then that's the fomate adduct.
+
+Isotope depth is 2.
+
+Retention time of 586.
+
+Add lipid.
+
+The second one is PC 36:1
+
+So C44H86N08P.
+
+The sodium adduct,.
+
+Isotope depth 4.
+
+Retention time 680.
+
+tolerance 20 and 5 PPM.
+
+
+Add lipid.
+
+
+
+PE 37:1
+
+C42H82N08P
+
+Negative ion, isotope depth of 3.
+
+Retention time is 654
+
+So I'll see if I can save it from here.
+
+Export lipids.
+
+And then I'll save this as negative.
+
+
+<AUDIO LOST BRIEFLY, RUN SUCCESSFULLY SAVED>
+
+
+
+
+E: 
+That is task 2 complete. Now the third task.
+
+Import the lipids from task two an, perform the analysis and those lipids.
+
+
+
+
+P:
+OK.
+
+Import lipids.
+
+Choose file
+
+Okay, import.
+
+
+
+
+
+E:
+I think we have actually found a bug. And yeah, I don't take this
+
+is positive, but that's fine. We can just move on just ignore it.
+<BUG IDENTIFIED?
+
+
+
+P:
+
+So I'll just analyse it and obviously the output
+
+for this one isn't going to be correct because
+
+the adducts aren't but...
+
+
+
+
+E: 
+That's fine.
+
+And then is there.
+
+OK, Yep.
+
+So the 4th and final task...
+
+Define a new positive
+
+adduct. An example of this would be [M + H - H20] too.
+
+The add and multiplication values for the calculation don't need to be correct.
+
+
+
+
+
+
+P:
+
+File... add new adduct.
+
+erm.
+
+Yeah, I might do the one you said.
+
+Does it need spaces?
+
+
+E:
+
+Well I'll let
+
+you figure it out.
+
+
+
+P:
+
+So the addition value.
+
+
+E:
+
+Again, it doesn't need to
+
+be correct.
+
+
+
+
+P:
+Adduct multiplication value.
+
+
+So I think I'll use one.
+
+And I won't have a nickname.
+
+
+
+
+E:
+
+The second part to this task is just define a
+
+lipid with that adduct, the rest of the information doesn't need to be correct. 
+
+
+
+P: 
+OK, 
+
+<PARTICIPANT SELECTS NEW LIPID, APPLICATION CRASHES>
+
+
+
+So that's us was done. I'll stop recording now.
