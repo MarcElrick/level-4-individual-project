@@ -247,65 +247,83 @@
 
 - _6 hours_ - Following final supervisor meeting, it was decided that another view style was required to make the software less unwieldy when working with lots of lipids. I therefore spent this time looking for a publicly available "collapsible" Qt widget that I could use. I found one publicly and it was as part of a pull request under an MIT license. I therefore decided to use and modify this for my own needs.
 
-## 29 Dec 2020
+## 29 Dec 2021
 
 - _2 hours_ - Yesterdays PR failed in CI - after running again, everything seems to have gone through without any problem. This is something to keep an eye on.
 
-## 2 Jan 2020
+## 2 Jan 2021
 
 - _2 hours_ - It turns out the previous tests were passing locally becuase I was running on another branch (duh). Spent time updating unit tests, as well as adding a few missing ones.
 
-## 3 Jan 2020
+## 3 Jan 2021
 
 - _1 hours_ - Triaged all dependencies to decide on a license and added license.
 
-## 4 Jan 2020
+## 4 Jan 2021
 
 - _5 hours_ - Fixed PyInstaller build. This was a massive issue and was very difficult to fix.
 
-## 5 Jan 2020
+## 5 Jan 2021
 
 - _2 hours_ - Added a release item to windows build. This should allow users to download and use for unit testing.
 
-## 6 Jan 2020
+## 6 Jan 2021
 
 - _5 hours_ - Implemented saving of lipid state.
 
-## 7 Jan 2020
+## 7 Jan 2021
 
 - _1.5 hours_ - Created new issues, created new branching strategy and separated build and release actions.
 - _1.5 hours_ - Started implementing the selection of multiple files.
 
-## 8 Jan 2020
+## 8 Jan 2021
 
 - _2 hours_ - Finished implementing selection of multiple files.
 - _3 hour_ - Fixed the validation mess of lipid details screen and fixed the custom Adduct form.
 
-## 10 Jan 2020
+## 10 Jan 2021
 
 - _0.5 hours_ - Spent some time cleaning up repo and merge PRs
 
-## 11 Jan 2020
+## 11 Jan 2021
 
 - _1 hour_ - Fixing mac build and linuc builds - had issues with the way pyinstaller works with mac. This may need revisited.
 - _1 hours_ - Changed the default location of output files, output file now opened by default upon completion of analysis.
 
-## 13 Jan 2020
+## 13 Jan 2021
 
 - _3 hours_ - Spent time trying to fix mac build so that evaluation participants can use a mac.
 
-## 14 Jan 2020
+## 14 Jan 2021
 
 - _2 hours_ - Created powerpoint with evaluation plan. This will be used to give participants an idea of what to expect.
 
-## 18 Jan 2020
+## 18 Jan 2021
 
 - _3 hours_ - Attempted to fix mac build. This failed. I believe it may have something to do with Big Sur.
 
 - _1 hour_ - Fixed bug where charge wasn't being preserved upon export/import. Also fixed bug where dialog windows were being preserved for export/import/new adduct.
 
-## 24 Jan 2020
+## 24 Jan 2021
 
 - _1 hour_ - Fixed some failing unit tests.
 - _1 hour_ - Added deepsource to the project to perform some static analysis in an attempt to find smells.
 - _1 hour_ - Added test files to repo.
+
+## 26 Jan 2021
+
+- _1 hour_ - Carried out first evaluation.
+- _1 hour_ - Began tanscribing evaluation.
+
+## 27 Jan 2021
+
+- _1 hour_ - Finished transcribing first evaluation.
+
+## 29 Jan 2021
+
+- _1 hour_ - Carried out second evaluation.
+- _1 hour_ - Began tanscribing evaluation.
+
+## 30 Jan 2021
+
+- _1 hour_ - Finished transcribing first evaluation.
