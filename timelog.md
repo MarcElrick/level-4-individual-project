@@ -349,3 +349,4 @@
 ## 7 Feb 2021
 
 - _2 hours_ - Transcribed fourth evaluation.
+- _2 hours_ - Spent time fixing bugs discovered in evaluation.
