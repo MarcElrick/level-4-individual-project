@@ -309,6 +309,7 @@
 - _1 hour_ - Fixed some failing unit tests.
 - _1 hour_ - Added deepsource to the project to perform some static analysis in an attempt to find smells.
 - _1 hour_ - Added test files to repo.
+- _1 hour_ - Planned out headings for dissertation.
 
 ## 26 Jan 2021
 
@@ -326,4 +327,25 @@
 
 ## 30 Jan 2021
 
-- _1 hour_ - Finished transcribing first evaluation.
+- _1 hour_ - Finished transcribing second evaluation.
+
+## 2 Jan 2021
+
+- _2 hours_ - Further fleshed out dissertation headings, mainly in design and implementation sections.
+
+## 4 Feb 2021
+
+- _1 hour_ - Carried out third evaluation
+
+## 5 Feb 2021
+
+- _1 hour_ - Carried out fourth evaluation
+
+## 6 Feb 20201
+
+- _2 hours_ - Transcribed third evaluation
+- _2 hours_ - Fleshed out evaluation section of dissertation.
+
+## 7 Feb 2021
+
+- _2 hours_ - Transcribed fourth evaluation.
