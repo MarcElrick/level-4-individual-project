@@ -9,7 +9,7 @@ import os
 
 class AddAdductWindow(QWidget):
     def __init__(self, state):
-        super(AddAdductWindow,self).__init__()
+        super(AddAdductWindow, self).__init__()
 
         self.state = state
         self.adductFormula = ""
@@ -92,6 +92,8 @@ class AddAdductWindow(QWidget):
 
         self.state.adduct_list.append([self.adductFormula, str(
             self.adduct_add), str(self.adduct_mult), str(self.adduct_label)])
+        self.state.setAdductList(self.state.charge_mode)
+
         self.close()
 
     def charge_mode_toggled(self, value):

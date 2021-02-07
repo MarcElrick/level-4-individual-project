@@ -8,6 +8,7 @@ import os
 class LipidDetailsScreenState:
     def __init__(self):
         self.charge_mode = 'Positive'
+        self.lipids = []
         self.setAdductList(self.charge_mode)
 
         self.lipids = [IndividualLipid(0, self.adduct_list)]
@@ -37,6 +38,9 @@ class LipidDetailsScreenState:
     def setAdductList(self, filename):
         self.adduct_list = parse_adduct_file(get_resource_path(
             os.sep.join(['assets', filename.lower() + '.csv'])))
+
+        for lipid in self.lipids:
+            lipid.adduct_list = self.adduct_list
 
     def get_lipid_data(self):
         return list(map(lambda x: x.get_lipid_data(), self.lipids))
@@ -128,6 +132,8 @@ class IndividualLipid:
 
     def setAdductIndex(self, value):
         self.adduct_index = value
+        if value >= len(self.adduct_list):
+            pass
         mass_multi = self.adduct_list[self.adduct_index][2]
         mass_add = self.adduct_list[self.adduct_index][1]
         try:
