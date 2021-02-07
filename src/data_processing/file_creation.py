@@ -100,6 +100,9 @@ def write_xlsx_block(worksheet, list_vals, row_num, start_col):
 
 
 def create_xlsx_output(output_list, lipids, filenames, output_filename=None, auto_open=True):
+    if not os.path.exists('output'):
+        os.makedirs('output')
+
     if not output_filename:
         now = str(datetime.datetime.now()).split(' ')
         output_filename = 'output' + os.sep + now[
