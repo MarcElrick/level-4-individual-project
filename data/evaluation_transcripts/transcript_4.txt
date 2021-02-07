@@ -1,0 +1,434 @@
+The first task is performing analysis on three lipids from
+
+
+positive data set.
+
+So the three lipids  are PC 34:1, PC 34:2, PC 36:2, so I
+
+presume I go to lipid name
+
+and put in PC space 34 one.
+
+
+Lipid formula, I'll copy that
+
+over from the spreadsheet. I'm
+
+not typing that out
+
+
+Okay, its an M+H adduct so 
+
+I don't need to select
+
+anything. An isotope Depth?
+
+OK, that's six. I can see that
+
+on the screen, so I'm just going
+
+to click up to get the six.
+
+
+Retention time is 660 seconds, I
+
+presume, so I'm just going to
+
+
+type 660 into that box.
+
+The retention time tolerance is 20,
+
+Mass tolerance, so there's
+
+PPM box and the Dalton box,
+
+
+so I'm just going to put it
+
+in as a 5PPM.
+
+And then click on add lipid
+
+and then I can scroll down and
+
+put the next one in.
+
+
+Put PC 34:2 and copy over the lipid formula
+
+
+Put that in.
+
+Isotope depth is 6, retention time is 600.
+
+Tolerance again is 20.
+
+
+Mass tolrance is 5.
+
+
+And then add lipid.
+
+Okay and the final one
+
+PC 36:2.
+
+I'll put the formula in.
+
+M + H again, isotope depth, 6
+
+
+I don't know what isotope depth is but I presume its the number of...have I figured on formula in for the previous one?
+
+Should be that one.
+
+OK.
+
+
+I'll put that one in for 34:2.
+
+This is nothing to do with the software its
+
+just me being stupid.
+
+
+
+Retention time for that
+
+one is 638.
+
+tolerance is 20
+
+
+Type in 5PPM.
+
+
+That's them all in and then I can
+
+click on next.
+
+
+Step two, pick files and
+
+enter times. 
+
+So I'm going to click on the add files button and that's
+
+taking me.
+
+
+To a folder and I will click up.
+
+
+And click on to
+
+positive  evaluation.
+
+
+And there's five files there, so
+
+presumably pick all of them
+
+
+because it's a time course.
+
+
+I'm gonna open those up.
+
+OK, first one file 0 I'm presuming I'm gonna put in time 0 for that next one
+
+next one file 8 and put in 8. I'm 
+
+presuming that's  the number of
+
+hours next one I'll put in 48, next
+
+one I'll put in 72 and then I'll put
+
+
+in 96. I'm gonnaadd files.
+
+
+Oh no, I'm not cancel return that I'm
+
+gonna do next.
+
+Now a screen has come up,
+
+Step 3, review analysis
+
+
+details. It's got three lipids.
+
+I hope it's not the right
+
+formulas in. Adduct, isotope depth, retention time.
+
+The mass and then it's got
+
+the files and then I'm gonna
+
+click on start analysis and hope for the best.
+
+Test so it's analyzing the
+
+various time points.
+
+It's on 34:1...34:2...36:2
+
+writing to outputs. And I'm
+
+getting very excited now.
+
+
+
+
+<OUTPUT BUG ENCOUNTERED>
+
+
+
+There we go. That's
+
+it started up begin.
+
+
+Ask if you need any further
+
+elaboration on this one.
+
+Define any three negative
+
+lipids and export them, and
+
+this does not involve running
+
+the analysis. You are defining
+
+the three lipids and exporting
+
+the definitions so that you can
+
+import the definitions later and
+
+you don't have to enter them.
+
+
+
+
+
+Okay.
+
+So I'm in negative ion mode.
+
+Sorry, what was I supposed to
+
+do? Didn't understand that.
+
+
+
+
+So the first part is
+
+define three negative lipids.
+
+Export them so that those those
+
+lipids can be saved and then
+
+you can import that later and
+
+you don't have to type them again.
+
+
+
+
+Okay so I want to
+
+PC 34:2, type that in, I'm gonna put the formula in.
+
+this time its formate adduct so
+
+I'm going to change the adduct
+
+type. Isotope depth this time is 2
+
+retention time I'm gonna put in 586. tolerance is 20.
+
+PPM tolerance is 5,
+
+so I'm adding that lipid.
+
+
+Then I'm going to put in the next one. PC 36:1
+
+Formula. This time we've got a sodium
+
+adduct so I'm gonna select
+
+
+that one. Isotope depth is 4
+
+retention time is 680.
+
+
+Tolerance is 20.
+
+and mass tolerance is 5
+
+Lipid name PE 37:1, copy that over
+
+M+H that's fine, Isotope depth is 3
+retention time is 654
+Tolerance 20 and 5 so add lipid
+
+So I'm gonna go to file.
+
+
+And export lipids 
+
+filename so I'm gonna put that as PC PE neg
+
+And I'm gonna save that.
+
+
+And then presumably, if I
+
+remove the lipids and can import the file
+
+
+
+
+
+
+I'll stop there for a second, just because that's the second task complete.
+
+The third task is import lipids from task 2 and perform analysis on them.
+
+
+
+
+
+
+
+So I.
+
+I'm going to file import
+
+lipids and choose a file. I
+
+have found the file is under
+
+main, saved runs.
+
+Open that up.
+
+
+I'm going to import.
+
+I'm going to just check
+
+that they're all there.
+
+OK, so this 123 is waiting for
+
+one there, so I'm just going to
+
+remove that lipid.
+
+
+So I've got three lipids negative ion, everything's OK.
+
+I want to click on next, I can't so I'll go on file
+
+But it won't let me do that.
+
+
+
+<BUG IDENTIFICATION - NEXT BUTTON REMAINING INACTIVE FOR VALID LIPID>
+
+And then click on next.
+
+Add files.
+
+Going into next evaluation and
+
+aI'm gonna add all the files again, I'm gonna put
+
+
+
+the times on.
+
+8, 24, 48. 72, 96
+
+
+Add Files. Oh no, I got that one wrong again.
+
+
+Then click on next.
+
+Start analysis.
+
+And then it just got to the
+
+writing to output bit again.
+
+<BUG IDENTIFICATION>
+
+Task 4 define a new positive
+
+adduct that is not on the
+
+list of positive adults.
+
+
+An example of this would be
+
+M + H - H2O
+
+the add and multiplication values for the
+
+calculation don't need to be
+
+correct. OK, so I'm gonna go to
+
+file at the top left and add new
+
+adduct, adduct, formula and type
+
+in M + H - H2O
+
+That's not right, what is it?
+
+
+
+And that's going to be negative
+
+Adduct addition value is going to be M + H - water
+
+it's gonna be a minus.
+
+
+Minus 17, adduct multiplication value.
+
+No idea really, I'll put that as 1.
+
+Adduct nickname which
+
+is, I've probably got that
+
+wrong at the top then.
+
+I suspect this is going to fail, I'm going to click on submit.
+
+Oh, its done it and then.
+
+
+Yeah.
+
+
+It's there, I don't think it's
+
+right but its there.
+
+<BUG IDENTIFICATION - Crash when new adduct clicked>
