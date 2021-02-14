@@ -350,3 +350,11 @@
 
 - _2 hours_ - Transcribed fourth evaluation.
 - _2 hours_ - Spent time fixing bugs discovered in evaluation.
+
+## 12 Feb 2021
+
+- _3 hours_ - Analysed transcripts and gleamed new requirements, creating appropriate issues from new user stories.
+
+## 14 Feb 2021
+
+- _1 hour_ - Implemented auto-collapsing of views.

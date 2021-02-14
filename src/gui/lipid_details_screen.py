@@ -75,9 +75,16 @@ class LipidDetailsScreen(QWidget):
             self.content_layout.itemAt(i).widget().charge_mode_toggled(value)
 
     def add_lipid(self):
+
         self.page_state.add_lipid()
         self.content_layout.addWidget(LipidListItem(
             self.page_state, self.page_state.lipids[-1], self.validate_and_enable_progression))
+
+        for i in range(self.content_layout.count()-1):
+            self.content_layout.itemAt(
+                i).widget().section.toggleButton.setChecked(False)
+            self.content_layout.itemAt(
+                i).widget().section.toggle(False)
 
     def validate_and_enable_progression(self):
         self.nav_buttons.btn_next.setEnabled(
@@ -199,6 +206,7 @@ class LipidListItem(QWidget):
 
         mainLayout = QVBoxLayout(self)
         mainLayout.addWidget(self.section)
+        self.section.toggleButton.setChecked(True)
         self.section.toggle(True)
 
     def charge_mode_toggled(self, value):
