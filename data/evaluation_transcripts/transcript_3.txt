@@ -1,6 +1,5 @@
 
-
-First task is
+E: First task is
 
 Perform analysis on three lipids from the positive 
 
@@ -10,33 +9,30 @@ provided lipids and the
 
 provided conditions.
 
- OK, so OK. So I've come to a dialog box on screen about lipid 
+
+
+P:
+OK, so OK. So I've come to a dialog box on screen about lipid 
 
 name, lipid formula, adduct type
 
 type i'm going to look at the
 
-caf6ec04-bf6f-4bfd-9ad3-497ffe018491
-
 drop down. With that there's there's protonated ammonium adduct
 
-ac479056-a482-46c8-80c0-bd9dd50ce095
-
- sodium addict potassium adduct. 
+,sodium adduct potassium adduct. 
 
 Further, for the future, maybe
 
 there may be other adducts that
 
-ea57a00e-a079-4b34-b3cb-0a9583d50676
-
 you might we might want to add
 
 in positive, but then they are
 
-the major ones. I would argue for positive ion. Isotope depth, 
+the major ones. I would argue for positive ion. 
 
-ab38ba64-e3eb-4cee-89e3-c467ade1696b
+Isotope depth, 
 
 not quite sure what that is. Retention time tolerance, mass to charge
 
@@ -44,13 +40,11 @@ charge, PPM tolerance there remove lipid. So do I just
 
 need to know now presumably just need to type in or to
 
-deb3f51e-01a1-4b1e-985b-ef8f3c5ee362
 
 extract lipid name from the file
 
 you provided. Yep.
 
-bd539090-19ca-4398-ae2a-341919041eac
 
 So I can just type one in.
 
@@ -58,11 +52,9 @@ Yep. OK.
 
 OK, let's see how that works.
 
-b2364232-5dae-4132-91a3-e488f45d3087
 
 Although maybe I'll do an
 
-d1fcbec8-544c-4f4f-8a79-1b562bb415c3
 
 abbreviation, Say 34:1. See what happens there? OK
 
@@ -70,21 +62,16 @@ liquid formula off the top my
 
 head. I don't know it.
 
- If you go into their conditions file. 
+If you go into their conditions file. 
  
- 
- 
- My apologies, OK, right? 
+My apologies, OK, right? 
 
-a1c20efc-c1d9-4b45-8685-7ee87a0cdf81
 
 That's fine. That's no
 
 problem. OK, sorry.
 
- That was a good one. Wasn't it OK. 
-
-def6d49b-b87d-45fc-b645-7e10e5e9ca89
+That was a good one. Wasn't it OK. 
 
 Again, just in terms of
 
@@ -104,8 +91,6 @@ name, for example ...
 
  it's quite a nice thing to have OK adduct type M+H
 
-af4bfce7-c955-407c-b0f6-d60584820400
-
  isotope depth, okay I have all the conditions here. My apologies 
 
  alright, that's all straightforward enough. 
@@ -116,13 +101,9 @@ of seconds. OK, that's fine.
 
 Often often work in minutes
 
-aff6c763-0c02-40d4-8ca6-97a306039b29
-
 myself, but that's fine. You
 
 know it's easy enough to divide
-
-bd61076c-06d2-4239-954f-e4e5b0922663
 
 by 60 became, so got an accurate
 
@@ -132,13 +113,10 @@ OK. Then add lipid presumably.
 
 OK, just put these OK. Just put all these in. OK so 
 
-aa2549c7-4230-4503-afef-41f8d0b5ab44
-
 I'll just put time. Now I'm
 
 just putting in the remaining
 
-e10a6ab9-c24d-41cf-8c8a-4a781891dc95
 
 lipids that have been chosen,
 
@@ -152,47 +130,33 @@ formula. I'll just copy that.
 
 Isotope okay that's easy enough 6.
 
-cfee3a23-7b54-4623-abb2-d32bc6434e9b
+retention Time is 600 in this 
 
- retention Time is 600 in this 
+case.
 
- case.
+Tolerance is 20. Did I mess that up?
 
- Tolerance is 20. Did I mess that up?
-
- The mass again, tolerance was PPM, so again, 
+The mass again, tolerance was PPM, so again, 
 
 it's nice. You got tolerance
 
 both PPM in Dalton. I generally
 
-d5ce44be-e99f-407e-8fa9-d716eacffb63
-
 work in PPM, but I know some
 
 people [refer dalton] and OK and
 
-c3565dc9-3bb6-4cac-a628-66a97f108e89
-
 I'll. Add a third lipid.
-
-dbba92a5-dc42-4e78-bd55-21c895367691
 
 So again, lipid name again from
 
 the conditions provided 36.
 
-eb186d09-06ab-454e-9015-281853ff0f15
-
 Lipid formula will copy that.
 
-f677f708-79a9-4d74-ae7e-174035ab29dc
-
- Make a straightforward enough and M plus H again isotope depth
+Make a straightforward enough and M plus H again isotope depth
 
 this 6. Retention time on this
-
-badf5eea-5179-4864-aa1c-2ee35b27a138
 
 occasion 638. Tolerance
 
@@ -200,41 +164,35 @@ again 20 so OK
 
 and then PPM.
 
-c2712e17-95e2-4389-8b96-88d4905000ff
-
 Five OK, and then I'll
 
 presumably now I've got my
-
-d0b57640-a931-4c40-a426-ed9e81a7fee4
 
 three lipids in positive. I'm
 
 just gonna go back and double
 
- check them all. OK charge mode there so it's clear 
+check them all. OK charge mode there so it's clear 
 
- their lipid name, Formula, adduct. Okay isotope 
+their lipid name, Formula, adduct. Okay isotope 
 
- depth, retension time mass tolerance and mass charge 
+depth, retension time mass tolerance and mass charge 
 
- and its tolerance. accurate mass another 34:1 34:2. OK, I 
+and its tolerance. accurate mass another 34:1 34:2. OK, I 
 
- isotope depth I've entered the wrong values so that would help 6 
+isotope depth I've entered the wrong values so that would help 6 
 
-e5ae4183-c885-4ed4-8112-4d713413c843
 
 retention time 600 tolerance should be 
 
- 20, is that right? Yeah, OK, that's fine, and I don't know why I've got 34 in
+20, is that right? Yeah, OK, that's fine, and I don't know why I've got 34 in
 
- there. OK, that's OK. Isotope depth. Something seems to be changing when I'm putting
+there. OK, that's OK. Isotope depth. Something seems to be changing when I'm putting
 
- stuff in there, so I'm not quite sure what's
+stuff in there, so I'm not quite sure what's
 
-eef3b510-723d-4271-8751-102249e33ab4
 
- happening there when I'm changing those conditions. So 
+happening there when I'm changing those conditions. So 
 
 I'm putting numbers in and this
 
@@ -248,8 +206,6 @@ doing something silly again.
 
 Likewise, that seems to do the
 
-c852eaca-ecff-4d86-b093-51e42ed2f1c2
-
 same in terms of isotope depth.
 
 If I go up.
@@ -260,29 +216,21 @@ that down. Six retention time
 
 can needs to be.
 
-a5a3282b-a6f2-4f9b-9557-879673f97dae
+600 and a tolerance of 20
 
- 600 and a tolerance of 20
+OK 660. Yeah, that's fine. I'll go next. 
 
- OK 660. Yeah, that's fine. I'll go next. 
-
- Pick files and enter and add files, presuming that 
+Pick files and enter and add files, presuming that 
 
 I'll just need to go and add
 
 files from the files that
 
-a5bbc911-661c-4549-b84a-45a740cb8b76
-
 being provided from the folder I have got. So if I go
-
-db1b6727-5256-402d-a79c-39cae11e2428
 
 to my desktop and I've got
 
 positive evaluation, so I'm
-
-ca811c0c-5719-4e9a-b879-f04ff3a94ad5
 
 assuming that I had all of
 
@@ -298,8 +246,6 @@ files. Cancel don't need
 
 to do that. OK, right? And we
 
-c0a81b64-9b8e-4045-98f6-b7eea48fe9fa
-
 got here. Pick files into times.
 
 OK, so I'm slightly not quite
@@ -309,8 +255,6 @@ sure what I need to do here. So
 in terms of picking times.
 
 So I'm not, I'm yeah OK.
-
-bd24420f-28fd-427b-86a4-57aaaa6d0f60
 
 So I did my files, pick files
 
@@ -336,8 +280,6 @@ retention time?
 
 Look
 
-a058cc2b-0879-48d6-bc60-4b9aa2372829
-
 OK, so I've now filled in those
 
 times. In fact, maybe why
@@ -346,17 +288,11 @@ didn't? Why did I call them?
 
 Actually, I know what I'll
 
-bf32da58-05c8-460d-b989-b4f60bd3b28e
-
 do is. I'll call him the time
 
 points for the experiments of
 
 the experiment so well say nought, 8.
-
-fdd3e60c-fc1e-49f8-800c-68b5315bcfc3
-
-ab8c3d43-d23d-4e20-b1c1-3d614626dff7
 
 48, 72, 96 We'll just see how we go with that. So I've
 
@@ -374,13 +310,9 @@ lipids, files Okay . So that previous. So if I
 
 go back yeah OK what we really
 
-c8fbf12f-94d1-4817-8162-0e096b9c9769
-
 for me be really handy is again
 
 just to give an indication as to
-
-c4a61546-5b11-4559-8f5c-de735335f26b
 
 the time points. Again as someone whos not a bioinformatics specialist.
 
@@ -389,8 +321,6 @@ and not necessarily good with softwarethat would be really
 good just to offer some some
 
 guides there to make it very
-
-a02b0661-f970-4cef-9907-11ce895eb420
 
 clear for people who are not as
 
@@ -406,19 +336,13 @@ OK, got the files. OK I've got
 
 review analysis details and
 
-fbcf1fe1-fd80-4f04-a748-21de430a45c7
-
 lipids. Yeah OK, that's fine.
 
 It seems to be seems to be some
 
-cba13561-c461-4723-843a-5784cd15e8ea
-
 slight changes here in terms of
 
 mass tolerance. Not quite sure
-
-cf73f297-5815-4423-830d-a08e41b61c6e
 
 why that is and again some
 
@@ -436,71 +360,40 @@ analysis so performing
 
 analysis.
 
-d22dd3bd-7a41-4132-8731-96fa448ea8fd
-
 Different time points, so this
 
 is the first PC 34 one. Now this
 
 is the second PC 34:2.
 
-d7715379-91fb-4f0a-9778-4c44cdb0282d
-
 PC-36. Two
 
 to the third lipid again.
 
-d99b1e94-41f3-4b1d-88a4-b5797b0f5b15
 Again three lipids
 
 chosen from positive ion.
 
-f226f816-890e-49fe-a88c-c24b4b132885
 
 OK just waiting for this analysis to complete.
-
-b4c98d54-1a2a-40eb-adf4-b0e9f371c4eb
 
 <BUG IDENTIFICATION>
 
 
+E:
+And so the next task is define any three negative lipids and
 
-And so the next one is define any three negative lipids and
-
-export them? And by exporting
+export them. And by exporting
 
 them, I mean you should export
 
-them so that you should export
-
-the run so that you can import
-
-fd8de7d9-2797-4652-815d-08a19ffa392a
+them so that you can import
 
 them again later.
 
-eba28892-3f27-4023-ad55-0005579bbb32
-
-Export them if that if that
-
-makes sense. So you should
-
-d5eb8c32-a70c-4d7f-b68b-0cb941371cb9
-
-export the lipids so that you
-
-can import the lipids back
-
-into the application later.
-
-c393382a-1f80-4838-b792-e29587b02de6
-
-From the files OK from OK.
-
-Right test file negative.
 
 
-
+P:
 OK, I'm gonna I'm OK. So if I
 
 don't need to use that box and
@@ -512,8 +405,6 @@ quite sure as to the task in
 terms of I can extract the ions
 
 from the from the raw files or
-
-a4420af6-db5f-4618-a562-bb6c8f8183d2
 
 if you have the. In this case
 
@@ -529,7 +420,7 @@ these particular PCs.
 
 
 
-
+E:
 I'll give you a little bit
 
 of assistance here. I am, so
@@ -538,25 +429,25 @@ the first thing you
 
 need to do is enter the lipids
 
-ab00f87a-2484-4429-9c1b-ec6e77cc366c
+as you did before. 
 
-as you did before. OK, first
-
-thing you need to do is enter
-
-enter the negative ones. OK, I'll
+OK, I'll
 
 let you see if you can figure
 
 out what to do after
 
-that. Let's just do that then so
+that. 
+
+
+
+P:
+
+Let's just do that then so
 
 I'll do all three. So this is
 
 this is negative. ion now just.
-
-f285d622-2d3a-479c-a945-1289b9a3ca7e
 
 Completing the details as per
 
@@ -564,39 +455,25 @@ the so again that's different.
 
 If an adduct and M minus formate
 
-M plus formate even ice to
-
-cb0e4fdd-c4f2-4fa8-9b28-c66c88fe35ac
+M plus formate even isotope
 
 depth should be 2.
 
 Retention time is 586.
 
-b74874c0-93a9-442a-9cdd-255609508efd
-
 Tolerance is 20.
-
-a906a9eb-0d40-43b1-beeb-5b5dc0ec804b
 
 Mass we've already got, PPM
 
 should be 5
 
-ec698792-950d-42d1-b9e1-55423466a5f3
-
 And I had a lipid.
 
-b813e005-dba6-4376-9135-14f2561e8107
-
 And this is PC 36:1.
-
-a02ba6ab-adac-4bd6-a440-1bb9600a6812
 
 Lipid formula, I'll
 
 just copy it.
-
-b99f4d25-1e04-4653-b980-b53410504b3a
 
 Okay isotope depth is 4
 
@@ -604,13 +481,9 @@ retention time is 680. Sorry not
 
 talking enough so I'm just
 
-ac498115-ce29-4f1e-8708-52e37083de9b
-
 completing the. The important
 
 information and putting that in
-
-f0b09afb-c37e-4c80-ba39-0593dfdc4d9c
 
 at 5 PPM.
 
@@ -620,15 +493,9 @@ negative ion lipid. Name will be
 
 PC 37 one.
 
-c47920de-a37c-4ec8-b362-ed591d747c8d
-
 Lipid formula is that
 
-b527f3c2-42db-425e-bc0e-21c4d9353356
-
 OK M - H thats fine. isotope depth is three
-
-f772ac90-01fa-472d-8b82-5f55f8b766d1
 
 retention time is 654
 
@@ -665,19 +532,13 @@ times again. So again, if I add
 
 files again from negative ion on
 
-d1c148cc-f69f-4cd6-be78-820492633928
-
 this occasion, so I'm just going
 
 to Add all of those files.
 
-c9bfc14d-ea4d-4d94-9d26-87f66548d151
-
 Again, I will use the different
 
 time points for the data
-
-be9899f2-836a-4548-b82b-6aad414fc8ec
 
 collection, so that looks like
 
@@ -685,9 +546,11 @@ it's against its in terms of
 
 hours of labeling nought 8.
 
-efa1e6e5-9e99-4e24-ac53-56e41ea2d829
 24, 48, 72, 96 I'll jump in and start the analysis
 
+
+
+E:
 
 Don't start.
 
@@ -699,21 +562,20 @@ minutes to see if you can figure
 
 out what you need to do. And
 
-then I'll. I'll interject. OK, no
+then I'll. I'll interject. 
+
+
+
+P:
+OK, no
 
 problem. OK, so we didn't start
-
-aa83bc58-56fe-4034-9cbb-063e9e083190
 
 the analysis we'll go back.
 
 OK, add files are done that
 
-ad096146-a996-455d-976e-778b5b4e8c50
-
 next. I want to extract files.
-
-c86c382a-f17d-4103-9b54-63952d05c76e
 
 Review details.
 
@@ -726,8 +588,6 @@ There seems to be a change in in
 in adducts for that first
 
 one. So if I go back.
-
-bff8fc8b-a769-44af-91d0-117534e8c026
 
 Keep going back again.
 
@@ -745,15 +605,11 @@ going to review things and they
 
 are definitely the right ones.
 
-e6383787-584e-432b-aa1e-0aac6f5f8401
-
 So why is that no longer coming
 
 up with negative ion type adducts
 
 I'll flip to pos and I'll flip to neg, see what it gives me.
-
-d9b0bc02-f736-4185-a0e3-71a99b8995e8
 
 OK so flip that back. OK reset,
 
@@ -767,21 +623,13 @@ Formulae that looks fine, 586
 
 tolerance. I think that it
 
-d5bfd00a-66e4-44e9-a0c3-240d1be5c2ae
-
 should be 2 I'll bring that up.
-
-e343ad5d-abbd-475b-bf8e-4f698774b690
 
 Tolerance 20 that's fine and I'm
 
 going to do this. This is the M
 
-d9557d45-a626-4743-bf15-4f4b75405813
-
 like and that was 36. One that
-
-bb18901f-5c12-4382-9365-a92e6c1c7798
 
 should be. I'm sodium, I said
 
@@ -796,7 +644,7 @@ put him and put in the hours, the time points.
 
 
 
-
+E:
 so I'll I'll
 
 interject here. OK, and if you
@@ -809,18 +657,13 @@ you'll see the file menu.
 
 
 
-
-
+P:
 
 Oh sorry, I didn't
 
 see that. OK, yeah.
 
-b8076812-9bbd-457f-a4f6-ad835fd3bf6d
-
 Yep OK, so export lipids presumably.
-
-d67ea6a9-e29a-4f35-a5b1-c93a399970da
 
 OK filename. OK so I'm given
 
@@ -834,8 +677,6 @@ OK, and presumably
 
 I need to save that.
 
-a0af591f-7106-44a5-9133-1fe24f00d090
-
 OK, where is that saved to
 
 looking to see if that's been
@@ -846,11 +687,7 @@ Or is it just sitting within
 
 the software?
 
-b2eb8032-f18e-4dd7-89d7-04e646c29ffd
-
 Can't seem to.
-
-e4fbabc9-834f-421f-bb1e-3790834070ce
 
 Don't seem to know where that's
 
@@ -859,49 +696,30 @@ gone now so I can go file.
 
 
 
+E:
 
-Well, so that's the second
-
-task complete. 
-
-The third task, if you go back to the
-
-first menu and delete all the
-
-
-lipids that you just entered.
-
-So just back. Yeah, back back.
-
-b7edc62b-5aff-44d7-9856-3d94011ac2cf
-
-Delete that, delete those.
-
-Yeah remove, remove yeah and
-
-
-
-
-
-so the third task is
+So the third task is
 
 Import lipids from task two and
 
 perform the analysis on those
 
-lipids. OK, so OK, so got a 
+lipids. 
+
+
+
+
+
+P:
+OK, so OK, so got a 
 
 dialog box in import lipids. So I've got a file.
 
 I've got a drop down menu with
 
-d45075ff-5798-4607-9a0b-b920d40f9962
-
 add new adducrtt export lipids,
 
 import lipids or just quit. So
-
-c7108c2d-48ed-4458-9d7b-ec44390f2adc
 
 being asked to import lipids. So
 
@@ -910,8 +728,6 @@ I want to do this form the
 positive. I suppose I could do
 
 that. Well, just did it for the
-
-f389636b-8e31-4547-82ca-c757ef2b5f04
 
 negative ion so I'll do those
 
@@ -933,8 +749,6 @@ to just import that so PC 34
 
 again do seem to be getting some
 
-a85dad98-0d01-4c8c-a175-d475965ef823
-
 changes in terms of the
 
 information is being inputted or
@@ -951,8 +765,6 @@ straightforward to import those
 
 files, and then I presume I
 
-a5e0ee95-2263-46d9-82cb-66d6094a97e5
-
 could just go to again what I
 
 will do is I'll just make this
@@ -967,8 +779,6 @@ analysis and I've done that
 next. That's fine. Gonna
 
 start the analysis.
-
-e5be2610-3cc2-4af6-b327-e22e1a934da5
 
 And it's running through.
 
@@ -995,13 +805,9 @@ to do? OK so I've been asked to
 
 input a new adduct type so once
 
-e572c9a4-4402-4727-bc29-3f96f6e2bd44
-
 in this I'm just going to just
 
 just for ease I'm going to go to
-
-db1f5337-6a02-4fab-9789-118322d38ca7
 
 conditions and I'm just going
 
@@ -1012,8 +818,6 @@ Appreciate this may not be the
 correct adduct, but it's really
 
 just part of the task. So I've
-
-e1680a6d-287c-471d-aabb-e28af665998e
 
 got lipid formula paste. OK, so
 
@@ -1031,8 +835,6 @@ think if we can do that will
 
 say M minus water.
 
-db6d8021-be6d-440d-a421-364f72ecd832
-
 OK, and we'll say that's
 
 positive. OK That's addition value.
@@ -1049,13 +851,9 @@ it out, but I don't know what
 
 the accurate mass for for water
 
-d2b11fbb-49f3-406f-9114-ca6890a63b1f
-
 is off the top of my head would
 
 be 18.0901023 or something like
-
-afea4a62-0533-42d2-aeb1-bb6938c4a239
 
 that. I've got adduct
 
@@ -1065,13 +863,9 @@ quite know what that means, but
 
 I'm going to say we'll call it
 
-f9fd3cf7-8536-4c10-b22e-e0a5cd19c24a
-
 one. I don't think
 
 there will be any more that
-
-fa52f326-7355-4849-9b68-2f8b50dde0b8
 
 would almost certainly be singly
 
@@ -1110,13 +904,11 @@ file, add new adduct
 
 <BUG IDENTIFICATION>
 
+P:
+
 Ah great, it's in there now
 
-just for the
-
-c0f38619-a7b5-4d1f-bced-a7bd7cb93cda
-
-purpose of exercise I'm having
+just for the purpose of exercise I'm having
 
 restarted the program. I've now
 
