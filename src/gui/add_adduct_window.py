@@ -63,8 +63,6 @@ class AddAdductWindow(QWidget):
             'Adduct Addition Value'), addition_spinbox)
         layout.addRow(CustomFieldLabel(
             'Adduct Multiplication Value'), multiplication_spinbox)
-        layout.addRow(CustomFieldLabel(
-            'Adduct Nickname (optional)'), QLineEdit())
         layout.addRow(btn_cancel, self.btn_submit)
 
         self.setLayout(layout)

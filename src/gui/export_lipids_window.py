@@ -23,7 +23,7 @@ class ExportLipidsWindow(QWidget):
         self.save_button.setEnabled(False)
         self.save_button.clicked.connect(self.save)
 
-        layout.addRow(QLabel("Filename"), txt_filename)
+        layout.addRow(QLabel("Filename"), txt_filename, QLabel(".json"))
         layout.addRow(exit_button, self.save_button)
 
     def save(self):
