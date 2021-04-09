@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import (QWidget, QFormLayout, QVBoxLayout, QHBoxLayout,
                              QRadioButton, QScrollArea, QSizePolicy)
 
 from gui.collapsible_section import Section
+from assets import strings
 
 
 class LipidDetailsScreen(QWidget):
@@ -106,6 +107,7 @@ class LipidListItem(QWidget):
         self.lipid_name = QLineEdit(parent=self.section)
         self.lipid_name.setText(self.lipid.name)
         self.lipid_name.textChanged.connect(self.update_lipid_name)
+        self.lipid_name.setToolTip(strings.tooltips['lipidName'])
 
         self.lipid_formula = QLineEdit(parent=self.section)
         self.lipid_formula.setText(self.lipid.lipid_formula)
@@ -122,6 +124,8 @@ class LipidListItem(QWidget):
         self.isotope_depth.setRange(0, 9)
         self.isotope_depth.setValue(self.lipid.isotope_depth)
         self.isotope_depth.valueChanged.connect(self.update_isotope_depth)
+        self.isotope_depth.setToolTip(strings.tooltips["isotopeDepth"])
+        self.isotope_depth.setToolTipDuration(0)
 
         self.retention_time = QDoubleSpinBox(decimals=0, parent=self.section)
         self.retention_time.setRange(0, 1000)
@@ -181,7 +185,7 @@ class LipidListItem(QWidget):
             "Adduct Type"), self.adduct_type)
 
         self.lipid_layout.addRow(CustomFieldLabel(
-            "Isotope Depth"), self.isotope_depth)
+            "Number of Isotopes"), self.isotope_depth)
 
         rt_container = QHBoxLayout()
         rt_container.addWidget(CustomFieldLabel(

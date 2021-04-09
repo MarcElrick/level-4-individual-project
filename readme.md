@@ -1,4 +1,4 @@
-# Lipid Isotope Inference Software
+# Lipid Kinetics Inference Software
 
 This repository contains my Glasgow University Level 4 Individual Project, as well as my dissertation and all related documentation.
 
@@ -10,15 +10,18 @@ This repository contains my Glasgow University Level 4 Individual Project, as we
 
 ### Windows Executable
 
-If you are on windows, then you can download a simple .exe file from the most recent CI build, located [here](https://github.com/MarcElrick/level-4-individual-project/actions?query=workflow%3A%22Package+application+with+PyInstaller%22). NOTE: The executable version has significantly longer startup time that running the application with python. Simply click on the downloaded file, ignore any warnings, and it should run.
+1. Download `lipid_isotope_inference.zip` from the [latest release](https://github.com/MarcElrick/level-4-individual-project/releases/latest).
+2. Extract this file to a suitable location.
+3. Open the extracted file and run `main.exe`.
+4. Accept any security warnings and run.
 
 ### Python
 
-Otherwise, you can run the software using any Python version >= 3.7.
+If not on Windows 10, you can run the software using any Python version >= 3.7. It is advised that you create a Python virtual environment for this. There are guides for both vanilla [Python](https://docs.python.org/3/tutorial/venv.html) and [Anaconda](https://docs.anaconda.com/anaconda/navigator/tutorials/manage-environments/).
 
 #### Installation
 
-1. Install Python >= 3.7
+1. Install Python >= 3.7 (activate virtual environment if using one)
 2. Clone this GitHub repository:
 
 ```bash
@@ -38,10 +41,6 @@ pip install -r requirements.txt
 cd src
 python main.py
 ```
-
-## Dissertation
-
-The PDF version of the dissertation is not in version control, however the most recent build of the PDF can be downloaded from the artefacts section of the most recent build, located [here](https://github.com/MarcElrick/level-4-individual-project/actions?query=workflow%3A%22Build+LaTeX+document%22).
 
 ## Documentation
 

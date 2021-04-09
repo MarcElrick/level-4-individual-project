@@ -17,7 +17,8 @@ class FilePickerScreen(QWidget):
 
     def build_ui(self):
         self.outerLayout = QVBoxLayout()
-        self.title = CustomTitle("Step 2: Pick files and enter times")
+        self.title = CustomTitle(
+            "Step 2: Pick files and enter experiment timepoints.")
 
         self.innerLayout = QVBoxLayout()
 
@@ -31,7 +32,7 @@ class FilePickerScreen(QWidget):
         self.nav_buttons.btn_next.setDisabled(
             len(self.state.file_time_pairs) == 0)
 
-        self.btn_add = ActionButton("Add Files")
+        self.btn_add = ActionButton("Choose Files")
         self.btn_add.clicked.connect(self.add_files)
 
         self.outerLayout.addWidget(self.title)
@@ -103,7 +104,7 @@ class PairListItem(QWidget):
 
         self.layout.addWidget(self.path_label)
         self.layout.addWidget(self.btn_choose_file)
-        self.layout.addWidget(CustomFieldLabel("Time"))
+        self.layout.addWidget(CustomFieldLabel("Timepoint(hours)"))
         self.layout.addWidget(self.time_entry)
         self.layout.addWidget(self.btn_delete)
         self.layout.setAlignment(Qt.AlignTop)

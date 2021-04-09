@@ -357,4 +357,128 @@
 
 ## 14 Feb 2021
 
-- _1 hour_ - Implemented auto-collapsing of views.
+- _1.5 hours_ - Implemented auto-collapsing of views and updated labels.
+- _1 hour_ - Further writing of evaluation section of dissertation.
+
+## 15 Feb 2021
+
+- _2 hours_ - Started adding tooltips to identified ambiguous labels.
+
+## 19 Feb 2021
+
+- _0.5 hours_ - Writing Implementation chapter of dissertation.
+
+## 23 Feb 2021
+
+- _1.5 hours_ - Writing Implementation chapter of dissertation.
+
+## 25 Feb 2021
+
+- _2 hours hours_ - Writing Introduction chapter of dissertation.
+
+## 26 Feb 2021
+
+- _1 hour_ - Writing Background section of dissertation.
+
+## 27 Feb 2021
+
+- _1 hour_ - Writing Background section of dissertation.
+
+## 1 March 2021
+
+- _1 hour_ - Writing Introduction section of dissertation.
+
+## 2 March 2021
+
+- _1 hour_ - Writing implementation section of dissertation - state management and GUI sections.
+
+## 3 March 2021
+
+- _2 hours_ - Continued writing implementation section - technology stack - discussing Java vs Python.
+- _2 hours_ - Further expanded implementation - GUI section.
+
+## 5 March 2021
+
+- _1 hour_ - Expanded implementation section - state management
+
+## 6 March 2021
+
+- _2 hours_ - Went through implementation section and brushed up language.
+
+## 8 March 2021
+
+- _1 hour_ - Implementation section - wrote testing section.
+
+## 11 March 2021
+
+- _2 hours_ - Implementation section - Planned and began writing about software engineering aspects - VC, Issue tracking, Documentation CI/CD, TDD.
+
+## 12 March 2021
+
+- _2 hours_ - Moved yesterdays sections into a new chapter - Software engineering practices. Also expanded significantly on this.
+
+## 14 March 2021
+
+- _0.5 hours_ - Proof reading + corrections
+
+## 20 March 2021
+
+- _2 hours_ - Made significant progress writing Introduction. Work needed to fully understand what should be in here.
+
+## 21 March 2021
+
+-_2 hours_- Made a list of necessary figures and began work on some two of them using Google draw.
+
+## 23 March 2021
+
+- _2 hours_ - Made further progress on figures
+- _1 hour_ - Learned how to make flowcharts with latex - required for one of my figures.
+
+## 24 March 2021
+
+- _2 hours_ - Writing background section - lots of difficult topics that will take time.
+
+## 26 March 2021
+
+- _2 hours_ - Further work on figures, brushed up on lots of language.
+
+## 28 March 2021
+
+- _3 hours_ - Put significant effort into introduction and background sections. Updated other sections based on supervisor feedback.
+
+## 30 March 2021
+
+- _3 hours_ - Work on background section - made checklist of all remaining work.
+
+## 1 April 2021
+
+- _3 hours_ - Work on background section - Further explaining of underlying process
+
+## 2 April 2021
+
+- _3 hours_ - Changes made to background section based on feedback from supervisor meeting. Understanding of underlying process was mostly correct however I need to expand further.
+
+## 3 April 2021
+
+- _1 hour_ - Proof reading of previous work.
+- _3 hours_ - Work on figures
+
+## 4 April 2021
+
+- _2 hours_ - Further work on figures, added refs for further reading.
+
+## 6 April 2021
+
+- _3 hours_ - General rewriting and tidy up
+
+## 7 April 2021
+
+- _3 hours_ - Changes made to background section based on feedback from supervisor meeting. Understanding of underlying process was mostly correct however initial distribution is due to carbon, not hydrogen isotopes.
+
+## 8 April 2021
+
+- _3 hours_ - Final dissertation writing.
+
+## 9 April 2021
+
+- _4 hours_ - Preparing repository for submission
