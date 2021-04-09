@@ -448,4 +448,37 @@
 
 ## 30 March 2021
 
-- _X hours_ - Work on background section - made checklist of all remaining work.
+- _3 hours_ - Work on background section - made checklist of all remaining work.
+
+## 1 April 2021
+
+- _3 hours_ - Work on background section - Further explaining of underlying process
+
+## 2 April 2021
+
+- _3 hours_ - Changes made to background section based on feedback from supervisor meeting. Understanding of underlying process was mostly correct however I need to expand further.
+
+## 3 April 2021
+
+- _1 hour_ - Proof reading of previous work.
+- _3 hours_ - Work on figures
+
+## 4 April 2021
+
+- _2 hours_ - Further work on figures, added refs for further reading.
+
+## 6 April 2021
+
+- _3 hours_ - General rewriting and tidy up
+
+## 7 April 2021
+
+- _3 hours_ - Changes made to background section based on feedback from supervisor meeting. Understanding of underlying process was mostly correct however initial distribution is due to carbon, not hydrogen isotopes.
+
+## 8 April 2021
+
+- _3 hours_ - Final dissertation writing.
+
+## 9 April 2021
+
+- _4 hours_ - Preparing repository for submission
