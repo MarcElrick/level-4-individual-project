@@ -4,6 +4,8 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{tikz}
+\usepackage{float}
+
 \usetikzlibrary{shapes,arrows}
 
 \tikzstyle{decision} = [diamond, draw, fill=blue!20, 
@@ -27,12 +29,9 @@
 %==============================================================================
 %% ABSTRACT
 \begin{abstract}
-    Every abstract follows a similar pattern. Motivate; set aims; describe work; explain results.
-    \vskip 0.5em
-    ``XYZ is bad. This project investigated ABC to determine if it was better. 
-    ABC used XXX and YYY to implement ZZZ. This is particularly interesting as XXX and YYY have
-    never been used together. It was found that  
-    ABC was 20\% better than XYZ, though it caused rabies in half of subjects.''
+
+    
+    The inference of lipid kinetics is a useful tool for understanding how metabolic reactions work within different biological organisms. This dissertation discusses the development of Lipid Kinetics Inference Software, an application for performing such inference that is a dramatic improvement over the previous state of the art. It provides an introduction to the problem at hand before discussing the entire software development life-cycle including: requirements gathering; design; implementation; software engineering and DevOps practices; and usability evaluation. It then gives reflections on this process and lists suggestions for future work. Evaluations showed that while the application was effective in performing analysis, there were several usability issues that were later remedied.
 \end{abstract}
 
 %==============================================================================
@@ -47,7 +46,7 @@
 % this declaration, but doing so would help future students.
 %
 \def\consentname {Marc Elrick} % your full name
-\def\consentdate {14 Jan 2021} % the date you agree
+\def\consentdate {\today} % the date you agree
 %
 \educationalconsent
 
@@ -88,66 +87,168 @@
 \pagenumbering{arabic} 
 
 
-This chapter provides an introduction to the LiKInS(Lipid Kinetics Inference Software) application and the motivations behind its development. It gives a cursory description to the process of isotope labelling within the context of lipidomics before discussing the project aims and the clients involved. The chapter concludes with an outline of the rest of this dissertation.
+This chapter provides an introduction to the LiKInS(Lipid Kinetics Inference Software) application and the motivations behind its development. It gives a cursory description to the process of isotope labelling within the context of lipidomics before discussing the project aims and the clients involved. The chapter concludes with an outline of the rest of this dissertation. While this chapter provides a cursory description of the problem being solved, chapter \ref{background} provides a much more in-depth explanation.
 
 \section{Problem Description} \label{problem-description}
-In order to grasp the problem being solved by LiKInS, it is first necessary to gain a basic understanding of where the data being processed originates. The following subsections each discuss topics necessary to understand the bigger picture.
-\subsection{Isotope Labelling}
-Isotope labelling is an experimental technique used in various scientific fields to observe and measure the effects and activity of a chemical reaction. A reactant(the substance undergoing the reaction) is deliberately altered by replacing some of its atoms with a less common isotope(an atom of the same element with a differing number of neutrons). Researchers then allow the reaction to take place and, after time has passed, they can examine the products to measure how much of the isotope is present, allowing them to determine the sequence of events within the reaction. 
+In order to grasp the problem being solved by LiKInS, it is first necessary to gain a basic understanding of where the data being processed originates. The following subsections each discuss topics necessary to understand the bigger picture. 
 
-\subsection{Lipidomics}
-Metabolomics is a field of Chemistry related to the study of chemical reactions involving metabolites(small molecules usually found in biological systems such as vitamins, proteins and ethanol). Lipidomics is a branch of the larger metabolomics field which is concerned specifically with the pathways of lipids within biological systems and how they interact with other metabolites. Isotope labelling can be used to observe these pathways and improve our understanding of them. This project deals specifically with the analysis of isotope labelling data within lipidomics.
+\subsection{Isotopes \& Isotope Labelling}
+An isotope is defined by \cite{isotope} as \say{one of two or more species of atoms of a chemical element with the same atomic number and position in the periodic table and nearly identical chemical behaviour but with different atomic masses and physical properties.} Isotopes are essentially all of the variants of an element, each of which has a differing number of neutrons.
+
+Isotope labelling is an experimental technique used in various scientific fields to observe and measure the effects and activity of a chemical reaction. A reactant (the substance undergoing the reaction) is deliberately altered by replacing some of its atoms with a less common isotope (an atom of the same element with a differing number of neutrons). Researchers then allow the reaction to take place and, after time has passed, they can examine the products to measure how much of the isotope is present, allowing them to determine the sequence of events within the reaction. 
+
+\subsection{Lipids \& Lipidomics}
+Lipids are defined by \cite{lipidDef19:online} as being \say{any of a diverse group of organic compounds including fats, oils, hormones, and certain components of membranes that are grouped together because they do not interact appreciably with water.} For the purposes of this dissertation, they can be thought of as simply interesting organic molecules that can be produced in metabolic reactions.
+
+Metabolomics  is defined as \say{the study of metabolites, the chemical substances produced as a result of metabolism, which encompasses all the chemical reactions that take place within cells to provide energy for vital processes} \citep{Metabolomics}. Lipidomics is a sub-branch of metabolomics concerned specifically with the pathways of lipids within biological systems and how they interact with other metabolites. Isotope labelling can be used to observe and improve our understanding of these pathways. This project deals specifically with the analysis of isotope labelling data within lipidomics.
 
 \subsection{Mass Spectrometry \& LiKInS}
-The measurement of products is done using an experimental technique known as mass spectrometry via a piece of specialised hardware known as a mass spectrometer. The resulting data is stored as a .MZML file. Prior to the development of LiKInS, there was no publicly available software for analysing how the intensity of isotopes within products vary across timepoints within a reaction. LiKInS allows the user to specify a set of lipids and a set of experiment files before parsing and analysing these files to produce an excel spreadsheet with the analysed data and accompanying visualisations.
+The measurement of products is done using an experimental technique known as mass spectrometry via a piece of specialised hardware known as a mass-spectrometer. The resulting data is stored as a MZML file. All files utilised during the development of LiKInS were created using measurements from an Orbitrap Exactive mass-spectrometer \citep{thermofisher}. Prior to the development of LiKInS, there was no publicly available software for analysing how the intensity of isotopes within products vary across time-points within a reaction. LiKInS allows the user to specify a set of lipids and a set of experiment files before parsing and analysing these files to produce an excel spreadsheet with the analysed data and accompanying visualisations.
 
 
-\section{Clients}
-LiKInS was developed in collaboration with metabolomics researchers from both the University of the Highlands and Islands and Glasgow Polyomics. These clients provided much of the background information for the project and served as the target users for the software. Towards the latter stages of development, they provided feedback and assisted in the gathering of new requirements and improvements to the application.
+
+\section{Clients}\label{clients}
+LiKInS was developed in collaboration with metabolomics researchers from both the University of the Highlands and Islands and Glasgow Polyomics. These clients provided much of the background information for the project and served as the target users for the software. Towards the latter stages of development, they provided feedback and assisted in the gathering of new requirements and improvements to the application. They also acted as particpants for the usability evaluation and assisted in recruiting other participants. 
 
 \section{Motivations}
-The analysis process performed by LiKInS could previously only be done manually unless the researcher had a significant amount of programming experience. As is discussed in depth in section \ref{manual-process}, the manual processing of this data is incredibly time consuming and requires the large-scale inspection and copying of values and so leaves a high potential for human error. The motivation is therefore clear - by developing an application to allow the automation of this process, researchers can save hours of tedious and laborious work. 
+The analysis process performed by LiKInS could previously only be done manually unless the researcher had a significant amount of programming experience. As is discussed in-depth in section \ref{manual-process}, the manual processing of this data is incredibly time consuming and requires the large-scale inspection and copying of values and so leaves a high potential for human error. The motivation is therefore clear: by developing an application to allow the automation of this process, researchers can save hours of tedious and laborious work. 
 
-This motivation was validated at the end of the project when one of the clients, who had previously undertaken the manual analysis process, gave the following statement via email: \say{The process isn’t ridiculously difficult however because it is not very automatic it takes up a fair amount of time. If this was reduced I could have monitored more lipids for my PhD}. It is clear that the concept of LiKInS has clear scope to increase the velocity of research within this area.
+This stated motivation was validated at the end of the project when one of the clients, who had previously undertaken the manual analysis process, gave the following statement via email: \say{The process isn’t ridiculously difficult however because it is not very automatic it takes up a fair amount of time. If this was reduced I could have monitored more lipids for my PhD}. It is clear that the concept of LiKInS has clear scope to increase the velocity of research within this area.
 
 \section{Aims}
-Given the problem description provided in \ref{problem-description}, the main objective of this project was clear: to develop an open-source application that can parse and analyse .MZML files to produce output data and visualisations stored as a spreadsheet. A prototype analysis pipeline was provided as a Jupyter notebook so in essence, the aim was to turn this into a self-contained, user-focused desktop application. This is discussed further in Chapter \ref{requirements-gathering} - Requirements Gathering, while the entire development process for this software is the subject matter of this dissertation.
+Given the problem description provided in \ref{problem-description}, the main objective of this project was clear: to develop an open-source application that can parse and analyse MZML files to produce output data and visualisations stored as a spreadsheet. A prototype analysis pipeline was provided as a Jupyter notebook so in essence, the aim was to turn this into a self-contained, user-focused desktop application. This is discussed further in chapter \ref{requirements-gathering}, while the entire development process for this software is the subject matter of this dissertation.
 
 
 \section{Dissertation Structure}
 This dissertation will outline the design, implementation and evaluation of LiKInS, as well as the software engineering practices utilised throughout. The remaining chapters are as follows:
 \begin{itemize}
     \item \textbf{Chapter 2 - Background}\newline
-    This chapter discusses prior work that allowed for the development of LiKInS as well as the previous state of the art in performing dynamic lipid analysis.
+    This chapter gives a more in-depth problem description and introduces the concepts and experimental processes that lead to the conceptualisation of LiKInS. It also reports on the previous state of the art in inferring lipid kinetics as well as previous work that contributed to the creation of LiKInS.
     \item \textbf{Chapter 3 - Requirements Gathering}\newline
-    This chapter is concerned with the process of gathering requirements, including how the problem was first understood, the development of user stories, functional requirements and how new requirements were gathered during implementation and evaluation.
+    This chapter is concerned with the process of gathering requirements, including how the problem was first understood, the development of user stories, functional and non-functional requirements and how new requirements were gathered during implementation and evaluation.
     \item \textbf{Chapter 4 - Design}\newline
     Chapter 4 covers the design process of the software, including the user interface design, the system architecture design and refinements to the design during development.
     \item \textbf{Chapter 5 - Implementation}\newline
-    This chapter discusses the implementation of LiKInS, including the technology stack, GUI development, state management system and packaging. 
+    This chapter discusses the implementation of LiKInS, including the technology stack, GUI development, state management system, packaging and testing
+    .
     \item \textbf{Chapter 6 - Software Engineering Practices}\newline
-    This chapter discusses the software engineering practices that were usilised, including version control, issue tracking, wiki documentation, continuous integration and deployment. 
+    This chapter discusses the software engineering and DevOps practices that were utilised, including version control, issue tracking, wiki documentation, continuous integration, deployment and test-driven development. 
     \item \textbf{Chapter 7 - Usability Evaluation}\newline
-    Chapter 6 discusses how the usability of the software was evaluated. This includes the recruitment of participants, the protocol used and how gathered data was analysed.
+    Chapter 7 discusses how the usability of the software was evaluated. This includes the recruitment of participants, the protocol used and how gathered data was analysed.
     \item \textbf{Chapter 8 - Conclusion}\newline
-    The final chapter will discuss reflections on the development of LiKInS as well as thoughts on future improvements that could be made.
+    The final chapter provides a summary of and reflections on the development of LiKInS as well as thoughts on future improvements that could be made.
     
 \end{itemize}
 
 
 %==================================================================================================================================
-\chapter{Background}
-This chapter will discuss previous contributions and how they lead to, and motivated, the development of LiKInS.
+\chapter{Background}\label{background}
+This chapter discusses key concepts behind the analysis process as well as the previous state of the art for inferring lipid kinetics. I then goes on to discuss previous contributions and how they lead to the development of LiKInS.
+
+
+\section{In-Depth Problem Description}
+With the relevant definitions being provided in section \ref{problem-description}, it is now possible to give a more specific description of the analysis process and the surrounding experimental process.
+
+\subsection{Heavy-Water}
+Much of this chapter will use the example of heavy water to explain the isotope labelling process. It is therefore important to understand how heavy-water differs from ordinary water. Whilst the vast majority of water molecules have chemical formula $H_{2}O$, where $H$ is hydrogen-1, also known as protium (the most abundant hydrogen isotope with one proton and no neutrons), heavy-water molecules have chemical formula $D_2O$ (also written as $^{2}H_{2}O$), where $D$ is deuterium. Deuterium, or hydrogen-2, is an isotope of hydrogen which has one proton and one neutron. The difference between these isotopes is illustrated in figure \ref{fig:h1-vs-h2}.
+%References for distribution of H to D%
+If one were to take a sample of water from a naturally occurring source (e.g. the ocean), that sample would contain approximately 1 deuterium atom for every 6,700 \citep{heavy-water} protium atoms. This means that while $H_{2}O$ does occur naturally, it is extremely rare. Henceforth, \say{ordinary water} refers specifically to $H_2O$.
+
+
+\begin{figure}[htb]
+\centering
+\begin{subfigure}{0.3\linewidth}
+        \includegraphics[width=\linewidth]{dissertation/images/Hydrogen-1.pdf}
+        \caption{Hydrogen-1 (Protium) Atom}
+    \end{subfigure}
+    \begin{subfigure}{0.3\linewidth}
+        \includegraphics[width=\linewidth]{dissertation/images/Deutereum.pdf}
+    \caption{Hydrogen-2 (Deuterium) Atom}
+    \end{subfigure}
+    \caption{Diagram showing the difference between protium and deuterium atoms. While the nucleus of a protium atom contains one proton and no neutrons, the nucleus of a deuterium atom contains one proton and one neutron.}
+    \label{fig:h1-vs-h2}
+\end{figure}
+
+\subsection{Definitions}
+Four terms that are relevant to this problem description are as defined. \textbf{Mass-charge ratio}, or m/z, is the ratio of atomic mass to formal charge of an ion (a charged particle, in our case a lipid). \textbf{Adducts} are molecules that are formed via the addition of two separate molecules. \textbf{Retention time} is the time from a sample being entered into the mass-spectrometer to becoming visible on its chromatogram. \textbf{Intensity} of a lipid refers to how much of that lipid is present within a sample.
+
+For the purposes of this dissertation, only the following facts must be known about these terms:
+\begin{itemize}
+\item Mass-charge ratio is generally analogous to mass and forms one axis of the output MZML files.
+\item Retention time forms another axis of the output MZML files.
+\item Adducts are used to charge lipids in a desired way and have a small effect on the mass of that lipid.
+\item Intensity forms the final axis of the output MZML files, encoded as colour.
+\end{itemize}
+
+\subsection{Isotope Patterns}
+%Next, it is important to understand the concept of isotope patterns with respect to lipids. Suppose we have a lipid $X$ which is formed in a metabolic reaction that involves the consumption of water. Since protium is far more abundant than deuterium, the vast majority of $X$ molecules produced will have all of their hydrogen atoms being protium. This specific configuration of $X$ is the first component of our isotope pattern. Let this component be known as $I_0$. Let the mass-charge ratio of $I_0$ be known as $m$.
+
+Next, it is important to understand the concept of isotope patterns with respect to lipids. Suppose we have a lipid $X$ which is formed in a metabolic reaction. Carbon-12 (six protons and six neutrons) is the most abundant isotope of carbon and hence most of the carbon atoms of $X$ will be carbon-12. This specific configuration of $X$ is the first component of our isotope pattern. Let this component be known as $I_0$. Let the mass-charge ratio of $I_0$ be known as $m$.
+
+Carbon-13 (six protons and seven neutrons) is the next most abundant carbon isotope and makes up about 1\% of all carbon atoms \citep{carbon13}. A smaller number of $X$ molecules will have one carbon-13 atom with the rest being carbon-12. These lipids, henceforth known as $I_1$, will have a slightly greater mass-charge ratio than $I_0$. Let the mass of a neutron be known as $\theta$ and hence the mass-charge ratio of $I_1$ is $m+\theta$.
+
+A yet smaller number of these molecules will have two carbon-13 atoms with the rest being carbon-12. These will have a greater mass-charge ratio ($m+2\theta$). This is our next component, $I_2$. 
+\begin{figure}[htb]
+    \centering
+    \includegraphics{dissertation/images/intensities_new_1.pdf}
+    \caption{An illustration of an isotope pattern. $I_0$ is the most abundant with each subsequent component being less abundant than the previous one. Additionally, each component has a greater mass-charge ratio (m/z) than its predecessor.}
+    \label{fig:isotopomers}
+\end{figure}
+
+
+We can define components in our isotope pattern up to a maximum $I_n$. $I_n$ would be the component with all carbon atoms being carbon-13 and would have mass $m+n\theta$. Each component is defined by how many of its carbon atoms are carbon-12 and how many are carbon-13. Figure \ref{fig:isotopomers} illustrates the relative intensities and mass-charge ratios of each component.
+
+Since the mass difference between carbon-12 and carbon-13 is the same as the difference between protium and deuterium ($\theta$), the picture becomes more complicated. A molecule of $I_0$ with a single hydrogen atom being deuterium instead of protium would have identical mass to that of $I_1$ ($m+\theta$) and so $I_1$ is more properly defined as any $X$ with a mass-charge ratio of $m+\theta$. More generally, $I_x$ is any configuration with a mass of $m + x\theta$. This means we can turn a molecule of $I_0$ into $I_1$ either by replacing a carbon-12 atom with carbon-13 or by replacing a protium atom with deuterium.
+
+\subsection{Experimental Procedure} \label{experimental-procedure}
+To understand how the concept an of isotope pattern factors into the problem at hand, it is necessary to provide a cursory description of the experimental process being carried out by researchers. This description uses the example of heavy water as the isotope labelled input. 
+
+This procedure is as follows:
+
+\begin{enumerate}
+    \item We start with an already running metabolic reaction. This could be within cultured human cells, bacterial cells or some other type of cell. The requirements of the experiment are: a) water is a reactant and b) some of the products of this reaction are lipids.
+    \item A sample of lipids is taken from this reaction which will later be measured using a mass-spectrometer.
+    \item Heavy water ($D_2O$) is then added to the reaction instead ordinary water ($H_2O$).
+    \item Several more samples are subsequently taken at different points throughout the experiment. Examples of experiment sample points would be at hours 0 (the sample taken at step 2), 8, 24, 48, 72 and 96.
+    \item If one were to look at the same lipid in each of these files, they would see that as time went on, the intensity of deuterium would increase and the intensity of protium would decrease. The expected change in isotope pattern over time is illustrated in figure \ref{fig:intensities-comparison} where we can see the intensity of higher components increases (due to the increased concentration of deuterium) while the intensity of lower components decreases. By observing these changes in intensity, one can infer information about the kinetics of the reaction (the rate of reaction).
+\end{enumerate}
+\begin{figure}
+    \centering
+        \begin{subfigure}{0.45\linewidth}
+        \includegraphics[width=\linewidth]{dissertation/images/intensities_new_1.pdf}
+    \caption{Time = 0 hours}
+    \end{subfigure}
+      \begin{subfigure}{0.45\linewidth}
+        \includegraphics[width=\linewidth]{dissertation/images/intensities_new_2.pdf}
+    \caption{Time = $n$ hours}
+    \end{subfigure}
+    \caption{A comparison of the isotope pattern of the same lipid between hour 0 and hour $n$. As the experiment goes on, the intensities of $I_1$ to $I_n$ increase while the intensity of $I_0$ decreases due to the increased metabolism of heavy water.}
+    \label{fig:intensities-comparison}
+\end{figure}
+\subsection{MZML and MZML Viewers}
+Measurements taken from a mass-spectrometer are generally stored as MZML files, an XML based format designed for storing mass-spectrometry data. This data can be viewed in a MZML viewer such as TOPPView\citep{openms}, a part of the OpenMS suite of mass-spectrometry software tools. Such software visualises data in three dimensions: along the x-axis we have retention time in seconds; along the y-axis we have mass-charge ratio; and the z-axis is codified using colour and denotes intensity. Figure \ref{fig:mzml-viewer} illustrates how isotope patterns are shown in an MZML viewer. Values are thresholded and assigned a colour. The user can view the exact value at a point by hovering over it with the mouse pointer.
+\begin{figure}[htb]
+    \centering
+    \begin{subfigure}{0.36\linewidth}
+        \includegraphics[width=\linewidth]{dissertation/images/intensities_new_1.pdf}
+    \caption{m/z vs intensity graph}
+    \end{subfigure}
+    \begin{subfigure}{0.5\linewidth}
+        \includegraphics[width=\linewidth]{dissertation/images/spectrum graph.pdf}
+    \caption{MZML Viewer}
+    \end{subfigure}
+    \caption{The same isotope pattern shown as an intensity vs m/z graph and on a MZML viewer with colour denoting intensity. Darker colours denote higher intensity}
+    \label{fig:mzml-viewer}
+\end{figure}
+
 
 \section{State of the Art} \label{state-of-the-art}
-%This section will provide a description of the process Nicole had to go through to perform this analysis by hand, and how there is a lack of software that does this.
-
-As it stands, there is no publicly available software to perform such analysis. The state of the art is essentially having a human manually going through each output file and extracting the relevant information by hand. This process is incredibly time consuming and extremely prone to human error.
+As it stands, there is no publicly available software to perform analysis on the mass-spectrometer data from the experiment described in \ref{experimental-procedure}. The state of the art is essentially having a human manually going through each output file and extracting the relevant information by hand. This process is incredibly time consuming and extremely prone to human error.
 \subsection{Manual Process}\label{manual-process}
-The process of manually extracting data for a single lipid is as follows:
+When carrying out this type of research, one would rarely be interested in only one lipid and would usually be analysing many. The process of manually extracting data for a \textbf{single} lipid is as follows:
 \begin{enumerate}
     \item The researcher must decide which lipid they would like to study. They must then find the theoretical mass-charge ratio(m/z) and retention time values for said lipid.  
-    \item The researcher must then open a .MZML file from the experiment in an appropriate .MZML viewer(e.g. TOPPView). This software will show the file as a spectrum, with retention time on the x-axis and mass-charge ratio on the y-axis.
+    \item The researcher must then open a MZML file from the experiment in an appropriate MZML viewer(e.g. TOPPView). This software will show the file as a spectrum, with retention time on the x-axis and mass-charge ratio on the y-axis.
     \item They must manually locate the region at their target m/z and retention time and locate the peak intensity. Since the actual value will not be exactly the same as their theoretical value, this may not be exactly in the expected location, but will be nearby. 
     \item They must then take a note of this value in a spreadsheet.
     \item Steps 1 to 4 must be repeated for each file. There is a minimum of 5 files from each experiment.
@@ -156,7 +257,7 @@ The process of manually extracting data for a single lipid is as follows:
 \end{enumerate}
 This process is illustrated in figure \ref{fig:toppView}.
 \subsection{Human Fallibility}
-To put into perspective just how tedious this process is, if one wished to analyse a single lipid from an experiment with measurements taken at six different time points(hence there are six files) and analyse to six isotopes, they would need to manually extract $6\times6=36$ different values from the .MZML viewer. Not only is this painstakingly slow but it is also incredibly prone to human error.
+To put into perspective just how tedious this process is, if one wished to analyse a single lipid from an experiment with measurements taken at six different time points(hence there are six files) and analyse to five isotopes, they would need to manually extract $6\times5=30$ different values across six separate files. Not only is this painstakingly slow but it is also incredibly prone to human error.
 
 The following errors could easily be made in this process:
 \begin{itemize}
@@ -171,10 +272,10 @@ These are just a few of the potential human errors that can be made during this 
 \subsection{Time Complexity}
  More generally, a single lipid requires the extraction of $m\times n$ values where $m$ is the number of isotopes and $n$ is the number of files. For a given number of lipids $l$, each of which has the same  $m$ and $n$ values, there are $l\times m\times n$ values to extract. This is the worst case scenario(as some lipids would usually be analysed to fewer isotopes) and so can be expressed in big-O notation as $O(lmn)$. While this is easily achievable by a machine, the time taken for a human to extract a single value makes scaling this process unfeasible. Moreover, it is not unreasonable to assume that there are 100 or more lipids being investigated at one time. Using the previous example, if there were 100 lipids being investigated, there would be $6\times6\times100=3600$ values to be manually extracted and so it is clear to see that not only is this highly prone to error and inaccuracy, it is also incredibly time consuming.
 
-\begin{figure}
+\begin{figure}[htb]
     \centering
-    \includegraphics[width=\textwidth]{dissertation/images/ToppView Diagram (2).pdf}
-    \caption{An illustration of how intensities are extracted from the .MZML viewer. Darker colours identify points of higher intensity. Researcher must identify the peak intensity and take note of its value. This must be done in every file for every isotope.}
+    \includegraphics[width=\textwidth]{dissertation/images/ToppView Diagram (3).pdf}
+    \caption{An illustration of how intensities are extracted from the MZML viewer. Darker colours identify points of higher intensity. Researcher must identify the peak intensity for each isotope component of the target lipid. This must be done in every file.}
     \label{fig:toppView}
 \end{figure}
 
@@ -183,11 +284,14 @@ Some work had already been done in automating the analysis process prior to the 
 
 
 \section{mass-spec-utils}
-The prototype pipeline makes use of a Python library called \say{mass-spec-utils} which was also developed by the project supervisor and contains a variety of utilities related to mass-spectrometry file processing. The prototype uses several components of this including an adduct thesaurus, which calculates the total mass of a given lipid with its adduct, as well as the MZMLFile class which acts as a wrapper to .mzml files with useful methods to parse and process these files. The final application drops most of the usages of mass-spec-utils in favour of new solutions, such as adduct calculations for which the user provides the numbers necessary for the calculation, with MZMLFile being the only component still used.
+The prototype pipeline makes use of a Python library called \say{mass-spec-utils} which was also developed by the project supervisor and contains a variety of utilities related to mass-spectrometry file processing. The prototype uses several components of this including an adduct thesaurus, which calculates the total mass of a given lipid with its adduct, as well as the MZMLFile class which acts as a wrapper to MZML files with useful methods to parse and process these files. The final application drops most of the usages of mass-spec-utils in favour of new solutions, such as adduct calculations for which the user provides the numbers necessary for the calculation, with MZMLFile being the only component still used.
 
+
+\section{Chapter Summary}
+This chapter discuessed the background to the development of LiKInS, firstly by providing an in-depth description of the problem at hand before going on to discuss the state of the art for performing the described analysis of lipid kinetics. It then discussed the prototype analysis piepeline that was provided at the start of the project as well as the mass-spec-utils python package that provided useful utilies for working with MZML files.
 %==================================================================================================================================
 \chapter{Requirements Gathering}\label{requirements-gathering}
-This chapter discusses the gathering of requirements for the project, issues encountered and how the complex problem was interpreted and broken down into actionable issues.
+This chapter discusses the gathering of requirements for the project, issues encountered and how the complex problem was interpreted and broken down into actionable issues. It also goes on to list the initial functional and non-functional requirements.
 
 \section{Understanding the Problem}
 Given the highly specialised nature of the problem in question, it was necessary to gain an understanding of the current prototype pipeline and some basic knowledge of the problem domain.
@@ -204,8 +308,7 @@ The process behind the manual analysis of lipids was presented in the first supe
 While this process gave a basic understanding of the initial requirements of the project, more refinements would be fleshed out in the future as described in \ref{user-stories-and-refinements} and \ref{key-requirements}.
 
 \section{User Stories and Refinements} \label{user-stories-and-refinements}
-Once a basic understanding of the requirements was achieved, it was necessary to write these in a precise, formalised notation to give a concise list of requirements. Initial user stories were created based on the developer understanding of the problem. By formalising this understanding, it was possible for clarifications and changes to be made in the following supervisor meeting, allowing for the removal of ambiguity and misunderstanding of requirements before any code was written. % Find literature discussing how user stories help avoid ambiguity in software projects.
-Initial requirements were gathered from the project supervisor, Dr Simon Rogers, who developed the prototype pipeline and had a deep understanding of the project at hand. As the weeks went on, contact with clients gradually increased until all new requirements were being gathered from clients.
+Once a basic understanding of the requirements was achieved, it was necessary to write these in a precise, formalised notation to give a concise list of requirements. The usage of user stories, as presented by \cite{user-stories}, was the chosen notation. Initial user stories were created based on the developer understanding of the problem. By formalising this understanding, it was possible for clarifications and changes to be made in the following supervisor meeting, allowing for the removal of ambiguity and misunderstanding of requirements before any code was written. Initial requirements were gathered from the project supervisor, Dr Simon Rogers, who developed the prototype pipeline and had a deep understanding of the project at hand. As the weeks went on, contact with clients gradually increased until all new requirements were being gathered from clients.
 
 The final set of requirements came from the results of the usability evaluation discussed in chapter \ref{usability-evaluation}. These were almost entirely based on the usability of the software and added no new features.
 
@@ -214,29 +317,61 @@ When it was time to work on a new user story, it would first be converted into o
 
 Issues were assigned one or more labels denoting which elements of the system would be worked on for that issue. Labels were as follows: 
 \begin{itemize}
-    \item \textbf{gui} - Issue relates to GUI development
+    \item \textbf{gui} - issue relates to GUI development
     \item \textbf{continuous integration} - issue relates to the implementation of a continuous integration pipeline.
-    \item \textbf{testing} - Issue relates to the implementation of tests or test files.
-    \item \textbf{bug} - Issue describes a software defect
-    \item \textbf{data processing} - issue relates to the data analysis process.
-    \item \textbf{evaluation enhancement} - Issue describes a change to be made due to the findings of the usability evaluation.
-    \item \textbf{documentation} - Issue relates to documentation and not directly to any code.
+    \item \textbf{testing} - issue relates to the implementation of tests or test files
+    \item \textbf{bug} - issue describes a software defect
+    \item \textbf{data processing} - issue relates to the data analysis process
+    \item \textbf{evaluation enhancement} - issue describes a change to be made due to the findings of the usability evaluation
+    \item \textbf{documentation} - issue relates to documentation and not directly to any code
 \end{itemize}
 
 
-\section{Functional Requirements} \label{key-requirements}
+\section{Non-Functional Requirements} \label{key-requirements}
 %It should run on-machine, not online due to large filesize
 The following functional requirements were identified as being essential:
 \begin{enumerate}
     \item The application should run on Windows 10.
     \item The application should not require deep technical knowledge to install and run.
-    \item The application should not require the uploading of large .MZML file to a website.
+    \item The application should not require the uploading of large MZML files to a website.
 \end{enumerate}
 Interestingly, the speed at which analysis was performed was not considered to be of great importance. The prototype pipeline could analyse 6 test files in approximately 1-2 minutes which is orders of magnitude faster that performing the analysis by hand, hence optimising the analysis speed was not considered a priority.
+
+\section{Initial Functional Requirements}
+To begin with, the initial functional requirements were gathered and expressed explicitly as user stories. These were categorised into \say{Main Functionality}, \say{Quality of Life} and \say{Potential Further Development}. These are listed below.
+\subsection{Main Features}
+These stories describe features that were deemed core to the final application:
+\begin{itemize}
+    \item As a biologist I want to pick MZML files so that the files can be analysed.
+    \item As a biologist I want to enter timepoints of selected MZML files so that the files can be analysed.
+    \item As a biologist I want to enter chemical formulae of interesting lipids so that lipid data can be correctly analysed.
+    \item As a biologist I want to indicate how a lipid was charged so that lipid data can be correctly analysed.
+    \item As a biologist I want to enter a retention time range for a lipid so that lipid data can be correctly analysed.
+    \item As a biologist I want to provide a mass range so that the correct lipid data can be extracted.
+    \item As a biologist I want to generate an output excel file so that I can view and analyse the data and potentially use it with other software.
+\end{itemize}
+
+\subsection{Quality of Life}
+These stories describe \say{nice to have} features, but were not core to the application.
+\begin{itemize}
+    \item As a biologist I want to know when the system is reading data/loading so that I know the software has not frozen or crashed.
+    \item As a biologist I want to view the progress of the analysis so that I can gauge roughly long I'll need to wait.
+    \item As a biologist I want to have the excel output file be automatically opened so that I can do other things on the computer and am immediately aware when analysis is done.
+    
+\end{itemize}
+
+\subsection{Potential Further Development}
+These stories describe stretch goals that would be implemented if time was available at the end of the project but were not priorities:
+\begin{itemize}
+    \item As a biologist I want to have a preview of data within the application itself once processed so that I don't need to open excel file to verify validity of results
+    \item As a biologist I want to view and edit data points within the application itself so that I can manually correct errors made by the system.
+\end{itemize}
 
 \section{Iterations}
 There were many occasions during supervisor meetings where either new requirements were discussed or there was a misunderstanding of previous requirements. In these cases, new user stories were created for new/adapted requirements and were then turned into issues.
 
+\section{Chapter Summary}
+This chapter discussed the process of gathering requirements for a difficult problem of which the developer had little prior knowledge. It discussed how the original problem was understood, how requirements were turned into user stories and then onto issues. It also discussed initial functional and non-functional requirements as well as how iterations were made involving new or updated requirements during implementation.
 
 %==================================================================================================================================
 \chapter{Design}
@@ -246,7 +381,7 @@ This chapter presents the design process behind LiKInS and how the gathered requ
 \section{User Interface} \label{user-interface-design}
 Initially, a set of low-fidelity wireframes were created using Figma based on the developer understanding of the requirements. These were connected so the viewer can navigate through them by clicking next and back buttons, giving a better idea of how the software would work. This was sent to one of the clients very early on in order to find out if any fields had been missed or were superfluous. This resulted in the identification of a missing field: retention time tolerance, which was key as retention time is not a fixed value and may drift a little. Wireframes were also shown to the project supervisor, who pointed out several issues, the largest of which being that it only allowed for analysis of a single lipid at a time when the user may wish to analyse hundreds. The original wireframes are shown in figure \ref{fig:wireframes}.
 
-\begin{figure}
+\begin{figure}[htb]
 \centering
 \begin{subfigure}{0.4\linewidth}
         \includegraphics[width=\linewidth]{dissertation/images/wireframes/wireframe1.pdf}
@@ -269,18 +404,33 @@ Initially, a set of low-fidelity wireframes were created using Figma based on th
 \end{figure}
 
 
-Given the short time in which the project could be completed, wireframes were not updated after the implementation of the original design in PyQt. Instead, an agile approach was taken whereby any changes required would be made in-code on a feature branch before the next supervisor meeting. This allowed the developer to gain an understanding of PyQt and how to create complex interfaces with it without wasting time creating further wireframes. Refinements were made to the UI throughout the project as usability problems arose.
+Wireframes were not updated after the implementation of the original design. Instead, an agile approach was taken whereby any changes required would be made in-code on a feature branch before the next supervisor meeting. This allowed the developer to gain an understanding of PyQt (see section \ref{gui-implementation}) and how to create complex interfaces with it without wasting time creating further wireframes. Refinements were made to the UI throughout the project as usability problems arose.
+
 
 \subsection{Four-step Design}
 Based on the gathered requirements, it was clear that the user's journey through the application could be broken down into four distinct steps. While there were later deviations from this, with additional windows for defining new adducts as well as importing/exporting, the main user journey for performing analysis remained consistent throughout the development of LiKInS. The four steps, each of which maps to a screen within the application, were as follows:
 \begin{enumerate}
     \item Lipid definition - At this stage, the user enters all information for all lipids they wish to define.
-    \item File selection - The user chooses the mzml files they wish to analyse and enter the corresponding experiment timepoint for each file.
+    \item File selection - The user chooses the MZML files they wish to analyse and enter the corresponding experiment timepoint for each file.
     \item Input summary - The user is given a chance to review all entered data and ensure it is correct before beginning analysis.
     \item Analysis progress - Analysis begins and the user is shown a progress bar denoting how much of the analysis has been performed as a percentage. Once analysis is completed, the user is shown the location of the output file on disk.
 \end{enumerate}
-Once implementation had begun, this design was modified slightly to fulfill additional requirements. The two features that required deviation was the implementation of importing/exporting groups of lipids and the definition of custom adducts. These features were designed around Windows platform conventions, with a standard file menu that can be accessed from any screen in the application. This would eventually include options for defining adducts, exporting lipids and importing lipids. When each of these options was clicked, a small model window would be opened and the user would be prevented from interacting with the main window until it was closed. While this deviated from the existing \say{four-step design}, it allowed these new features to be seamlessly integrated with the existing system without a large-scale redesign.
+Once implementation had begun, this design was modified slightly to fulfill additional requirements. The two features that required deviation was the implementation of importing/exporting groups of lipids and the definition of custom adducts. These features were designed around Windows platform conventions, with a standard file menu that can be accessed from any screen in the application. This would eventually include options for defining adducts, exporting lipids and importing lipids. When each of these options was clicked, a small modal window would be opened and the user would be prevented from interacting with the main window until it was closed. While this deviated from the existing \say{four-step design}, it allowed these new features to be seamlessly integrated with the existing system without a large-scale redesign.
 
+\subsection{Information Required from the User}
+It was clear from the onset that several pieces of information and files would be required from the user. Those that were initially believed to be necessary were as follows:
+\begin{itemize}
+    \item Lipid formula
+    \item Target retention time
+    \item Retention time tolerance(how far from the target retention should be searched for the peak intensity)
+    \item Adduct type (defines how the target lipid is charged)
+    \item Target mass (refers to m/z - the word \say{mass} is used due to poor understanding at this stage of development)
+    \item Mass tolerance (\say{mass} refers to m/z and defines how far should be searched for peak)
+\end{itemize}
+
+Additionally, files to be analysed as well as the corresponding experiment time-point in hours would be required from the user.
+
+Initially, the design only took into account the input of a single lipid. This was later updated to allow the input of a theoretically infinite number of lipids (with obvious technological limitations). It was also later established mass would not need to be manually entered as it could be calculated via the lipid formula and adduct.
 
 \section{System Architecture} \label{system-architecture-design}
 %Discuss GUI, state, lack of state management system being imposed by middleware. This gave flexibility but also required adherence to best practices.
@@ -292,18 +442,22 @@ Given the four-step nature of the application described in \ref{user-interface-d
     \item The input summary screen would need access to state from the file selection screen.
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[htb]
     \centering
-    \includegraphics[scale=0.5]{dissertation/images/wireframes/gui-state-diagram.pdf}
-    \caption{Diagram showing the interaction design of screen and state objects. Each screen object accesses its respective state object via method calls and has no access to other state objects}
+    \includegraphics[scale=0.5]{dissertation/images/gui-state-diagram.pdf}
+    \caption{Diagram showing the interaction design of screen and state objects. Each screen object accesses its respective state object via method calls and has no access to other state objects. State objects have no references to other classes.}
     \label{fig:gui-state-interaction}
 \end{figure}
+
+\section{Chapter Summary}
+This chapter discussed the design of LiKInS including the user interface design with its four-step nature as well as an accompanying state management system to handle user interactions.
+
 
 %==================================================================================================================================
 \chapter{Implementation}
 This chapter will discuss the implementation of LiKInS including the technology stack used, the GUI and state management implementations, packaging and finally testing.
 
-\section{Technology Stack}
+\section{Technology Stack} \label{technology-stack}
 There were several factors under consideration when deciding upon the programming language and libraries to be used. This section will discuss the technology choices that were considered and the rationale behind the final decision.
 \subsection{Python}
 Given that the prototype pipeline had already been implemented in Python, it was a clear candidate. It was already proven that powerful mass-spectrometry libraries existed and could be successfully implemented in Python as this had already been done. Using python would also allow for the reuse of code from the prototype pipeline, potentially allowing more time to be allocated to features beyond that of the analysis itself. Considering the key requirements in \ref{key-requirements} it was clear that, should Python be the final choice, we could run the application on Windows 10. It was also clear that any application created using Python could use an open-source license, as the language itself was open-source. The requirement of concern was the third: namely that by default, users would need to have Python properly installed along with all dependencies to be able to run it. This was deemed an unacceptable level of complexity and so a solution had to be found for this problem for Python to be a viable candidate.
@@ -317,23 +471,38 @@ The best solution found was PyInstaller: a Python utility that gathers the curre
 
 
 \subsection{Java}
-The other primary contender was Java. Given that TOPPView is written in Java, it was clear that the libraries necessary to parse .mzml files were already available in Java. Java also met all three of the key requirements: The application could run on Windows 10; anything developed with Java could be open-source; and the application could be compiled into a JAR file and run in one click, assuming the user has Java installed (this was viewed as acceptable as many other applications in this field, such as TOPPView, also require the installation of Java). Java also has the benefit of first-party GUI libraries such as Swing or JavaFX which are well supported and documented. The major downside to using java is of course that the code from the prototype pipeline would need to be completely rewritten.
+The other primary contender was Java. Given that TOPPView is written in Java, it was clear that the libraries necessary to parse MZML files were already available in Java. Java also met all three of the key requirements: The application could run on Windows 10; anything developed with Java could be open-source; and the application could be compiled into a JAR file and run in one click, assuming the user has Java installed (this was viewed as acceptable as many other applications in this field, such as TOPPView, also require the installation of Java). Java also has the benefit of first-party GUI libraries such as Swing or JavaFX which are well supported and documented. The major downside to using java is of course that the code from the prototype pipeline would need to be completely rewritten.
 
-\subsection{Final Choice and Reflections}
-In the end, Python was the final choice of language. This choice was mainly due to the fact that the prototype was already written in Python and so there was a large opportunity for reuse. Additionally, a Python application packaged with PyInstaller would be easier to run than the equivalent Java application as the user would not be required to have a JRE installer, although it is likely that the user wouldn't have any trouble installing a JRE.
-
-If this project was to be repeated, the choice would likely be Java for the following reasons:
-\begin{itemize}
-    \item PyInstaller was found to be cumbersome and difficult to work with. Large amounts of time was spent debugging and fixing issues with it not detecting certain dependencies. Changes to the codebase would commonly require updating PyInstaller's configuration and it generally took more time than it should have. Compiling a Java application into a JAR file would likely have been much less of a problem and is still of minimal hassle to the end-user.
-    \item The choice of GUI library on Python, PyQt5, was very poorly documented and was found to be lacking in certain functionality and base components. For example, The included layout components were very basic and did not include any dynamic layouts, such as collapsible accordion views, which had to be implemented by hand. Contrasting this with the mature JavaFX which includes an accordion component by default an is documented with standard, complete javadoc and it becomes clear that Java likely would have been a better choice resulting in a more pleasing GUI.
-    \item As is mentioned in TESTING SECTION, GUI tests were quickly abandoned when it became clear that the effort to reward ratio for PyQt5 tests was very high and that it would be impossible to run them on CI with no window manager. JavaFX supports GUI testing without requiring the GUI to be instantiated. This would allow such GUI tests to be quickly written and included in CI.
-\end{itemize}
+\subsection{Final Choice}
+In the end, Python was the final choice of language. This choice was mainly due to the fact that the prototype was already written in Python and so there was a large opportunity for reuse. Additionally, a Python application packaged with PyInstaller would be easier to run than the equivalent Java application as the user would not be required to have a JRE installed, although it is likely that the user wouldn't have any trouble installing a JRE.
 
 
-\section{Graphical User Interface}
-As previously stated, the final GUI was written in Python using the PyQt5 library. This was chosen because it seemed to be the most feature rich and advanced Python GUI framework available and would allow for a look and feel that matches the parent operating system, providing a level of familiarity for users.
+\section{Graphical User Interface} \label{gui-implementation}
+The final GUI was written in Python using PyQt5, a Python implementation of the popular Qt framework, developed by \cite{PyQt5}. This was chosen because it seemed to be the most feature rich and advanced Python GUI framework available and would allow for a look and feel that matches the parent operating system, providing a level of familiarity for users.
 
-All files related to UI components were placed in the \textbf{gui/} directory where each file generally represents a single screen, each of which may contain multiple classes. There is additionally a file named \say{custom\_components.py} which contains many classes, each of which extends a default Qt class. For example, as discussed in \ref{usability-enhancements}, the default QSpinBox implementation provided a significant usability problem and so the scroll wheel functionality for these components had to be disabled. Instead of manually disabling them all, it was much easier to create a new component as a subclass of QSpinBox and disable the scrollwheel, then replace all QSpinBox objects with this new component.
+\begin{figure}[htb]
+\centering
+\begin{subfigure}{0.4\linewidth}
+        \includegraphics[width=\linewidth]{dissertation/images/Screen1.png}
+        \caption{Lipid Details Screen}
+    \end{subfigure}
+    \begin{subfigure}{0.4\linewidth}
+        \includegraphics[width=\linewidth]{dissertation/images/screen2.png}
+    \caption{File Selection Screen}
+    \end{subfigure}
+    \begin{subfigure}{0.4\linewidth}
+        \includegraphics[width=\linewidth]{dissertation/images/Screen3.png}
+    \caption{Input Summary Screen}
+        \end{subfigure}
+        \begin{subfigure}{0.4\linewidth}
+        \includegraphics[width=\linewidth]{dissertation/images/Screen4.png}
+    \caption{Analysis Progress Screen}
+    \end{subfigure}
+    \caption{The GUI screens for the final implementation. Two lipids are defined with 6 files. Each stage of the four-step process is shown.}
+    \label{fig:gui-screens}
+\end{figure}
+
+All files related to UI components were placed in the \textbf{gui/} directory where each file generally represents a single screen, each of which may contain multiple classes. There is additionally a file named \say{custom\_components.py} which contains many classes, each of which extends a default Qt class. For example, as discussed in section \ref{usability-enhancements}, the default QSpinBox implementation provided a significant usability problem and so the scroll wheel functionality for these components had to be disabled. Instead of manually disabling them all, it was much easier to create a new component as a subclass of QSpinBox and disable the scrollwheel, then replace all QSpinBox objects with this new component.
 
 A GUI controller class was written which simply acts as a wrapper around each of the four screens. Each of these screens were an attribute of this class and are instantiated within its constructor. This means that by instantiating the state controller, all GUI components are immediately instantiated. The state controller described in \ref{state-management-implementation} is also instantiated within the GUI controller.
 
@@ -381,7 +550,7 @@ Had there been additional time for this project, a Windows install wizard would 
 % Discuss creation of test files, justification behind what was/wasn't tested, any tests that were not present and perhaps should have been, difficulties in creating tests and final decision to use TOPPView
 Unit testing is a major part of the development of robust software and the development of LiKInS presented several testing-related challenges that were somewhat unique to this type of development.
 
-\subsection{GUI Testing}
+\subsection{GUI Testing}\label{gui-testing}
 Early into the project, unit tests were written for the GUI. These tests mainly revolved around the moving of pages: if you click next, are you taken to the correct page? Since PyQt5 tests require the UI to be initialised, any testing machine would need display server capabilities to be able to run the tests and so these tests were not compatible with the continuous integration pipelines discussed in \ref{continuous-integration}. Additionally, the UI was prone to having its external behaviour altered often as new requirements were gathered and so these tests had to be rewritten on several occasions. After discussion with the project supervisor, it was decided that the return-on-investment of writing these tests was not worth it and so the decision was made to avoid further GUI unit tests.
 
 \subsection{Testing the Analysis Pipeline}
@@ -398,15 +567,20 @@ This was done by making a number of changes to the way tests were structured. Fi
 
 Once these test files were deemed to no longer be sensitive, they were added to the repository and continuous integration was adjusted to run file-dependant tests.
 
+\section{Chapter Summary}
+The chapter discussed the implementation of LiKInS. This includes the technology stack used and why it was chosen, the GUI implementation alongside the accompanying state management system. It then went on to discuss changes that were made to the additional prototype pipeline, packaging and issues surrounding the writing of tests.
+
+
+
 \chapter{Software Engineering Practices}
 This chapter discusses software engineering practices and processes that were utilised during the development of LIKinS including version control, issue tracking, documentation, continuous integration and automated deployments. It also discusses the limited use of test-driven development in development and the limitations that were encountered in doing so.
 
 \section{Version Control}
-The repository was hosted on \cite{GitHub:online} which was chosen because it is generally the platform of choice for open-source projects and has all of the desired features including built-in issue tracking, a project wiki and continuous integration as well as a method of automated release. Each of these factors are discussed in this section.
+The repository was hosted on GitHub \citep{GitHub:online} which was chosen because it is generally the platform of choice for open-source projects and has all of the desired features including built-in issue tracking, a project wiki and continuous integration as well as a method of automated release. Each of these factors are discussed in this section.
 
 
 \subsection{Feature Branching}
-While this project was only worked on by a single developer, a branching strategy in conjunction with a continuous integration pipeline(see section \ref{continuous-integration}) was deemed to be essential in ensuring developer discipline throughout. The strategy used was \say{Feature Branching} as described by \cite{fowler_2020}. Essentially, a new branch was created for each feature, where a feature roughly corresponded to an issue in the issue tracker(see section \ref{issue-tracker}). Once each feature was complete, a pull request would be created and the pull request template would be filled in. Pull requests were used for two reasons, as opposed to merging directly: \begin{itemize}
+While this project was only worked on by a single developer, a branching strategy in conjunction with a continuous integration pipeline (see section \ref{continuous-integration}) was deemed to be essential in ensuring developer discipline throughout. The strategy used was \say{Feature Branching} as described by \cite{fowler_2020}. Essentially, a new branch was created for each feature, where a feature roughly corresponded to an issue in the issue tracker(see section \ref{issue-tracker}). Once each feature was complete, a pull request would be created and the pull request template would be filled in. Pull requests were used for two reasons, as opposed to merging directly: \begin{itemize}
     \item A pull request template could be used as a \say{checklist} by the developer to ensure that an issue was complete before merging onto the mainline branch.
     \item Continuous integration could be triggered on a pull request as a final safety net to ensure that the new branch passes tests and compiles correctly before a new feature was merged onto the mainline branch.
 \end{itemize}
@@ -420,14 +594,21 @@ A pull request template was used in the hopes of maintaining a level of develope
     \item Make the developer specify which issue is closed by the branch to automatically close it in the issue tracker.
     \item Make the developer fill out a checklist to ensure they have written appropriate tests and have no TODOs left for the issue in question.
 \end{itemize}
+Part of the pull request template is shown in figure \ref{fig:pr-template}.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{dissertation/images/PR-template.png}
+    \caption{Part of a pull request that follows the pull request template as rendered on GitHub. }
+    \label{fig:pr-template}
+\end{figure}
 \section{Issue Tracking}\label{issue-tracker}
 GitHub's default issue tracker was a natural choice for keeping track of the project, with it one click away from the code repository itself. When a new requirement was gathered, it would first be converted into a user story, before being added to the issue tracker as one or more issues. Additionally, any bugs that were discovered would also be added as issues as well as any necessary documentation or CI updates.
 \section{Documentation}
 GitHub's inbuilt wiki feature was used to store and track design documents throughout the projects lifecycle. The most prominent of these was user stories: each story would be written out in the form \say{\textbf{As a} <user type> \textbf{I want to} <feature description> \textbf{So that} <justification for feature>} as requirements were gathered. Once it was time to start development on a batch of user stories, each one would be turned into one or more issues, which would then be put into the issue tracker. Upon completion of these user stories, they would have a strike-through put through them to denote them as complete. By storing stories separately from issues like this, it was easy to differentiate between immediately pressing issues and other user stories in the backlog whilst still keeping track of such issues.
 
 \section{Continuous Integration \& Deployment} \label{continuous-integration} \label{deployment}
-\begin{figure}
+\begin{figure}[htb]
     \centering
     \scalebox{0.55}{\begin{tikzpicture}[node distance = 2cm, auto]
     % Place nodes
@@ -454,7 +635,7 @@ GitHub's inbuilt wiki feature was used to store and track design documents throu
     \path [line] (decide2) -- node{yes}(release);
     \path [line] (release) -- (deploy);
 \end{tikzpicture}}
-    \caption{A visual representation of feature acceptance process}
+    \caption{A flow-chart representing the feature acceptance process.}
     \label{fig:ci}
 \end{figure}
 One of the main reasons for using GitHub was the inclusion of free, easy to use continuous integration via GitHub Actions. Extensive use of this service was made for a variety of purposes. The following workflows were created:
@@ -467,10 +648,10 @@ One of the main reasons for using GitHub was the inclusion of free, easy to use 
 \end{enumerate}
 The overall acceptance procedure for a new pull request is illustrated in figure \ref{fig:ci}. Each of these will be discussed in turn.
 \subsection{Testing Pipeline}
-\cite{vasilescu} report that the use of automated testing within continuous integration results in 48\% more bugs being caught by development team than without it and so using such automated testing appears to be an effective measure for identifying software defects. In this case, the testing pipeline was run upon each pull request to master and each push to master. This would run unit tests described in \ref{testing}, initially only running those that did not depend on test files until the content of  these files was no longer sensitive information.
+\cite{vasilescu} report that the use of automated testing within continuous integration results in 48\% more bugs being caught by development teams than without it and so using such automated testing appears to be an effective measure for identifying software defects. In the case of LiKInS, the testing pipeline was run upon each pull request to master and each push to master. This would run unit tests described in \ref{testing}, initially only running those that did not depend on test files until the content of  these files was no longer sensitive information.
  
  \subsection{Windows Build}
- The windows build pipeline was effective in ensuring that changes made to the application were did not break the compilation process. There were numerous occasions where a change in codebase inadvertently broke the build process and this could be caught instantly as soon as the pull request was created and so could be remedied before being pushed to master.
+ The windows build pipeline was effective in ensuring that changes made to the application did not break the compilation process. There were numerous occasions where a change in codebase inadvertently broke the build process and this could be caught instantly as soon as the pull request was created and so could be remedied before being pushed to master.
  
  \subsection{MacOS and Linux Builds}
  While initially there was only a build pipeline for Windows, a counterpart for MacOS was soon created for the benefit of both the project supervisor and one of the clients, who were running MacOS machines.  A Linux pipeline was also created at this point as it was very little additional work and would serve the slim possibility of clients who were running Linux. As further changes were made, it became clear that the overhead to maintain all three build pipelines was rather large and without a machine to test the MacOS or Linux builds on, there was no way to test the built executable. Therefore, the decision was made to deprecate these builds. These pipelines would be run 
@@ -479,7 +660,7 @@ The overall acceptance procedure for a new pull request is illustrated in figure
 GitHub includes a feature known as \say{GitHub Releases} which allows a built release of software to be stored separately from the repository itself and can be accessed by anybody whether they have a GitHub account or not. This seemed like the perfect way to distribute the application to evaluation participants. The final pipeline would once again build the Windows application but would then create a new release in GitHub releases with the built executable. This was done whenever there was a push to the release branch and so to create a new release one must simply merge master into the release branch.
 '
 \section{Test-Driven Development}
-Test-Driven Development(TDD) is an agile methodology which aims to produce inherently testable code alongside a suite of unit tests which both act as self-documentation(as tests essentially define the API for the piece of code being tested) and a safety net to provide instant feedback if a change has broken an existing piece of functionality.
+Test-Driven Development(TDD) is an agile methodology introduced in \say{Test-Driven Development By Example}\citep{kentbeck} which aims to produce inherently testable code alongside a suite of unit tests which both act as self-documentation(as tests essentially define the API for the piece of code being tested) and a safety net to provide instant feedback if a change has broken an existing piece of functionality.
 
 With the clear benefits of TDD, it was decided from the outset that it would be an effective strategy for writing LiKInS in a robust and agile manner. It was especially suited due to the nature of the project: developer understanding of underlying processing was initially limited and requirements were likely to change often. Having a safety net of tests could help save time by identifying breaking changes early so they can be properly addressed.
 
@@ -487,6 +668,8 @@ Two main issues were encountered when attempting to implement TDD into the devel
 
 Due to these issues, TDD was mostly used when writing state objects as well as functions surrounding persistent data storage and retrieval. Where it could be used, TDD was deemed to be an effective way to ensure software quality while still allowing agility with changing requirements.
 
+\section{Chapter Summary}
+This chapter discussed some of the software engineering and DevOps practices at play through the development of LiKInS. These include version control, issue tracking, documentation, continuous integration \& deployment and the use of test-driven development.
 
 %==================================================================================================================================
 \chapter{Usability Evaluation} \label{usability-evaluation}
@@ -521,7 +704,7 @@ A rudimentary selective coding technique was used to analyse the transcripts in 
 
 For example, one of the categories was \say{ambiguous label}. This was used when a participant expressed that they did not understand the meaning of a field label. Two out of four participants expressed that they did not know what was meant by \say{Isotope depth} and so it was clear that this label presented a usability problem that needed to be addressed.
 
-\begin{figure}
+\begin{figure}[htb]
     \begin{subfigure}{0.5\textwidth}
         \centering
         \includegraphics[width=\textwidth]{dissertation/images/transcript_page_1.png}    
@@ -612,7 +795,7 @@ This chapter discussed the usability evaluation of the software. This encompasse
 \chapter{Conclusion}
 This chapter summarises this dissertation before discussing developer reflections on the project as a whole. It then goes on to discuss potential future development of LiKInS.
 \section{Summary}
-This dissertation discussed the design and development of LiKInS(Lipid Kinetics Inference Software) from gathering requirements through to evaluating usability. Mass spectrometers are used to measure the products of isotope labelling experiments and prior to the development of LiKInS, there was not publicly available software for inferring lipid kinetics over time. LiKInS was developed with the assistance of clients from the University of the Highlands and Islands and Glasgow Polyomics and aimed to automate a manual process previously undertaken by one of these clients for their PhD.
+This dissertation discussed the design and development of LiKInS(Lipid Kinetics Inference Software) from gathering requirements through to evaluating usability. Mass-spectrometers are used to measure the products of isotope labelling experiments and prior to the development of LiKInS, there was not publicly available software for inferring lipid kinetics over time. LiKInS was developed with the assistance of clients from the University of the Highlands and Islands and Glasgow Polyomics and aimed to automate a manual process previously undertaken by one of these clients for their PhD.
 
 The previous state of the art for this process was a human manually going through each file and extracting values by hand. This is a labour intensive and highly error prone process with a time complexity of $O(lmn)$ for $l$ lipids with $m$ isotopes being analysed and $n$ data files. While this is within polynomial time and is trivial for a computer to perform, it is incredibly time consuming for a human. LiKInS was written in Python and leveraged a prototype, also written in Python, as the basis for the underlying analysis.
 
@@ -620,31 +803,69 @@ Before development could begin, the complex problem needed to be understood by t
 
 The user interface design contained four screens: one for defining lipids; one for choosing files and entering their corresponding experiment time points; one for reviewing all entered data; and one to view the progress of the analysis pipeline. A corresponding custom state management system was devised with one state object for each of these screens. 
 
-The application was written using a technology stack centered around Python with the graphical user interface being written in PyQt5. The graphical user interface was managed using the custom state management system with a one-to-one relationship between state objects and GUI objects. There were several testing related challenges throughout development that needed to be addressed. User interface testing was seen to provide little value for the amount of effort required to write them and so it was decided that these tests should not be written. Since test files were considered as sensitive information, workarounds had to be found to avoid storing this data in a public GitHub repository until it was no longer considered sensitive.
+The application was written using a technology stack centered around Python with the graphical user interface being written in PyQt5. State was managed using the custom state management system with a one-to-one relationship between state objects and GUI objects. There were several testing related challenges throughout development that needed to be addressed. User interface testing was seen to provide little value for the amount of effort required to write them and so it was decided that these tests should not be written. Since test files were considered as sensitive information, workarounds had to be found to avoid storing this data in a public GitHub repository until it was no longer considered sensitive.
 
 Many software engineering and DevOps practices were utilised in the development of LiKInS. Version control was done via Git with the repository being hosted on GitHub. Feature branching was used to maintain developer discipline throughout the project. Other GitHub features were used to assist in the project: GitHub's issue tracker was used to manage the product backlog; GitHub's \say{wiki} feature was used to manage project documentation; GitHub actions was used to run continuous integration pipelines; and GitHub releases was used to deploy the application. Test-driven development was utilised to ensure code quality and to catch newly introduced bugs however the nature of development made TDD difficult in some cases and so its use was somewhat limited.
 
-With usability being of primary concern, a usability evaluation was carried out with LiKInS to identify areas of the implementation that were difficult to use. The concurrent think-aloud protocol was used where participants completed a series of tasks provided by the evaluate and verbalised their thoughts whilst completing each task. Transcripts were taken and phrases were then categorised into one of four categories, allowing areas of common difficulty to be identified, quantified and addressed. Many labels were found to ambiguous or difficult to understand and the file 
+With usability being of primary concern, a usability evaluation was carried out with LiKInS to identify areas of the implementation that were difficult to use. The concurrent think-aloud protocol was used where participants completed a series of tasks provided by the evaluate and verbalised their thoughts whilst completing each task. Transcripts were taken and phrases were then categorised into one of four categories, allowing areas of common difficulty to be identified, quantified and addressed. Many labels were found to be ambiguous or difficult to understand and users expressed great confusion as to the location of exported files.
 
 
 \section{Reflections}
-\section{Guidance}
+There are many aspects of development that, if this project were to be repeated, would be done differently whilst others would remain largely the same. Reflections that yield potentially valuable insights are listed below.
+
+\subsection{Requirements Gathering}
+Given the specialised nature of the application at hand, gathering accurate requirements was crucial and the methods used were found to be effective in ensuring requirements were captured with no major issues arising from misinterpreted requirements. The recording and reviewing of meetings was a large part of this success as it allowed misunderstood areas to be noted and then addressed at subsequent meetings. Likewise, the manual inspection of prototype code allowed phenomena described in meetings to be linked to their implementation. Whilst there was significant time and effort put into understanding these requirements, this would likely always be the case with such a specialist application.
+
+\subsection{Design}
+Overall, the design stage was successful in that the final implementation largely reflected the initial design with refinements being made throughout as one would expect. One aspect of design that could have avoided errors later on is to do with wireframes: new requirements mandated the creation of screens that were not part of the initial four-step design (file import/export) and so these new screens did not have wireframes prior to implementation. Had these screens been at least partially designed, feedback could have been gathered from clients and some usability issues could perhaps have been avoided. More generally, more constant client contact could have avoided some issues throughout the project however, given that clients were not required to give up their time in any way, the decision was made not to ask for too much feedback.
+
+\subsection{Implementation}
+% As with any software project, issues arose throughout the implementation of LiKInS. These will be discussed in turn.
+\subsubsection{Technology Stack}
+If this project was to be repeated, the Python stack described in section \ref{technology-stack} would likely be swapped with the proposed Java stack for the following reasons:
 \begin{itemize}
-    \item
-        Summarise briefly and fairly.
-    \item
-        You should be addressing the general problem you introduced in the
-        Introduction.        
-    \item
-        Include summary of concrete results (``the new compiler ran 2x
-        faster'')
-    \item
-        Indicate what future work could be done, but remember: \textbf{you
-        won't get credit for things you haven't done}.
+    \item PyInstaller was found to be cumbersome and difficult to work with. Large amounts of time were spent debugging and fixing issues with it not detecting certain dependencies. Changes to the codebase would commonly require updating PyInstaller's configuration and it generally took more time than it should have. Compiling a Java application into a JAR file would likely have been much less of a problem and is still of minimal inconvenience to the end-user.
+    \item The choice of GUI library on Python, PyQt5, was very poorly documented and was found to be lacking in certain functionality and base components. For example, the included layout components were very basic and did not include any dynamic layouts, such as collapsible accordion views, which had to be implemented by hand. Contrasting this with the mature JavaFX which includes an accordion component by default and is documented with standard, complete javadocs and it becomes clear that Java likely would have been a better choice resulting in a more pleasing GUI.
+    \item As is mentioned in \ref{testing}, GUI tests were quickly abandoned when it became clear that the effort to reward ratio for PyQt5 tests was very high and that it would be impossible to run them on CI with no window manager. JavaFX supports GUI testing without requiring the GUI to be instantiated. This would allow such GUI tests to be quickly written and included in CI.
 \end{itemize}
+
+\subsubsection{State Management}
+The chosen state management system was found to be very effective and is one of the highlights of this project given that it did not require any significant redesign during implementation and was instead flexible enough to handle all new requirements without being overly complex. It is however true that if the previously described technology changes were made, platform conventions may well impose a different state management system.
+
+\subsubsection{Testing}
+Whilst the written test suite was effective and did assist in catching breaking changes, the decision to drop user interface tests had a negative impact on the robustness of the final product and would possibly have assisted in catching bugs earlier. Several bugs were introduced upon the implementation of lipid importing that were only caught during evaluation and which a comprehensive test suite would likely have caught early. This does not however change the fact that, under the circumstances, foregoing user interface tests was justified under the circumstances given the reasoning provided in section \ref{gui-testing}.
+
+\subsection{Version Control}
+\subsubsection{Feature Branching}
+While some would argue that no branching strategy is necessary in a project with a sole developer, feature branching was found to be an effective tactic in ensuring developer discipline and repository organisation. This kept each commit focused on the issue related to its branch and prevented deviation from whichever task was currently being completed. There were occasionally very small changes that were pushed directly to the master branch and the branching strategy did not interfere with the ability to perform these changes when required.
+
+\subsubsection{Pull Request Template}
+The pull request template was successful in its stated goals, ensuring that the requirements of each issue were fully met before the corresponding branch could be pulled into master.
+
+\subsection{Continuous Integration}
+While this is no surprise, the use of continuous integration throughout the project undoubtedly saved time. There were several occasions when bugs or problems building new changes were only highlighted upon the running of testing and build pipelines after a pull request. Without such safeguards, these issues would have been caught later and would be more difficult to fix.
+
+\subsection{Usability Evaluation}
+As discussed in section \ref{usability-evaluation}, the evaluation methods available were somewhat restricted due to the small number of potential participants. This issue was unavoidable and the best solution was chosen under the circumstances. The results were perhaps affected by a number of bugs that were found during evaluations and additional testing and checks could potentially have caught these. Additionally, a further round of usability testing could have verified that the changes made did in fact improve usability however participants would have now been familiar with the software and learning effects would have significantly biased results in favour of increased usability.
 
 
 \section{Future Developments}
+
+\subsection{Additional Features}
+If one were to continue development of LiKInS, there are several avenues they may wish to pursue beyond further usability enhancements. Firstly, there are the original stretch goals of this project that were not fulfilled.
+
+\subsubsection{Re-analysis of Single Values} Should the output produce a value that appears to be an error(e.g. nothing was found within target ranges or value does not follow the expected pattern), the user should be able to somehow select that value, adjust analysis parameters and run analysis on only the designated area.
+\subsubsection{In-app Visualisations}Make data visualisations visible and interactive within the application itself instead of automatically opening the output file. This would be a simple quality-of-life improvement. 
+
+
+While those are the original stretch goals for the project, there are additional improvements that could be made:
+
+    \subsubsection{Error reporting.} The application could have checks in place to see if a potential error was made in the analysis(or within an input file). These errors could be reported within the console on the progress screen and optionally saved to log files.
+    \subsubsection{In-place Error Reporting} This would build further upon error reporting by pausing analysis when a potential error has occurred and offering the user the option to tweak parameters and run that value again or to simply continue.
+   \subsubsection{Expanded exporting.} Exporting could be expanded to allow the exporting of analysis file locations and corresponding experiment time-points. This would allow researchers to easily run a full analysis again without the need to re-enter files and time-points.
+
+\subsection{Performance Enhancements}
+As is discussed in \ref{key-requirements}, the speed of analysis was not an important factor in the development of LiKInS and as such, the original analysis process from the prototype pipeline was largely unchanged. It would almost certainly be possible in the future to optimize this process to reduce the amount of file parsing involved, hence reducing analysis times.
 
 %==================================================================================================================================
 %
@@ -656,25 +877,7 @@ With usability being of primary concern, a usability evaluation was carried out 
 
 \chapter{Appendices}
 
-Typical inclusions in the appendices are:
 
-\begin{itemize}
-\item
-  Copies of ethics approvals (required if obtained)
-\item
-  Copies of questionnaires etc. used to gather data from subjects.
-\item
-  Extensive tables or figures that are too bulky to fit in the main body of
-  the report, particularly ones that are repetitive and summarised in the body.
-
-\item Outline of the source code (e.g. directory structure), or other architecture documentation like class diagrams.
-
-\item User manuals, and any guides to starting/running the software.
-
-\end{itemize}
-
-\textbf{Don't include your source code in the appendices}. It will be
-submitted separately.
 
 \end{appendices}
 
