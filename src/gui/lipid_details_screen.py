@@ -60,7 +60,7 @@ class LipidDetailsScreen(QWidget):
         scroll_area.setWidget(wrapper)
         scroll_area.setWidgetResizable(True)
 
-        new_lipid_btn = ActionButton('Add Lipid')
+        new_lipid_btn = ActionButton('New Lipid')
         new_lipid_btn.clicked.connect(self.add_lipid)
 
         self.screen_layout.addWidget(scroll_area)
@@ -121,6 +121,7 @@ class LipidListItem(QWidget):
             self.updateAdduct)
 
         self.isotope_depth = QSpinBox(parent=self.section)
+        self.isotope_depth.wheelEvent = lambda *event: None
         self.isotope_depth.setRange(0, 9)
         self.isotope_depth.setValue(self.lipid.isotope_depth)
         self.isotope_depth.valueChanged.connect(self.update_isotope_depth)
@@ -128,12 +129,14 @@ class LipidListItem(QWidget):
         self.isotope_depth.setToolTipDuration(0)
 
         self.retention_time = QDoubleSpinBox(decimals=0, parent=self.section)
+        self.retention_time.wheelEvent = lambda *event: None
         self.retention_time.setRange(0, 1000)
         self.retention_time.setValue(self.lipid.retention_time)
         self.retention_time.valueChanged.connect(self.update_retention_time)
 
         self.retention_time_tolerance = QDoubleSpinBox(
             decimals=0, parent=self.section)
+        self.retention_time_tolerance.wheelEvent = lambda *event: None
         self.retention_time_tolerance.setRange(0, 100)
         self.retention_time_tolerance.setValue(
             self.lipid.retention_time_tolerance)
@@ -141,6 +144,7 @@ class LipidListItem(QWidget):
             self.update_retention_time_tolerance)
 
         self.mass = QDoubleSpinBox(decimals=20, parent=self.section)
+        self.mass.wheelEvent = lambda *event: None
         self.mass.setRange(0, 10000)
         self.mass.setValue(
             self.lipid.mass)
@@ -148,6 +152,7 @@ class LipidListItem(QWidget):
             self.lipid.setMass)
 
         self.mass_tolerance = QDoubleSpinBox(decimals=6, parent=self.section)
+        self.mass_tolerance.wheelEvent = lambda *event: None
         self.mass_tolerance.setRange(0, 100)
         self.mass_tolerance.setValue(
             self.lipid.mass_tolerance)

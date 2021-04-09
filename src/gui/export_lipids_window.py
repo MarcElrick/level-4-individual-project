@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QFormLayout, QLabel, QPushButton, QLineEdit, QLabel
+from PyQt5.QtWidgets import QWidget, QFormLayout, QLabel, QPushButton, QLineEdit, QLabel, QHBoxLayout
 from PyQt5.QtCore import Qt
 
 
@@ -23,7 +23,10 @@ class ExportLipidsWindow(QWidget):
         self.save_button.setEnabled(False)
         self.save_button.clicked.connect(self.save)
 
-        layout.addRow(QLabel("Filename"), txt_filename, QLabel(".json"))
+        hbox = QHBoxLayout()
+        hbox.addWidget(txt_filename)
+        hbox.addWidget(QLabel(".json"))
+        layout.addRow(QLabel("Filename"), hbox)
         layout.addRow(exit_button, self.save_button)
 
     def save(self):
