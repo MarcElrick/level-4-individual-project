@@ -1,0 +1,48 @@
+\documentclass{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\begin{document}
+\pagestyle{empty}
+
+
+
+
+% Define block styles
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+    
+\begin{tikzpicture}[node distance = 2cm, auto]
+    % Place nodes
+    \node [cloud] (init) {Pull Request Submitted};
+    \node [block, below of=init] (identify) {Run Python Tests + Build Pipelines};
+    \node [decision, below of=identify] (decide) {Did all pipelines pass?};
+    \node [cloud, left of=decide, node distance=4.5cm] (update) {PR Code Updated};
+    \node [cloud, below of=decide, node distance=2.5cm] (merged) {PR Merged to Master};
+    \node [block, below of=merged, node distance=2.5cm] (PR2) {Run Python Tests + Build Pipelines};
+    \node [decision, below of=PR2, node distance=3cm] (decide2) {Did all pipelines pass?};
+    \node [cloud, right of=decide, node distance=4.5cm] (revert) {Revert  Merge + Fix};
+    \node [cloud, below of=decide2, node distance=2.5cm] (release) {Merge to release branch};
+   \node [block, below of=release, node distance=2cm] (deploy) {Deployment Pipeline Run};
+    % Draw edges
+    \path [line] (init) -- (identify);
+    \path [line] (identify) -- (decide);
+    \path [line] (decide) -- node [near start] {no} (update);
+    \path [line] (update) |- (identify);
+    \path [line] (decide) -- node {yes}(merged);
+    \path [line] (merged) -- (PR2);
+    \path [line] (decide2) -| node [near start] {no} (revert);
+    \path [line] (PR2) -- (decide2);
+    \path [line] (revert) |- (init);
+    \path [line] (decide2) -- node{yes}(release);
+    \path [line] (release) -- (deploy);
+\end{tikzpicture}
+
+
+\end{document}
